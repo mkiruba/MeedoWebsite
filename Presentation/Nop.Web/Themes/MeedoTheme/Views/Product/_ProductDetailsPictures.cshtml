@@ -63,16 +63,20 @@
                 }
             </div>
         }
-        <script type="text/javascript" asp-location="Footer">
+            <script type="text/javascript" asp-location="Footer">
             $(document).ready(function () {
                 $('.thumb-item img').on('click', function () {
                     $('#main-product-img-@Model.Id').attr('src', $(this).attr('data-defaultsize'));
+
+                    var ez = $('#main-product-img-@Model.Id').data('elevateZoom');
+                    ez.swaptheimage($(this).attr('data-defaultsize'), $(this).attr('data-fullsize')); 
+                                        
                     $('#main-product-img-@Model.Id').attr('title', $(this).attr('title'));
                     $('#main-product-img-@Model.Id').attr('alt', $(this).attr('alt'));
                     $('#main-product-img-lightbox-anchor-@Model.Id').attr('href', $(this).attr('data-fullsize'));
                     $('#main-product-img-lightbox-anchor-@Model.Id').attr('title', $(this).attr('title'));
                 });
             });
-        </script>
+            </script>
     }
 </div>
