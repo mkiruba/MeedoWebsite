@@ -33,22 +33,22 @@
                 @foreach (var cat in Model.CategoryBreadcrumb)
                 {
                     var isLastCategory = cat.Id == Model.Id;
-                    <li>
-                        @if (isLastCategory)
-                        {
-                            <strong class="current-item active">@cat.Name</strong>
-                        }
-                        else
-                        {
-                            <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name">@cat.Name</a>
-                            @*<span class="delimiter">@breadcrumbDelimiter</span>*@
-                        }
-                    </li>
-                }
-        </ul>
-    </div>
-    @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_after_breadcrumb", additionalData = Model.Id })
-}
+                <li>
+                    @if (isLastCategory)
+                    {
+                        <strong class="current-item active">@cat.Name</strong>
+                    }
+                    else
+                    {
+                        <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name">@cat.Name</a>
+                        @*<span class="delimiter">@breadcrumbDelimiter</span>*@
+                    }
+                </li>
+            }
+            </ul>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_after_breadcrumb", additionalData = Model.Id })
+    }
 <div class="page category-page">
     <div class="page-title panel-heading">
         <h1>@Model.Name</h1>
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                         }
                     </div>
                 }
@@ -134,22 +134,27 @@
         {
             @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_filters", additionalData = Model.Id })
-        <div class="product-filters-wrapper">
-            @*filtering*@
-            @if (Model.PagingFilteringContext.PriceRangeFilter.Enabled)
+
+        @section left
             {
-                <div class="well">
-                    @await Html.PartialAsync("_FilterPriceBox", Model.PagingFilteringContext.PriceRangeFilter)
-                </div>
-            }
-            @*filtering*@
-            @if (Model.PagingFilteringContext.SpecificationFilter.Enabled)
-            {
-                @await Html.PartialAsync("_FilterSpecsBox", Model.PagingFilteringContext.SpecificationFilter)
-            }
-        </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_product_list", additionalData = Model.Id })
+            @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_filters", additionalData = Model.Id })
+            <div class="product-filters-wrapper">
+                @*filtering*@
+                @if (Model.PagingFilteringContext.PriceRangeFilter.Enabled)
+                {
+                    <div class="well">
+                        @await Html.PartialAsync("_FilterPriceBox", Model.PagingFilteringContext.PriceRangeFilter)
+                    </div>
+                }
+                @*filtering*@
+                @if (Model.PagingFilteringContext.SpecificationFilter.Enabled)
+                {
+                    @await Html.PartialAsync("_FilterSpecsBox", Model.PagingFilteringContext.SpecificationFilter)
+                }
+            </div>
+            @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_product_list", additionalData = Model.Id })
+        }
+
         @*product grid and list*@
         @if (Model.Products.Count > 0)
         {
