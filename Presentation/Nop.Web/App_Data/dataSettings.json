@@ -1,0 +1,5 @@
+{
+  "DataProvider": "sqlserver",
+  "DataConnectionString": "Server=tcp:meedodb.database.windows.net,1433;Initial Catalog=meedodb;Persist Security Info=False;User ID=meedodb;Password=Paddington2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+  "RawDataSettings": {}
+}
