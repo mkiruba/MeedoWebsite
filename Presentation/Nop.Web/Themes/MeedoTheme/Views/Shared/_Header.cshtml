@@ -36,12 +36,13 @@
                         @await Component.InvokeAsync("Logo")
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    @await Component.InvokeAsync("FlyoutShoppingCart")
-                </div>
+              
                 <div class="col-md-4 header-upper-right pull-right">
                     <div class="header-links-wrapper">
                         @await Component.InvokeAsync("HeaderLinks")
+                    </div>
+                    <div class="pull-right">
+                        @await Component.InvokeAsync("FlyoutShoppingCart")
                     </div>
                 </div>
             </div>
