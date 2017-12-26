@@ -1,16 +1,16 @@
 ﻿@model HeaderLinksModel
 @using System.Text.Encodings.Web
-<div class="header-links header-top-right">
+<div class="header-links header-top-right">   
     <ul>
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_before" })
         @await Component.InvokeAsync("AdminHeaderLinks")
         @if (Model.IsAuthenticated)
         {
-            <li  class="my-account"><a href="@Url.RouteUrl("CustomerInfo")" class="ico-account">@T("Account.MyAccount")@*@Model.CustomerName*@</a></li>
+            <li  class="my-account"><a href="@Url.RouteUrl("CustomerInfo")" title="@T("Account.MyAccount")" class="ico-account"></a></li>
         }
         else
         {
-            <li class="register"><a href="@Url.RouteUrl("Register")" class="ico-register"><span>@T("Account.Register")</span></a></li>
+            <li class="register"><a href="@Url.RouteUrl("Register")" title="@T("Account.Register")" class="ico-register"></a></li>
         }
         @if (Model.WishlistEnabled)
         {
@@ -32,11 +32,11 @@
         }
         @if (Model.IsAuthenticated)
         {
-            <li class="logout"><a href="@Url.RouteUrl("Logout")" class="ico-logout"><span>@T("Account.Logout")</span></a></li>
+            <li class="logout"><a href="@Url.RouteUrl("Logout")" title="@T("Account.Logout")" class="ico-logout"></a></li>
         }
         else
         {
-            <li class="login"><a href="@Url.RouteUrl("Login")" class="ico-login"><span>@T("Account.Login")</span></a></li>
+            <li class="login"><a href="@Url.RouteUrl("Login")" title="@T("Account.Login")" class="ico-login"></a></li>
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_after" })
     </ul>
