@@ -1,13 +1,5 @@
 ﻿@model ProductDetailsModel
 @{
-    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
-    ////to do add owl carousel thumbnail https://github.com/gijsroge/OwlCarousel2-Thumbs
-    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/owlcarousel/thumbs/owl.carousel2.thumbs.min.js");
-    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
-    //Html.AppendCssFileParts($"~/lib/easyzoom/easyzoom.css");
-    //Html.AppendCssFileParts($"~/lib/easyzoom/example.css");
-    //Html.AppendCssFileParts($"~/lib/easyzoom/pygments.css");
-    //Html.AppendCssFileParts($"~/lib/animate/animate.css");
     Html.AddScriptParts(ResourceLocation.Footer, "~/lib/elevatezoom/jquery.elevateZoom.min.js");
     Html.AddScriptParts(ResourceLocation.Footer, "~/lib/pgwslider/pgwslider.min.js");
     Html.AppendCssFileParts($"~/lib/pgwslider/pgwslider.min.css");
@@ -21,35 +13,42 @@
             {
                 <li>
                     @*<a href="@picture.FullSizeImageUrl" data-standard="@picture.ImageUrl" title="@picture.Title" id="main-product-img-lightbox-anchor-@Model.Id">*@
-                    <div id="main-product-img-@Model.Id">
-                        <img alt="@picture.AlternateText" src="@picture.ImageUrl" data-large-src="@picture.FullSizeImageUrl" title="@picture.Title" itemprop="image" id="thumb-product-img-@Model.Id" />
+                    <div id="main-product-img-@Model.PictureModels.IndexOf(picture)">
+                        <img alt="@picture.AlternateText" src="@picture.FullSizeImageUrl" data-large-src="@picture.FullSizeImageUrl" title="@picture.Title" itemprop="image"
+                             id="thumb-product-img-@Model.PictureModels.IndexOf(picture)"/>
                     </div>
                     @*</a>*@
                 </li>
             }
         </ul>
-        @*<div class="easyzoom easyzoom--adjacent easyzoom--with-thumbnails col-md-8">
-                <a href="@Model.PictureModels[0].FullSizeImageUrl" title="@Model.PictureModels[0].Title" id="main-product-img-lightbox-anchor-@Model.Id">
-                    <img class="animated slideInLeft" alt="@Model.PictureModels[0].AlternateText" src="@Model.PictureModels[0].ImageUrl" title="@Model.PictureModels[0].Title" height="360" itemprop="image" id="thumb-product-img-@Model.Id" />
-                </a>
-            </div>*@
 
         <script>
-            $(document).ready(function() {
-                $('.pgwSlider .ps-current img').elevateZoom({
-                    cursor: "crosshair",
-                    zoomWindowFadeIn: 500,
-                    zoomWindowFadeOut: 750
-                });
-            });
             $(document).ready(function () {
                 $('.pgwSlider').pgwSlider({
                     autoSlide: false,
                     listPosition: 'left',
                     displayControls: true,
                     transitionEffect: 'sliding',
-                    afterSlide: function () { $('.pgwSlider .ps-current img').attr('data-zoom-image', $('.pgwSlider .ps-current img').attr('src')); }
+                    beforeSlide: function () { 
+                        $('.zoomContainer').remove();
+                    },
+                    //hide the caption
+                    afterSlide: function () {
+                        $('.pgwSlider .ps-current .ps-caption').hide();                        
+                        $('.pgwSlider .ps-current img').elevateZoom({
+                            cursor: "crosshair",
+                            zoomWindowFadeIn: 500,
+                            zoomWindowFadeOut: 750
+                        }); 
+                    }
                 });
+                $('.pgwSlider .ps-current img').each(function () {
+                    $(this).attr('data-zoom-image', $(this).attr('src'));
+                                     
+                });
+
+                //hide the thumbnail captions                                
+                $('.pgwSlider .ps-list span').hide();                
             });
         </script>
     }
@@ -59,46 +58,5 @@
         {
             <img alt="@picture.AlternateText" src="@picture.ImageUrl" data-zoom-image="@picture.FullSizeImageUrl" title="@picture.Title" itemprop="image" id="main-product-img-@Model.Id" />
         }
-    }
-
-    @*@if (Model.PictureModels.Count > 1)
-        {
-            @*if (Model.PictureModels.Count <= 3)
-                {
-                    <div class="picture-thumbs">
-                        @foreach (var picture in Model.PictureModels)
-                        {
-                            <a class="thumb-item thumb-popup-link">
-                                <img src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
-                            </a>
-                        }
-                    </div>
-                }
-                else
-                {*@
-    @*<div class="picture-thumbs product-slider" id="product-slider">
-                @foreach (var picture in Model.PictureModels)
-                {
-                    <a class="thumb-item thumb-popup-link">
-                        <img class="owl-lazy" data-src="@picture.ThumbImageUrl" src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
-                    </a>
-                }
-            </div>
-            //}
-            <script type="text/javascript" asp-location="Footer">
-                $(document).ready(function () {
-                    $('.thumb-item img').on('click', function () {
-                        $('#main-product-img-@Model.Id').attr('src', $(this).attr('data-defaultsize'));
-
-                        var ez = $('#main-product-img-@Model.Id').data('elevateZoom');
-                        ez.swaptheimage($(this).attr('data-defaultsize'), $(this).attr('data-fullsize'));
-
-                        $('#main-product-img-@Model.Id').attr('title', $(this).attr('title'));
-                        $('#main-product-img-@Model.Id').attr('alt', $(this).attr('alt'));
-                        $('#main-product-img-lightbox-anchor-@Model.Id').attr('href', $(this).attr('data-fullsize'));
-                        $('#main-product-img-lightbox-anchor-@Model.Id').attr('title', $(this).attr('title'));
-                    });
-                });
-            </script>
-        }*@
+    }   
 </div>
