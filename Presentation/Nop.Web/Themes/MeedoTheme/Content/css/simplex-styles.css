@@ -493,7 +493,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .manufacturer-grid .item-box .manufacturer-item{background:#f5f5f5;}
 .category-grid .item-box .category-item{margin-bottom:50px;background:#fff;transition:all 0.3s ease-in-out 0s;-webkit-transition:all 0.3s ease-in-out 0s;-moz-transition:all 0.3s ease-in-out 0s;-o-transition:all 0.3s ease-in-out 0s;cursor:pointer;}
 .vendor-grid .item-box .picture a img,.manufacturer-grid .item-box .picture a img,.category-grid .item-box .picture a img,.sub-category-grid .item-box .picture a img{width:100%;}
-.home-page-category-grid .item-box {height:auto;}
+/*.home-page-category-grid .item-box {height:auto;}*/
 .order{padding:7px 0;}
 .product-selectors{margin:0px 0px 30px;background:#fff;color:#333;clear:both;}
 .product-selectors .product-span{padding:5px 0 0 10px !important;}
