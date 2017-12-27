@@ -242,7 +242,6 @@
     <None Include="Themes\MeedoTheme\Views\Vendor\Info.cshtml" />
     <None Include="Themes\MeedoTheme\Views\_ViewImports.cshtml" />
     <None Include="Themes\MeedoTheme\Views\_ViewStart.cshtml" />
-    <None Include="wwwroot\lib\desoslide\js\jquery.desoslide.min.js" />
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -254,7 +253,6 @@
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageCategories\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomePagePolls\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageProducts\" />
-    <Folder Include="wwwroot\lib\owlcarousel\" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.
