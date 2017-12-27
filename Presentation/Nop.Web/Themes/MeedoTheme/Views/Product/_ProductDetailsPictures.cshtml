@@ -1,55 +1,61 @@
 ﻿@model ProductDetailsModel
 @{
-    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
-    //to do add owl carousel thumbnail https://github.com/gijsroge/OwlCarousel2-Thumbs
-    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/owlcarousel/thumbs/owl.carousel2.thumbs.min.js");
-    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
-    Html.AppendCssFileParts($"~/lib/easyzoom/easyzoom.css");
-    Html.AppendCssFileParts($"~/lib/easyzoom/example.css");
-    Html.AppendCssFileParts($"~/lib/easyzoom/pygments.css");
-    Html.AppendCssFileParts($"~/lib/animate/animate.css");
+    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
+    ////to do add owl carousel thumbnail https://github.com/gijsroge/OwlCarousel2-Thumbs
+    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/owlcarousel/thumbs/owl.carousel2.thumbs.min.js");
+    //Html.AddScriptParts(ResourceLocation.Footer, "~/lib/easyzoom/easyzoom.js");
+    //Html.AppendCssFileParts($"~/lib/easyzoom/easyzoom.css");
+    //Html.AppendCssFileParts($"~/lib/easyzoom/example.css");
+    //Html.AppendCssFileParts($"~/lib/easyzoom/pygments.css");
+    //Html.AppendCssFileParts($"~/lib/animate/animate.css");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/elevatezoom/jquery.elevateZoom.min.js");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/pgwslider/pgwslider.min.js");
+    Html.AppendCssFileParts($"~/lib/pgwslider/pgwslider.min.css");
 }
 <div class="gallery">
 
     @if (Model.DefaultPictureZoomEnabled)
     {
-        <ul class="thumbnails col-md-4">
+        <ul class="pgwSlider">
             @foreach (var picture in Model.PictureModels)
             {
                 <li>
-                    <a href="@picture.FullSizeImageUrl" data-standard="@picture.ImageUrl" title="@picture.Title" id="main-product-img-lightbox-anchor-@Model.Id">
-                        <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" itemprop="image" id="thumb-product-img-@Model.Id" />
-                    </a>
+                    @*<a href="@picture.FullSizeImageUrl" data-standard="@picture.ImageUrl" title="@picture.Title" id="main-product-img-lightbox-anchor-@Model.Id">*@
+                    <div id="main-product-img-@Model.Id">
+                        <img alt="@picture.AlternateText" src="@picture.ImageUrl" data-large-src="@picture.FullSizeImageUrl" title="@picture.Title" itemprop="image" id="thumb-product-img-@Model.Id" />
+                    </div>
+                    @*</a>*@
                 </li>
             }
         </ul>
-        <div class="easyzoom easyzoom--adjacent easyzoom--with-thumbnails col-md-8">
-            <a href="@Model.PictureModels[0].FullSizeImageUrl" title="@Model.PictureModels[0].Title" id="main-product-img-lightbox-anchor-@Model.Id">
-                <img class="animated slideInLeft" alt="@Model.PictureModels[0].AlternateText" src="@Model.PictureModels[0].ImageUrl" title="@Model.PictureModels[0].Title" height="360" itemprop="image" id="thumb-product-img-@Model.Id" />
-            </a>
-        </div>
+        @*<div class="easyzoom easyzoom--adjacent easyzoom--with-thumbnails col-md-8">
+                <a href="@Model.PictureModels[0].FullSizeImageUrl" title="@Model.PictureModels[0].Title" id="main-product-img-lightbox-anchor-@Model.Id">
+                    <img class="animated slideInLeft" alt="@Model.PictureModels[0].AlternateText" src="@Model.PictureModels[0].ImageUrl" title="@Model.PictureModels[0].Title" height="360" itemprop="image" id="thumb-product-img-@Model.Id" />
+                </a>
+            </div>*@
 
         <script>
+            $(document).ready(function() {
+                $('.pgwSlider .ps-current img').elevateZoom({
+                    cursor: "crosshair",
+                    zoomWindowFadeIn: 500,
+                    zoomWindowFadeOut: 750
+                });
+            });
             $(document).ready(function () {
-                // Instantiate EasyZoom instances
-                var $easyzoom = $('.easyzoom').easyZoom();
-
-                // Setup thumbnails example
-                var api1 = $easyzoom.filter('.easyzoom--with-thumbnails').data('easyZoom');
-
-                $('.thumbnails').on('click', 'a', function (e) {
-                    var $this = $(this);
-
-                    e.preventDefault();
-                    // Use EasyZoom's `swap` method
-                    api1.swap($this.data('standard'), $this.attr('href'));                    
+                $('.pgwSlider').pgwSlider({
+                    autoSlide: false,
+                    listPosition: 'left',
+                    displayControls: true,
+                    transitionEffect: 'sliding',
+                    afterSlide: function () { $('.pgwSlider .ps-current img').attr('data-zoom-image', $('.pgwSlider .ps-current img').attr('src')); }
                 });
             });
         </script>
     }
     else
     {
-        @foreach (var picture in Model.PictureModels)
+        foreach (var picture in Model.PictureModels)
         {
             <img alt="@picture.AlternateText" src="@picture.ImageUrl" data-zoom-image="@picture.FullSizeImageUrl" title="@picture.Title" itemprop="image" id="main-product-img-@Model.Id" />
         }
