@@ -463,7 +463,8 @@
                     }
                 }
                 if (data.pictureDefaultSizeUrl) {
-                    $('#main-product-img-@productId').attr("src", data.pictureDefaultSizeUrl);
+                    //$('#main-product-img-@productId').attr("src", data.pictureDefaultSizeUrl);
+                    $('.pgwSlider .ps-list img[src="' + data.pictureFullSizeUrl + '"]').click();
                 }
                 if (data.pictureFullSizeUrl) {
                     $('#main-product-img-lightbox-anchor-@productId').attr("href", data.pictureFullSizeUrl);
