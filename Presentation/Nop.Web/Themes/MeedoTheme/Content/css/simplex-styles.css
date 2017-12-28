@@ -57,6 +57,24 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .header-links-wrapper .header-top-right{float:right;width:auto;position:relative;}
 .header-top-right ul li{float:left;}
 .header-top-right ul li.my-account a,.header-top-right ul li.register a{border-left:1px solid #ccc;}
+.email span {
+    text-transform: lowercase;
+}
+.header-top-right ul .email a {
+    padding: 8px 8px 8px 8px;
+}
+.phone {
+    padding: 8px 15px 8px 35px;
+    float: left;
+    border-right: 1px solid #ccc;
+    font-size: 12px;
+    float: left;
+    line-height: 18px;
+    color: #333;
+    text-decoration: none;
+    margin: 6px 0px;
+}
+
 .header-top-right ul li a{padding:8px 15px 8px 35px;float:left;border-right:1px solid #ccc;font-size:12px;float:left;line-height:18px;color:#333;text-decoration:none;margin:6px 0px;text-transform:capitalize;}
 .header-top-right ul li a:hover{color:#ea5648;}
 .header-top-right ul li .ico-account{background:url(../images/user-icon.png) no-repeat 10px 9px;height:30px;}
@@ -101,6 +119,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .flyout-main-wrapper .shopping-cart-link .ico-cart:hover{background:url(../images/cart-icon.png) no-repeat 0px -28px;}
     .flyout-main-wrapper .shopping-cart-link .cart-label {
         color: #333;
+        margin-left:-10px;
     }
 .flyout-main-wrapper .shopping-cart-link .cart-qty{color:#ea5648;}
 .flyout-main-wrapper .flyout-cart-wrapper::before {background:url(../images/flyout-arrow-top.png) no-repeat center center;content: " ";height: 14px;left: 70%;position: absolute;top:-14px;width:26px;}
@@ -131,7 +150,12 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .empty-shopping-cart{padding:15px 0px;color:#333;font-weight:700;}
 .mini-shopping-cart .price span{color:#333;font-weight:700;}
 #flyout-cart .shopping-cart-link{height:35px;}
-
+.badge-notify {
+    background: #ea5648;
+    position: relative;
+    top: -10px;
+    left: -15px;
+}
 
 
 /* HEADER AND MENU STYLE */

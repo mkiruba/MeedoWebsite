@@ -2,8 +2,9 @@
 <div id="flyout-cart" class="flyout-main-wrapper">
     <div class="shopping-cart-link">
         <a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">
+            <span class="badge badge-notify">@Model.TotalProducts</span>
             <span class="cart-label">@T("ShoppingCart")</span>
-            <span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.TotalProducts) @T("admin.currentcarts.totalitems")</span>
+            @*<span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.TotalProducts) @T("admin.currentcarts.totalitems")</span>*@
         </a>
     </div>
     <div class="flyout-cart-wrapper" id="flyout-cart-wrapper">

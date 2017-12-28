@@ -16824,4 +16824,7 @@
   <LocaleResource Name="Wishlist.YourWishlistURL">
     <Value>Your wishlist URL for sharing</Value>
   </LocaleResource>
+  <LocaleResource Name="Email.SupportEmail">
+    <Value>support@meedo.in</Value>
+  </LocaleResource>
 </Language>
