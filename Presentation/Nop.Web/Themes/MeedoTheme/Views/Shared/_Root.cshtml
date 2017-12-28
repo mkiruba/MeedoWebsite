@@ -15,7 +15,7 @@
     <script type="text/javascript" asp-location="Footer">
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
     </script>
-    <div class="header-menu">
+    @*<div class="header-menu">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="master-wrapper-content">
 
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })

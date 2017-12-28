@@ -25,27 +25,31 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = "header_middle" })
     <div class="header-lower">
         <div class="container">
-        <div class="row">
-            @*<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-left">
-                    <div class="search-box">
-                        @await Component.InvokeAsync("SearchBox")
+            <div class="row">
+                @*<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-left">
+                        <div class="search-box">
+                            @await Component.InvokeAsync("SearchBox")
+                        </div>
+                    </div>*@
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="header-logo">
+                        @await Component.InvokeAsync("Logo")
                     </div>
-                </div>*@
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                <div class="header-logo">
-                    @await Component.InvokeAsync("Logo")
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="header-menu">
+                        @await Component.InvokeAsync("TopMenu")
+                    </div>
+                </div>
+                <div class="col-md-4 header-upper-right pull-right">
+                    <div class="header-links-wrapper">
+                        @await Component.InvokeAsync("HeaderLinks")
+                    </div>
+                    <div class="pull-right">
+                        @await Component.InvokeAsync("FlyoutShoppingCart")
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-4 header-upper-right pull-right">
-                <div class="header-links-wrapper">
-                    @await Component.InvokeAsync("HeaderLinks")
-                </div>
-                <div class="pull-right">
-                    @await Component.InvokeAsync("FlyoutShoppingCart")
-                </div>
-            </div>
-        </div>
         </div>
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "header_after" })
