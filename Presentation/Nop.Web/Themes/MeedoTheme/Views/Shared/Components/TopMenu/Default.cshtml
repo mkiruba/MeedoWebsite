@@ -1,6 +1,11 @@
 ﻿@model TopMenuModel
 <div class="main-menu">
     <nav class="navbar navbar-inverse category-menu">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="header-logo">
+                @await Component.InvokeAsync("Logo")
+            </div>
+        </div>
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button aria-expanded="false" data-target="#mobile-menu" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
@@ -11,7 +16,7 @@
             </button>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="mobile-menu" class="collapse navbar-collapse">
+        <div id="mobile-menu" class="collapse navbar-collapse col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <ul class="nav navbar-nav">
                @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_before" })
                 @if (Model.DisplayHomePageMenuItem)
@@ -60,6 +65,14 @@
                 @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_after" })
             </ul>
         </div><!-- /.navbar-collapse -->
+        <div class="header-upper-right pull-right col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="header-links-wrapper">
+                @await Component.InvokeAsync("HeaderLinks")
+            </div>
+            <div class="pull-right">
+                @await Component.InvokeAsync("FlyoutShoppingCart")
+            </div>
+        </div>
     </nav>
 </div>
 <script type="text/javascript" asp-location="Footer">
