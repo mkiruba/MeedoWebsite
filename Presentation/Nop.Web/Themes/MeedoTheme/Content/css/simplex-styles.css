@@ -165,7 +165,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu li a:hover{color:#ea5648;background:url("../images/submenu-active-icon.png") no-repeat 20px 10px #f9f9f9;}
 .slider-wrapper.theme-custom{margin-top:0px;display:none;}
 #index-page .slider-wrapper.theme-custom{display:block;margin-bottom:20px;}
-.main-menu.goToTop .navbar.navbar-inverse.category-menu{margin: 0 auto;width: 1140px !important;}
+/*.main-menu.goToTop .navbar.navbar-inverse.category-menu{margin: 0 auto;width: 1140px !important;}*/
 .header-menu .main-menu{width: 100% !important;transition:all 0.5s ease-in-out 0s;}
 #index-page .header-menu{margin-bottom:0px;}
 .theme-custom .nivo-controlNav a.active{background-color:#ea5648 !important;}

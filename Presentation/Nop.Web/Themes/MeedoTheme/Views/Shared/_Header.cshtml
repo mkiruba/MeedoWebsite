@@ -24,7 +24,7 @@
         </div>*@
     @await Component.InvokeAsync("Widget", new { widgetZone = "header_middle" })
     <div class="header-lower">
-        <div class="container">
+        @*<div class="container">*@
             <div class="row">
                 @*<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-left">
                         <div class="search-box">
@@ -50,7 +50,7 @@
                     </div>
                 </div>*@
             </div>
-        </div>
+        @*</div>*@
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "header_after" })
 </div>
