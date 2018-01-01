@@ -201,8 +201,11 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .title.sub-title{margin-bottom:50px;margin-top: 20px;position: relative;text-align: center;}
 .title.sub-title::before {border-top: 1px solid #ccc;content: "";left: 0%;position: absolute;right:0%;top:50%;}
 .title.sub-title strong {background: #fff;border: 1px solid #ccc;display: inline-block;position: relative;z-index: 10;padding:15px 25px;font-weight:700;text-transform:uppercase;font-size:18px;color:#333;letter-spacing:3px;line-height:18px;}
-
-
+.master-column-wrapper .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 100%;
+}
 
 
 /* HOME NEWS SECTION STYLE */
