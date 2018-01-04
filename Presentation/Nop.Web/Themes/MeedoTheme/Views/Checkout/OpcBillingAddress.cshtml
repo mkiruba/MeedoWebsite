@@ -5,75 +5,64 @@
     {
         <div class="section ship-to-same-address">
             <p class="selector">
-                <input asp-for="ShipToSameAddress" onclick="Shipping.toggleSameShippingAddress(this)"/>
+                <input asp-for="ShipToSameAddress" onclick="Shipping.toggleSameShippingAddress(this)" />
                 <label asp-for="ShipToSameAddress">@T("Checkout.ShipToSameAddress")</label>
             </p>
         </div>
     }
     @if (Model.ExistingAddresses.Count > 0)
     {
-        <div class="container" style="margin-top:20px;">
-            <div class="row">
-                <div class="col-xs-6">
-                    <h3 class="text-center">Basic Example</h3>
-                    <div class="well" style="max-height: 300px;overflow: auto;">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Cras justo odio</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Morbi leo risus</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Vestibulum at eros</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Cras justo odio</a>
-                            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-unchecked"></span>Dapibus ac facilisis in</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script type="text/javascript" asp-location="Footer">
-            $(".list-group-item").click(function() { 
+            $(".list-group-item").click(function () {
                 $(".list-group>a").removeClass("active");
                 $(".list-group>a>span").addClass("glyphicon-unchecked");
-                $(this).addClass("active");      
+                $(this).addClass("active");
                 $(this).find("span").removeClass("glyphicon-unchecked");
-                $(this).find("span").addClass("glyphicon-check");      
+                $(this).find("span").addClass("glyphicon-check");
+                Billing.newAddress(!$(this).data("value"));
             });
         </script>
         <div class="section select-billing-address">
             <label for="billing-address-select">@T("Checkout.SelectBillingAddressOrEnterNewOne")</label>
             <div>
-                <select name="billing_address_id" id="billing-address-select" class="address-select form-control dropdown-toggle"
-                        title="" onchange="Billing.newAddress(!this.value)">
-                    @foreach (var address in Model.ExistingAddresses)
-                    {
-                        var addressLine = "";
-                        addressLine += address.FirstName;
-                        addressLine += " " + address.LastName;
-                        if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
+                @*<select name="billing_address_id" id="billing-address-select" class="address-select form-control dropdown-toggle"
+                    title="" onchange="Billing.newAddress(!this.value)">*@
+                <div class="well" style="max-height: 300px;overflow: auto;">
+                    <div class="list-group">
+                        @foreach (var address in Model.ExistingAddresses)
                         {
-                            addressLine += ", " + address.Address1;
+                            var addressLine = "";
+                            addressLine += address.FirstName;
+                            addressLine += " " + address.LastName;
+                            if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
+                            {
+                                addressLine += ", " + address.Address1;
+                            }
+                            if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
+                            {
+                                addressLine += ", " + address.City;
+                            }
+                            if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
+                            {
+                                addressLine += ", " + address.StateProvinceName;
+                            }
+                            if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
+                            {
+                                addressLine += " " + address.ZipPostalCode;
+                            }
+                            if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
+                            {
+                                addressLine += ", " + address.CountryName;
+                            }
+                            //how should we render "FormattedCustomAddressAttributes" here?
+                            <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
+                            @*<option value="@(address.Id)">@(addressLine)</option>*@
                         }
-                        if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
-                        {
-                            addressLine += ", " + address.City;
-                        }
-                        if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
-                        {
-                            addressLine += ", " + address.StateProvinceName;
-                        }
-                        if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
-                        {
-                            addressLine += " " + address.ZipPostalCode;
-                        }
-                        if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
-                        {
-                            addressLine += ", " + address.CountryName;
-                        }
-                        //how should we render "FormattedCustomAddressAttributes" here?
-                        <option value="@(address.Id)">@(addressLine)</option>
-                    }
-                    <option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
-                </select>
+                        @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>*@
+                        <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
+                        @*</select>*@
+                    </div>
+                </div>
             </div>
         </div>
     }

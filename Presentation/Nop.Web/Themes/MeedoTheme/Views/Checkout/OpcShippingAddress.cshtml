@@ -186,12 +186,25 @@
         <div class="shipping-addresses" id="shipping-addresses-form">
             @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_shipping_address_top" })
             @if (Model.ExistingAddresses.Count > 0)
-            {
+            {  
+                <script type="text/javascript" asp-location="Footer">
+            $(".list-group-item").click(function () {
+                $(".list-group>a").removeClass("active");
+                $(".list-group>a>span").addClass("glyphicon-unchecked");
+                $(this).addClass("active");
+                $(this).find("span").removeClass("glyphicon-unchecked");
+                $(this).find("span").addClass("glyphicon-check");
+                    Shipping.newAddress(!$(this).data("value"));
+            });
+        </script>
                 <div class="section select-shipping-address">
+
                     <label for="shipping-address-select">@T("Checkout.SelectShippingAddressOrEnterNewOne")</label>
                     <div>
-                        <select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
-                                title="" onchange="Shipping.newAddress(!this.value)">
+                        <div class="well" style="max-height: 300px;overflow: auto;">
+                    <div class="list-group">
+                        @*<select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
+                                title="" onchange="Shipping.newAddress(!this.value)">*@
                             @foreach (var address in Model.ExistingAddresses)
                             {
                                 var addressLine = "";
@@ -218,10 +231,14 @@
                                     addressLine += ", " + address.CountryName;
                                 }
                                 //how should we render "FormattedCustomAddressAttributes" here?
-                                <option value="@(address.Id)">@(addressLine)</option>
+                                <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
+                                @*<option value="@(address.Id)">@(addressLine)</option>*@
                             }
-                            <option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
-                        </select>
+                        <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
+                            @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
+                        </select>*@
+                        </div>
+                </div>
                     </div>
                 </div>
             }

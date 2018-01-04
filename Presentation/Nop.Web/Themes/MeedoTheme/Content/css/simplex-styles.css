@@ -1087,13 +1087,13 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 .opc li.tab-section{float:left; /*width:100%;*/background:#fff;}
 .opc .step-title:after{display:block;content:".";clear:both;font-size:0;line-height:0;height:0;overflow:hidden;}
 .opc .ul{list-style:disc outside;padding-left:18px;}
-.opc .allow .step-title{cursor:pointer;}
+/*.opc .allow .step-title{cursor:pointer;}*/
 .opc .step-title{text-align:right;background:#eee;}
 .opc .step-title .number{float:left;background-color:#333;margin:0 15px 0 0;font-size:16px;line-height:43px;color:#fff;font-weight:bold;width:43px;height:43px;text-align:center;}
-.opc .active .step-title .number{background-color:#ea5648;font-weight:700;}
+.opc /*.active*/ .step-title .number{background-color:#ea5648;font-weight:700;}
 .opc .step-title h2{float:left;margin:0;font-size: 14px; text-transform:uppercase;line-height:18px;font-weight:700;color:#333;padding:12px 0px;}
 .opc .tab-section{margin-bottom:10px;}
-.opc .active .step-title h2{font-weight:700;font-size:14px;color:#ea5648;}
+.opc /*.active*/ .step-title h2{font-weight:700;font-size:14px;color:#ea5648;}
 .opc .step{padding:20px 15px;float:left; width:100%;}
 .select-billing-address label,.select-shipping-address label{margin-bottom:15px;color:#000;}
 .select-billing-address .address-box label,.select-shipping-address .address-box label{margin-bottom:0;font-weight:normal;color:#777;}
