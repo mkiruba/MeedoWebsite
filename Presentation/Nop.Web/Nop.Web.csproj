@@ -250,6 +250,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Plugins\Payments.CCAvenue\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageBestSellers\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageCategories\" />

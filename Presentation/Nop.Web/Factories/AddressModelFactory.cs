@@ -214,8 +214,14 @@ namespace Nop.Web.Factories
             //countries and states
             if (addressSettings.CountryEnabled && loadCountries != null)
             {
-                model.AvailableCountries.Add(new SelectListItem { Text = _localizationService.GetResource("Address.SelectCountry"), Value = "0" });
-                foreach (var c in loadCountries())
+                //model.AvailableCountries.Add(new SelectListItem { Text = _localizationService.GetResource("Address.SelectCountry"), Value = "0" });
+                //if there is only one country set that as default selected country
+                var countries = loadCountries();
+                if (countries.Count == 1)
+                {
+                    model.CountryId = countries.First().Id;
+                }
+                foreach (var c in countries)
                 {
                     model.AvailableCountries.Add(new SelectListItem
                     {

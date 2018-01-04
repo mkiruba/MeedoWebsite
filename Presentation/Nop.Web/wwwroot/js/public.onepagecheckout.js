@@ -188,6 +188,7 @@ var Billing = {
 var Shipping = {
     form: false,
     saveUrl: false,
+    isSameShippingAddress: true,
 
     init: function (form, saveUrl) {
         this.form = form;
@@ -214,7 +215,14 @@ var Shipping = {
             $('#shipping-addresses-form').show();
         }
     },
-
+    toggleSameShippingAddress: function (shipToSameAddressInput) {
+        if (shipToSameAddressInput.checked) {
+            $('#opc-shipping').hide();
+        }
+        else {
+            $('#opc-shipping').show();
+        }
+    },
     resetSelectedAddress: function () {
         var selectElement = $('#shipping-address-select');
         if (selectElement) {
