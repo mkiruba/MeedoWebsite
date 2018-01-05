@@ -1566,7 +1566,71 @@ namespace Nop.Web.Controllers
                 return Json(new { error = 1, message = exc.Message });
             }
         }
+        public virtual IActionResult OpcSaveCheckoutInfo(IFormCollection form)
+        {
+            try
+            {
+                //validation
+                var cart = _workContext.CurrentCustomer.ShoppingCartItems
+                    .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+                    .LimitPerStore(_storeContext.CurrentStore.Id)
+                    .ToList();
+                if (!cart.Any())
+                    throw new Exception("Your cart is empty");
 
+                if (!_orderSettings.OnePageCheckoutEnabled)
+                    throw new Exception("One page checkout is disabled");
+
+                if (_workContext.CurrentCustomer.IsGuest() && !_orderSettings.AnonymousCheckoutAllowed)
+                    throw new Exception("Anonymous checkout is not allowed");
+
+                var paymentMethodSystemName = _workContext.CurrentCustomer
+                    .GetAttribute<string>(SystemCustomerAttributeNames.SelectedPaymentMethod, _genericAttributeService, _storeContext.CurrentStore.Id);
+                var paymentMethod = _paymentService.LoadPaymentMethodBySystemName(paymentMethodSystemName);
+                if (paymentMethod == null)
+                    throw new Exception("Payment method is not selected");
+                //Todo : Call OpcSaveBilling, OpcSaveShipping, OpcSaveShippingMethod, OpcSavePaymentMethod, 
+                //return all the errors together and if success go to confirm part
+                var warnings = paymentMethod.ValidatePaymentForm(form);
+                foreach (var warning in warnings)
+                    ModelState.AddModelError("", warning);
+                if (ModelState.IsValid)
+                {
+                    //get payment info
+                    var paymentInfo = paymentMethod.GetPaymentInfo(form);
+
+                    //session save
+                    HttpContext.Session.Set("OrderPaymentInfo", paymentInfo);
+
+                    var confirmOrderModel = _checkoutModelFactory.PrepareConfirmOrderModel(cart);
+                    return Json(new
+                    {
+                        update_section = new UpdateSectionJsonModel
+                        {
+                            name = "confirm-order",
+                            html = RenderPartialViewToString("OpcConfirmOrder", confirmOrderModel)
+                        },
+                        goto_section = "confirm_order"
+                    });
+                }
+
+                //If we got this far, something failed, redisplay form
+                var paymenInfoModel = _checkoutModelFactory.PreparePaymentInfoModel(paymentMethod);
+                return Json(new
+                {
+                    update_section = new UpdateSectionJsonModel
+                    {
+                        name = "payment-info",
+                        html = RenderPartialViewToString("OpcPaymentInfo", paymenInfoModel)
+                    }
+                });
+            }
+            catch (Exception exc)
+            {
+                _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
+                return Json(new { error = 1, message = exc.Message });
+            }
+        }
         public virtual IActionResult OpcConfirmOrder()
         {
             try

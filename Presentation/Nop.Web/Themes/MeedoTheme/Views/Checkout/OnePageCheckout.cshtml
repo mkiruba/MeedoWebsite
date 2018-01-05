@@ -59,9 +59,9 @@
                     </form>
                     <script type="text/javascript" asp-location="Footer">
                                                 Billing.init('#co-billing-form', '@(storeLocation)checkout/OpcSaveBilling/', @(Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant()));
-                                                if ($("#billing-address-select").length > 0) {
-                                                    Billing.newAddress(!$('#billing-address-select').val());
-                                                }
+                                                //if ($("#billing-address-select").length > 0) {
+                                                //    Billing.newAddress(!$('#billing-address-select').val());
+                                                //}
                     </script>
 
                 </div>
@@ -131,15 +131,15 @@
                         </div>
                     </form>
                     <script type="text/javascript" asp-location="Footer">
-                    PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
+                        SaveCheckoutInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSaveCheckoutInfo/');
                     </script>
-                    @*<div class="buttons" id="payment-info-buttons-container">
-                            <p class="back-link">
+                    <div class="buttons" id="payment-info-buttons-container">
+                            @*<p class="back-link">
                                 <a href="#" class="btn btn-default" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
-                            </p>
-                            <input type="button" class="btn btn-primary payment-info-next-step-button" onclick="PaymentInfo.save()" value="@T("Common.Continue")" />
+                            </p>*@
+                            <input type="button" class="btn btn-primary payment-info-next-step-button" onclick="SaveCheckoutInfo.save()" value="@T("Common.Continue")" />
                             <span class="please-wait" id="payment-info-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
-                        </div>*@
+                        </div>
                 </div>
             </li>
             <li id="opc-confirm_order" class="tab-section col-md-12">
@@ -147,7 +147,7 @@
                     <span class="number">@confirmOrderStepNumber</span>
                     <h2>@T("Checkout.ConfirmOrder")</h2>
                 </div>
-                <div id="checkout-step-confirm-order" class="step a-item">
+                <div id="checkout-step-confirm-order" class="step a-item" style="display: none;">
                     <div id="checkout-confirm-order-load">
                         @await Html.PartialAsync("OpcConfirmOrder", Model.ConfirmOrder)
                         @*confirm order content will be loaded here*@

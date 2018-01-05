@@ -36,6 +36,7 @@ var Checkout = {
     },
 
     setLoadWaiting: function (step, keepDisabled) {
+        step = 'payment-info';
         if (step) {
             if (this.loadWaiting) {
                 this.setLoadWaiting(false);
@@ -135,7 +136,7 @@ var Billing = {
     },
 
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
 
         Checkout.setLoadWaiting('billing');
         
@@ -232,7 +233,7 @@ var Shipping = {
     },
 
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
 
         Checkout.setLoadWaiting('shipping');
 
@@ -294,7 +295,7 @@ var ShippingMethod = {
     },
     
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
         
         if (this.validate()) {
             Checkout.setLoadWaiting('shipping-method');
@@ -367,7 +368,7 @@ var PaymentMethod = {
     },
     
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
         
         if (this.validate()) {
             Checkout.setLoadWaiting('payment-method');
@@ -414,7 +415,7 @@ var PaymentInfo = {
     },
 
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
         
         Checkout.setLoadWaiting('payment-info');
         $.ajax({
@@ -446,7 +447,27 @@ var PaymentInfo = {
         Checkout.setStepResponse(response);
     }
 };
+var SaveCheckoutInfo = {
+    form: false,
+    saveUrl: false,
 
+    init: function (form, saveUrl) {
+        this.form = form;
+        this.saveUrl = saveUrl;
+    },
+    save: function () {
+        Checkout.setLoadWaiting('payment-info');
+        $.ajax({
+            cache: false,
+            url: this.saveUrl,
+            data: $(this.form).serialize(),
+            type: 'post',
+            success: this.nextStep,
+            complete: this.resetLoadWaiting,
+            error: Checkout.ajaxFailure
+        });
+    }
+}
 
 
 var ConfirmOrder = {
@@ -460,7 +481,7 @@ var ConfirmOrder = {
     },
 
     save: function () {
-        if (Checkout.loadWaiting != false) return;
+        //if (Checkout.loadWaiting != false) return;
         
         //terms of service
         var termOfServiceOk = true;
