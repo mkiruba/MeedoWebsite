@@ -13,12 +13,16 @@
     @if (Model.ExistingAddresses.Count > 0)
     {
         <script type="text/javascript" asp-location="Footer">
-            $(".list-group-item").click(function () {
-                $(".list-group>a").removeClass("active");
-                $(".list-group>a>span").addClass("glyphicon-unchecked");
+            //select first item by default
+            Billing.newAddress(!$(".list-group").find("a.active").data("value"));
+            $("#opc-billing").find(".list-group-item").click(function () {
+                $(this).parent().children("a").removeClass("active");
+                $(this).parent().find("a>span").removeClass("glyphicon-check");
+                $(this).parent().find("a>span").addClass("glyphicon-unchecked");
                 $(this).addClass("active");
                 $(this).find("span").removeClass("glyphicon-unchecked");
                 $(this).find("span").addClass("glyphicon-check");
+                console.log("CallingBilling");
                 Billing.newAddress(!$(this).data("value"));
             });
         </script>
@@ -55,11 +59,27 @@
                                 addressLine += ", " + address.CountryName;
                             }
                             //how should we render "FormattedCustomAddressAttributes" here?
-                            <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
+                            if (!Model.NewAddressPreselected && Model.ExistingAddresses.IndexOf(address) == 0)
+                            {
+                                <a href="#" class="list-group-item active" data-value="@(address.Id)"><span class="glyphicon glyphicon-check"></span>@(addressLine)</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
+                            }
+
                             @*<option value="@(address.Id)">@(addressLine)</option>*@
                         }
                         @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>*@
-                        <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
+                        @if (Model.NewAddressPreselected)
+                        {
+                            <a href="#" class="list-group-item active " data-value=""><span class="glyphicon glyphicon-check"></span>@T("Checkout.NewAddress")</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
+                        }
+
                         @*</select>*@
                     </div>
                 </div>
