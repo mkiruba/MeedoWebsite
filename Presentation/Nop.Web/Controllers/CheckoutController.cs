@@ -1584,9 +1584,28 @@ namespace Nop.Web.Controllers
                 if (_workContext.CurrentCustomer.IsGuest() && !_orderSettings.AnonymousCheckoutAllowed)
                     throw new Exception("Anonymous checkout is not allowed");
 
+                var filterByCountryId = 0;
+                if (_addressSettings.CountryEnabled &&
+                    _workContext.CurrentCustomer.BillingAddress != null &&
+                    _workContext.CurrentCustomer.BillingAddress.Country != null)
+                {
+                    filterByCountryId = _workContext.CurrentCustomer.BillingAddress.Country.Id;
+                }
+
+                IPaymentMethod paymentMethod;
                 var paymentMethodSystemName = _workContext.CurrentCustomer
                     .GetAttribute<string>(SystemCustomerAttributeNames.SelectedPaymentMethod, _genericAttributeService, _storeContext.CurrentStore.Id);
-                var paymentMethod = _paymentService.LoadPaymentMethodBySystemName(paymentMethodSystemName);
+                //var paymentMethod = _paymentService.LoadPaymentMethodBySystemName(paymentMethodSystemName);
+                if (!string.IsNullOrEmpty(paymentMethodSystemName))
+                {
+                    paymentMethod = _paymentService.LoadPaymentMethodBySystemName(paymentMethodSystemName);
+                }
+                else
+                {
+                    paymentMethod = _paymentService
+                        .LoadActivePaymentMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id,
+                            filterByCountryId).FirstOrDefault();
+                }
                 if (paymentMethod == null)
                     throw new Exception("Payment method is not selected");
                 //Todo : Call OpcSaveBilling, OpcSaveShipping, OpcSaveShippingMethod, OpcSavePaymentMethod, 

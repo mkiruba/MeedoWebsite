@@ -146,6 +146,7 @@
                                                             @if (i == 0) {
                                                                 <text>googleMap.setCenter(marker.getPosition());</text>
                                                             }
+/**/
                                                             clearInterval(interval_@i);
                                                         }
                                                     })
@@ -189,7 +190,8 @@
             {  
                 <script type="text/javascript" asp-location="Footer">
                     //select first item by default
-                    Shipping.newAddress(!$(".list-group").find("a.active").data("value"));
+                            Shipping.newAddress(!$(".list-group").find("a.active").data("value"));
+                            $("#shipping-address-input").val($(".list-group").find("a.active").data("value"));
                     $("#opc-shipping").find(".list-group-item").click(function () {
                         $(this).parent().children("a").removeClass("active");
                         $(this).parent().find("a>span").addClass("glyphicon-unchecked");
@@ -199,6 +201,7 @@
                         $(this).find("span").addClass("glyphicon-check");
                         console.log("CallingShipping");
                         Shipping.newAddress(!$(this).data("value"));
+                        $("#shipping-address-input").val($(this).data("value"));
                     });
                 </script>
                 <div class="section select-shipping-address">
@@ -206,57 +209,58 @@
                     <label for="shipping-address-select">@T("Checkout.SelectShippingAddressOrEnterNewOne")</label>
                     <div>
                         <div class="well" style="max-height: 300px;overflow: auto;">
-                    <div class="list-group">
-                        @*<select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
-                                title="" onchange="Shipping.newAddress(!this.value)">*@
-                            @foreach (var address in Model.ExistingAddresses)
-                            {
-                                var addressLine = "";
-                                addressLine += address.FirstName;
-                                addressLine += " " + address.LastName;
-                                if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
-                                {
-                                    addressLine += ", " + address.Address1;
-                                }
-                                if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
-                                {
-                                    addressLine += ", " + address.City;
-                                }
-                                if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
-                                {
-                                    addressLine += ", " + address.StateProvinceName;
-                                }
-                                if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
-                                {
-                                    addressLine += " " + address.ZipPostalCode;
-                                }
-                                if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
-                                {
-                                    addressLine += ", " + address.CountryName;
-                                }
-                                //how should we render "FormattedCustomAddressAttributes" here?
-                                if (!Model.NewAddressPreselected && Model.ExistingAddresses.IndexOf(address) == 0)
-                                {
-                                    <a href="#" class="list-group-item active" data-value="@(address.Id)"><span class="glyphicon glyphicon-check"></span>@(addressLine)</a>
-                                }
-                                else
-                                {
-                                    <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
-                                }
-                                @*<option value="@(address.Id)">@(addressLine)</option>*@
-                            }
-                        @if(Model.NewAddressPreselected)
-                        {
+                            <div class="list-group">
+                                <input type="hidden" id="shipping-address-input" name="shipping_address_id" value="">
+                                @*<select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
+        title="" onchange="Shipping.newAddress(!this.value)">*@
+                                @foreach (var address in Model.ExistingAddresses)
+    {
+        var addressLine = "";
+        addressLine += address.FirstName;
+        addressLine += " " + address.LastName;
+        if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
+        {
+            addressLine += ", " + address.Address1;
+        }
+        if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
+        {
+            addressLine += ", " + address.City;
+        }
+        if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
+        {
+            addressLine += ", " + address.StateProvinceName;
+        }
+        if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
+        {
+            addressLine += " " + address.ZipPostalCode;
+        }
+        if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
+        {
+            addressLine += ", " + address.CountryName;
+        }
+        //how should we render "FormattedCustomAddressAttributes" here?
+        if (!Model.NewAddressPreselected && Model.ExistingAddresses.IndexOf(address) == 0)
+        {
+                            <a href="#" class="list-group-item active" data-value="@(address.Id)"><span class="glyphicon glyphicon-check"></span>@(addressLine)</a>
+}
+else
+{
+                            <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
+}
+                            @*<option value="@(address.Id)">@(addressLine)</option>*@
+}
+                                @if (Model.NewAddressPreselected)
+    {
                             <a href="#" class="list-group-item active " data-value=""><span class="glyphicon glyphicon-check"></span>@T("Checkout.NewAddress")</a>
-                        }
-                        else
-                        {
+}
+else
+{
                             <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
-                        }
-                        
-                            @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
-                        </select>*@
-                        </div>
+}
+
+                                @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
+        </select>*@
+                            </div>
                 </div>
                     </div>
                 </div>
