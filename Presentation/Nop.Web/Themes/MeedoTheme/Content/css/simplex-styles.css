@@ -447,7 +447,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .item-box .product-rating-box{display: inline-block;margin: 0 0 20px;width:100%;position:relative;}
 .item-box .rating{background: url('../images/star-x-inactive.png') repeat-x;width:100px;height: 16px;margin:0 auto;}
 .item-box .rating div{background: url('../images/star-x-active.png') repeat-x;height: 16px;}
-.item-box,.item-box.product-grid{height:530px;}
+/* .item-box,.item-box.product-grid{height:530px;} */
 .item-box .product-item{background:#fff;float:left;width:100%;transition:all 0.3s ease-in-out 0s;-webkit-transition:all 0.3s ease-in-out 0s;-moz-transition:all 0.3s ease-in-out 0s;-o-transition:all 0.3s ease-in-out 0s;}
 .item-box .product-item .picture a img{width:100%;}
 .item-box .product-item .picture{margin-bottom:25px;position:relative;}
