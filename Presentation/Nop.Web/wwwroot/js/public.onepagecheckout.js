@@ -180,7 +180,7 @@ var Billing = {
         }
 
         Checkout.setStepResponse(response);
-    }
+    }    
 };
 
 
@@ -213,8 +213,8 @@ var Shipping = {
             $('#pickup-points-form').hide();
             $('#shipping-addresses-form').show();
         }
-    },
-
+    },   
+   
     resetSelectedAddress: function () {
         var selectElement = $('#shipping-address-select');
         if (selectElement) {
@@ -255,6 +255,15 @@ var Shipping = {
         }
 
         Checkout.setStepResponse(response);
+    },
+
+    toggleBillingAddressDifferent: function (billingAddressDifferent) {
+        if (billingAddressDifferent.checked) {
+            $('#opc-billing').show();
+        }
+        else {
+            $('#opc-billing').hide();
+        }
     }
 };
 
