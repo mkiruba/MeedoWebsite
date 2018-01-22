@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li role="presentation" class="disabled">
-                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Payment">
+                                <a href="#step2" data-toggle="tab" aria-controls="step3" role="tab" title="Payment">
                                     <span class="round-tab">
                                         <i class="glyphicon glyphicon-credit-card"></i>
                                     </span>
@@ -141,6 +141,46 @@
                                 </div>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step2">
+                                <div class="step2">
+                                    <div class="step_21">
+                                        <div class="row">
+                                            <label>Payment</label>
+                                        </div>
+                                    </div>
+                                    <div class="step-22">
+                                        <div id="opc-payment_method">
+                                            <div class="step-title">
+                                                
+                                                <h2>@T("Checkout.PaymentMethod")</h2>
+                                            </div>
+                                            <div id="checkout-step-payment-method" class="step a-item" style="display: none;">
+                                                @*<form id="co-payment-method-form">*@
+                                                    <div id="checkout-payment-method-load">
+                                                        @*payment methods content will be loaded here*@ @*Payment is not required*@
+                                                    </div>
+                                                @*</form>*@
+                                                <script type="text/javascript" asp-location="Footer">
+                                                    PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/');
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div id="opc-payment_info">
+                                            <div class="step-title">
+                                                <h2>@T("Checkout.PaymentInfo")</h2>
+                                            </div>
+                                            <div id="checkout-step-payment-info" class="step a-item" style="display: none;">
+                                                @*<form id="co-payment-info-form">*@
+                                                    <div id="checkout-payment-info-load">
+                                                        @*payment info content will be loaded here*@ @*Payment is not required*@
+                                                    </div>
+                                                @*</form>*@
+                                                <script type="text/javascript" asp-location="Footer">
+                                                    PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                                     <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
@@ -234,7 +274,7 @@
         });
     </script>
 </div>
-</div>
+
 @*<div class="page checkout-page">
     <div class="page-title panel-heading">
         <h1>@T("Checkout")</h1>
