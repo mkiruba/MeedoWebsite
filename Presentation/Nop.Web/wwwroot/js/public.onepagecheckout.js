@@ -1,8 +1,21 @@
 /*
 ** nopCommerce one page checkout
 */
-
-
+/*
+** new checkout 
+*/
+var Addresses = {
+    save: function () {
+        Shipping.save();
+        Billing.save();
+        if ($('#BillingAddressDifferent').checked) {
+            Billing.save();
+        }
+        //var $active = $('.wizard .nav-tabs li.active');
+        //$active.next().removeClass('disabled');
+        //nextTab($active);
+    }
+}
 var Checkout = {
     loadWaiting: false,
     failureUrl: false,
