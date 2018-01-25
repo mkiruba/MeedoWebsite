@@ -4,18 +4,18 @@
 /*
 ** new checkout 
 */
-var Addresses = {
-    save: function () {
-        Shipping.save();
-        Billing.save();
-        if ($('#BillingAddressDifferent').checked) {
-            Billing.save();
-        }
-        //var $active = $('.wizard .nav-tabs li.active');
-        //$active.next().removeClass('disabled');
-        //nextTab($active);
+var tab = {
+    nextTab: function (elem) {
+        var $active = $('.wizard .nav-tabs li.active');
+        $active.next().removeClass('disabled');
+        $active.next().find('a[data-toggle="tab"]').click();
+    },
+    prevTab: function (elem) {
+        var $active = $('.wizard .nav-tabs li.active');
+        $active.prev().find('a[data-toggle="tab"]').click();
     }
 }
+
 var Checkout = {
     loadWaiting: false,
     failureUrl: false,
@@ -74,9 +74,14 @@ var Checkout = {
     },
 
     gotoSection: function (section) {
-        section = $('#opc-' + section);
+        var sectionName = '#opc-' + section;
+        section = $(sectionName);
+        //Todo: 25/01/18 need to navigate to paymentinfo tab
         section.addClass('allow');
-        Accordion.openSection(section);
+        //$('.wizard .nav-tabs li>a' + section).click();
+        //Accordion.openSection(section);
+        $('.wizard .nav-tabs li a[id="' + sectionName + '"]').removeClass('disabled');
+        $('.wizard .nav-tabs li a[id="' + sectionName +'"]').click()
     },
 
     back: function () {
@@ -177,7 +182,8 @@ var Billing = {
             if (response.wrong_billing_address) {
                 Accordion.showSection('#opc-billing');
             } else {
-                Accordion.hideSection('#opc-billing');
+                tab.nextTab();
+                //Accordion.hideSection('#opc-billing');
             }
         }
 
