@@ -74,13 +74,14 @@ var Checkout = {
     },
 
     gotoSection: function (section) {
-        var sectionName = '#opc-' + section;
-        section = $(sectionName);
+        var sectionName = 'opc-' + section;
+        section = $('#'+sectionName);
         //Todo: 25/01/18 need to navigate to paymentinfo tab
         section.addClass('allow');
         //$('.wizard .nav-tabs li>a' + section).click();
         //Accordion.openSection(section);
         $('.wizard .nav-tabs li a[id="' + sectionName + '"]').removeClass('disabled');
+        $('.wizard .nav-tabs li a[id="' + sectionName + '"]').parent().removeClass('disabled');
         $('.wizard .nav-tabs li a[id="' + sectionName +'"]').click()
     },
 
