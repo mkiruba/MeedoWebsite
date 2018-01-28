@@ -67,7 +67,7 @@
                                 </script>
                             }
                             break;
-                            case AttributeControlType.RadioList:
+                        case AttributeControlType.RadioList:
                             {
                                 <div class="btn-group" data-toggle="buttons">
                                     @foreach (var attributeValue in attribute.Values)
@@ -93,31 +93,111 @@
                                             }
                                         }
                                 </div>
+                                <div class="size-guide">
+                                    <!-- Button trigger modal -->
+                                    <a href="#" class="nav-link active" data-toggle="modal" data-target="#sizeGuideModal">
+                                        Size Guide
+                                    </a>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="sizeGuideModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Size Guide</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col"></th>
+                                                                <th scope="col">CHEST</th>
+                                                                <th scope="col">LENGTH</th>
+                                                                <th scope="col">SLEEVE LENGTH</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">SIZE</th>
+                                                                <td>cm</td>
+                                                                <td>cm</td>
+                                                                <td>cm</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">S</th>
+                                                                <td>95</td>
+                                                                <td>134</td>
+                                                                <td>43</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">M</th>
+                                                                <td>100</td>
+                                                                <td>138</td>
+                                                                <td>44</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">L</th>
+                                                                <td>106</td>
+                                                                <td>142</td>
+                                                                <td>46</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">XL</th>
+                                                                <td>111</td>
+                                                                <td>146</td>
+                                                                <td>48</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">XXL</th>
+                                                                <td>118</td>
+                                                                <td>150</td>
+                                                                <td>51</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">3XL</th>
+                                                                <td>126</td>
+                                                                <td>152</td>
+                                                                <td>53</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @*<ul class="option-list">
-                                    @foreach (var attributeValue in attribute.Values)
-                                    {
-                                        var attributeName = string.IsNullOrEmpty(attributeValue.PriceAdjustment) ?
-                                        attributeValue.Name :
-                                        T("Products.ProductAttributes.PriceAdjustment", attributeValue.Name, attributeValue.PriceAdjustment,
-                                        attributeValue.CustomerEntersQty ? T("Products.ProductAttributes.PriceAdjustment.PerItem").Text : string.Empty).Text;
-                                        <li>
-                                            <input id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected"
-                                                   @(attribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) />
-                                            <label for="@(controlId)_@(attributeValue.Id)">@attributeName</label>
-                                            @if (attributeValue.CustomerEntersQty)
-                                            {
-                                                <div class="qty-box" id="@(controlId)_@(attributeValue.Id)_qty_box" style="display:none">
-                                                    <div class="form-group">
-                                                        <label class="text-prompt col-md-5 control-label" for="@(controlId)_@(attributeValue.Id)_qty">@(T("Products.ProductAttributes.PriceAdjustment.Quantity").Text)</label>
-                                                        <div class="col-md-7 qty-text">
-                                                            <input class="form-control" type="text" name="@(controlId)_@(attributeValue.Id)_qty" id="@(controlId)_@(attributeValue.Id)_qty" value="@(attributeValue.Quantity)" />
+                                        @foreach (var attributeValue in attribute.Values)
+                                        {
+                                            var attributeName = string.IsNullOrEmpty(attributeValue.PriceAdjustment) ?
+                                            attributeValue.Name :
+                                            T("Products.ProductAttributes.PriceAdjustment", attributeValue.Name, attributeValue.PriceAdjustment,
+                                            attributeValue.CustomerEntersQty ? T("Products.ProductAttributes.PriceAdjustment.PerItem").Text : string.Empty).Text;
+                                            <li>
+                                                <input id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected"
+                                                       @(attribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) />
+                                                <label for="@(controlId)_@(attributeValue.Id)">@attributeName</label>
+                                                @if (attributeValue.CustomerEntersQty)
+                                                {
+                                                    <div class="qty-box" id="@(controlId)_@(attributeValue.Id)_qty_box" style="display:none">
+                                                        <div class="form-group">
+                                                            <label class="text-prompt col-md-5 control-label" for="@(controlId)_@(attributeValue.Id)_qty">@(T("Products.ProductAttributes.PriceAdjustment.Quantity").Text)</label>
+                                                            <div class="col-md-7 qty-text">
+                                                                <input class="form-control" type="text" name="@(controlId)_@(attributeValue.Id)_qty" id="@(controlId)_@(attributeValue.Id)_qty" value="@(attributeValue.Quantity)" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            }
-                                        </li>
-                                    }
-                                </ul>*@
+                                                }
+                                            </li>
+                                        }
+                                    </ul>*@
                                 <script type="text/javascript" asp-location="Footer">
                                     $(document).ready(function() {
                                         showHideRadioQuantity("@controlId");

@@ -1961,7 +1961,9 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 .tooltip-container .tooltip-body{margin: 5px;}
 .tooltip-container .tooltip-body img{border: 0 none #fff;width: 190px;}
 .product-details-page .attributes ul.color-squares .selected-value .attribute-square-container .attribute-square,.product-details-page .attributes ul.image-squares .selected-value .attribute-square-container .attribute-square{border-color:#ea5648;}
-
+.size-guide {
+    margin-top: 5px;
+}
 
 
 
