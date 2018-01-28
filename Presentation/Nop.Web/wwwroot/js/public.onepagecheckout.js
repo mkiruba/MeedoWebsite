@@ -5,13 +5,14 @@
 ** new checkout 
 */
 var tab = {
-    nextTab: function (elem) {
+    nextTab: function () {
         var $active = $('.wizard .nav-tabs li.active');
         $active.next().removeClass('disabled');
         $active.next().find('a[data-toggle="tab"]').click();
     },
-    prevTab: function (elem) {
+    prevTab: function () {
         var $active = $('.wizard .nav-tabs li.active');
+        $active.prev().removeClass('disabled');
         $active.prev().find('a[data-toggle="tab"]').click();
     }
 }
@@ -87,7 +88,8 @@ var Checkout = {
 
     back: function () {
         if (this.loadWaiting) return;
-        Accordion.openPrevSection(true, true);
+        //Accordion.openPrevSection(true, true);
+        tab.prevTab();
     },
 
     setStepResponse: function (response) {

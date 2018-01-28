@@ -524,8 +524,6 @@ namespace Nop.Web.Factories
                 ShippingRequired = cart.RequiresShipping(_productService, _productAttributeParser),
                 DisableBillingAddressCheckoutStep = _orderSettings.DisableBillingAddressCheckoutStep,
                 BillingAddress = PrepareBillingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true),
-                ShippingAddress = PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true),
-                ShippingMethod = PrepareShippingMethodModel(cart, _workContext.CurrentCustomer.ShippingAddress)
             };
             return model;
         }
