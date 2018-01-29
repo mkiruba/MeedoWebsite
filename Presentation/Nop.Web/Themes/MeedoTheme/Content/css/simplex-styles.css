@@ -64,7 +64,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     padding: 8px 8px 8px 8px;
 }
 .phone {
-    padding: 8px 15px 8px 35px;
+    padding: 8px 15px 8px 0px;
     float: left;
     border-right: 1px solid #ccc;
     font-size: 12px;
@@ -1583,7 +1583,6 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 .reward-points-page .panel.panel-default table tbody tr,.compare-products-page .panel.panel-default table tbody tr,.private-messages-page .panel.panel-default table tbody tr,.forum-subscriptions-page .subscription-list table tbody tr,.forums-table-section table tbody tr,.reward-points-page.panel.panel-default table tbody tr,.back-in-stock-subscription-list-page .panel.panel-default table tbody tr,.shipment-details-page .section .panel.panel-default table tbody tr,.order-details-page .section .panel.panel-default table tbody tr{border-top:1px solid #ddd;}
 .order-details-page .section .panel.panel-default table .a-center.name{text-align:left;}
 .shipment-details-page .section .panel.panel-default table .a-left.name em,.order-details-page .section .panel.panel-default table .a-left.name em{font-style:normal;}
-
 
 
 
