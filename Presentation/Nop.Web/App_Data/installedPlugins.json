@@ -10,7 +10,6 @@
   "Payments.PayPalStandard",
   "Pickup.PickupInStore",
   "Shipping.FedEx",
-  "Shipping.FixedOrByWeight",
   "Shipping.UPS",
   "Tax.FixedOrByCountryStateZip",
   "Widgets.GoogleAnalytics",
