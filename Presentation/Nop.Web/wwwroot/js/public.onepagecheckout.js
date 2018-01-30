@@ -210,10 +210,12 @@ var Billing = {
 var Shipping = {
     form: false,
     saveUrl: false,
-
-    init: function (form, saveUrl) {
+    differentBilling: false,
+    init: function (form, saveUrl, differentBilling) {
         this.form = form;
         this.saveUrl = saveUrl;
+        this.differentBilling = differentBilling;
+        this.toggleBillingAddress(differentBilling);
     },
 
     newAddress: function (isNew) {
@@ -226,7 +228,7 @@ var Shipping = {
         $.event.trigger({ type: "onepagecheckout_shipping_address_new" });
     },
 
-    togglePickUpInStore: function (pickupInStoreInput) {
+    togglePickUpInStore: function (pickupInStoreInput) {        
         if (pickupInStoreInput.checked) {
             $('#pickup-points-form').show();
             $('#shipping-addresses-form').hide();
@@ -249,7 +251,9 @@ var Shipping = {
         if (Checkout.loadWaiting != false) return;
 
         Checkout.setLoadWaiting('shipping');
-
+        if (differentBilling) {
+            Billing.save();
+        }
         $.ajax({
             cache: false,
             url: this.saveUrl,
@@ -280,7 +284,12 @@ var Shipping = {
     },
 
     toggleBillingAddressDifferent: function (billingAddressDifferent) {
-        if (billingAddressDifferent.checked) {
+        differentBilling = billingAddressDifferent.checked;
+        this.toggleBillingAddress(billingAddressDifferent.checked);
+    },
+
+    toggleBillingAddress: function (differentBilling) {
+        if (differentBilling) {
             $('#opc-billing').show();
         }
         else {

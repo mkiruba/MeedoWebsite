@@ -11,6 +11,7 @@
   "Pickup.PickupInStore",
   "Shipping.FedEx",
   "Shipping.UPS",
+  "Shipping.FixedOrByWeight",
   "Tax.FixedOrByCountryStateZip",
   "Widgets.GoogleAnalytics",
   "Widgets.NivoSlider",
