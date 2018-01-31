@@ -11,7 +11,12 @@ var tab = {
         $active.next().find('a[data-toggle="tab"]').click();
     },
     prevTab: function () {
-        var $active = $('.wizard .nav-tabs li.active');
+        var $active = $('.wizard .nav-tabs li.active'); 
+        var isBillingAddDifferent = $('.opc #opc-shipping').find('#BillingAddressDifferent');
+        
+        if (!isBillingAddDifferent.is(":checked") && $active.find('#opc-payment_info').length > 0) {
+            $active = $active.prev();
+        }       
         $active.prev().removeClass('disabled');
         $active.prev().find('a[data-toggle="tab"]').click();
     }
@@ -251,9 +256,7 @@ var Shipping = {
         if (Checkout.loadWaiting != false) return;
 
         Checkout.setLoadWaiting('shipping');
-        if (differentBilling) {
-            Billing.save();
-        }
+       
         $.ajax({
             cache: false,
             url: this.saveUrl,

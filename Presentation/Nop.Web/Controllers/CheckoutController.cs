@@ -1200,17 +1200,18 @@ namespace Nop.Web.Controllers
                     }
 
                     //do not ship to the same address
-                    var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true);
+                    //var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true);
 
-                    return Json(new
-                    {
-                        update_section = new UpdateSectionJsonModel
-                        {
-                            name = "shipping",
-                            html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
-                        },
-                        goto_section = "shipping"
-                    });
+                    //return Json(new
+                    //{
+                    //    update_section = new UpdateSectionJsonModel
+                    //    {
+                    //        name = "shipping",
+                    //        html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
+                    //    },
+                    //    goto_section = "shipping"
+                    //});
+                    return OpcLoadStepAfterShippingAddress(cart);
                 }
 
                 //shipping is not required
@@ -1317,6 +1318,7 @@ namespace Nop.Web.Controllers
                             selectedCountryId: newAddress.CountryId,
                             overrideAttributesXml: customAttributes);
                         shippingAddressModel.NewAddressPreselected = true;
+                        
                         return Json(new
                         {
                             update_section = new UpdateSectionJsonModel
@@ -1358,7 +1360,22 @@ namespace Nop.Web.Controllers
                     _workContext.CurrentCustomer.ShippingAddress = address;
                     _customerService.UpdateCustomer(_workContext.CurrentCustomer);
                 }
+                if (model.BillingAddressDifferent)
+                {
+                    var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
+                       selectedCountryId: model.ShippingNewAddress.CountryId); 
+                    billingAddressModel.NewAddressPreselected = false;
 
+                    return Json(new
+                    {
+                        update_section = new UpdateSectionJsonModel
+                        {
+                            name = "billing",
+                            html = RenderPartialViewToString("OpcBillingAddress", billingAddressModel)
+                        },
+                        goto_section = "billing"
+                    });                    
+                }
                 return OpcLoadStepAfterShippingAddress(cart);
             }
             catch (Exception exc)
