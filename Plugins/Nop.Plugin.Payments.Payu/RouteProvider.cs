@@ -1,31 +1,25 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using Nop.Web.Framework.Mvc.Routes;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Nop.Web.Framework.Mvc.Routing;
 
 namespace Nop.Plugin.Payments.Payu
 {
     public partial class RouteProvider : IRouteProvider
     {
-        public void RegisterRoutes(RouteCollection routes)
+        public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
-            routes.MapRoute("Plugin.Payments.Payu.Configure",
+            routeBuilder.MapRoute("Plugin.Payments.Payu.Configure",
                  "Plugins/PaymentPayu/Configure",
-                 new { controller = "PaymentPayu", action = "Configure" },
-                 new[] { "Nop.Plugin.Payments.Payu.Controllers" }
-            );
+                 new { controller = "PaymentPayu", action = "Configure" });
 
-            routes.MapRoute("Plugin.Payments.Payu.PaymentInfo",
+            routeBuilder.MapRoute("Plugin.Payments.Payu.PaymentInfo",
                  "Plugins/PaymentPayu/PaymentInfo",
-                 new { controller = "PaymentPayu", action = "PaymentInfo" },
-                 new[] { "Nop.Plugin.Payments.Payu.Controllers" }
-            );
+                 new { controller = "PaymentPayu", action = "PaymentInfo" });
 
             //Return
-            routes.MapRoute("Plugin.Payments.Payu.Return",
+            routeBuilder.MapRoute("Plugin.Payments.Payu.Return",
                  "Plugins/PaymentPayu/Return",
-                 new { controller = "PaymentPayu", action = "Return" },
-                 new[] { "Nop.Plugin.Payments.Payu.Controllers" }
-            );
+                 new { controller = "PaymentPayu", action = "Return" });
         }
         public int Priority
         {

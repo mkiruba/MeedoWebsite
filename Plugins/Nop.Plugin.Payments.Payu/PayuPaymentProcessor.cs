@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Web.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Nop.Core;
 using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Orders;
@@ -24,11 +25,12 @@ namespace Nop.Plugin.Payments.Payu
     {
         #region Fields
 
-        private readonly PayuPaymentSettings _PayuPaymentSettings;
+        private readonly PayuPaymentSettings _payuPaymentSettings;
         private readonly ISettingService _settingService;
         private readonly ICurrencyService _currencyService;
         private readonly CurrencySettings _currencySettings;
         private readonly IWebHelper _webHelper;
+        private readonly ILocalizationService _localizationService;
 
         #endregion
 
@@ -36,13 +38,15 @@ namespace Nop.Plugin.Payments.Payu
 
         public PayuPaymentProcessor(PayuPaymentSettings PayuPaymentSettings,
             ISettingService settingService, ICurrencyService currencyService,
+            ILocalizationService localizationService,
             CurrencySettings currencySettings, IWebHelper webHelper)
         {
-            this._PayuPaymentSettings = PayuPaymentSettings;
+            this._payuPaymentSettings = PayuPaymentSettings;
             this._settingService = settingService;
             this._currencyService = currencyService;
             this._currencySettings = currencySettings;
             this._webHelper = webHelper;
+            this._localizationService = localizationService;
         }
 
         #endregion
@@ -75,8 +79,8 @@ namespace Nop.Plugin.Payments.Payu
             var orderId= postProcessPaymentRequest.Order.Id;
             var remotePostHelper = new RemotePost();
             remotePostHelper.FormName = "PayuForm";
-            remotePostHelper.Url = _PayuPaymentSettings.PayUri;
-            remotePostHelper.Add("key", _PayuPaymentSettings.MerchantId.ToString());
+            remotePostHelper.Url = _payuPaymentSettings.PayUri;
+            remotePostHelper.Add("key", _payuPaymentSettings.MerchantId.ToString());
             remotePostHelper.Add("amount", postProcessPaymentRequest.Order.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat));
 			remotePostHelper.Add("productinfo", "productinfo");
             remotePostHelper.Add("Currency", _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode);
@@ -85,10 +89,10 @@ namespace Nop.Plugin.Payments.Payu
             remotePostHelper.Add("service_provider", "payu_paisa");
             remotePostHelper.Add("surl", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPayu/Return");
 			remotePostHelper.Add("furl", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPayu/Return");
-            remotePostHelper.Add("hash", myUtility.getchecksum(_PayuPaymentSettings.MerchantId.ToString(), 
+            remotePostHelper.Add("hash", myUtility.getchecksum(_payuPaymentSettings.MerchantId.ToString(), 
                 postProcessPaymentRequest.Order.Id.ToString(), postProcessPaymentRequest.Order.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat),
                 "productinfo",postProcessPaymentRequest.Order.BillingAddress.FirstName.ToString(),
-                postProcessPaymentRequest.Order.BillingAddress.Email.ToString(),_PayuPaymentSettings.Key));
+                postProcessPaymentRequest.Order.BillingAddress.Email.ToString(), _payuPaymentSettings.Key));
 
 
             //Billing details
@@ -156,7 +160,7 @@ namespace Nop.Plugin.Payments.Payu
         /// <returns>Additional handling fee</returns>
         public decimal GetAdditionalHandlingFee(IList<ShoppingCartItem> cart)
         {
-            return _PayuPaymentSettings.AdditionalFee;
+            return _payuPaymentSettings.AdditionalFee;
         }
 
         /// <summary>
@@ -243,6 +247,21 @@ namespace Nop.Plugin.Payments.Payu
             return true;
         }
 
+        public IList<string> ValidatePaymentForm(IFormCollection form)
+        {
+            return new List<string>();
+        }
+
+        public ProcessPaymentRequest GetPaymentInfo(IFormCollection form)
+        {
+            return new ProcessPaymentRequest();
+        }
+
+        public override string GetConfigurationPageUrl()
+        {
+            return $"{_webHelper.GetStoreLocation()}Admin/PaymentPayu/Configure";
+        }
+
         /// <summary>
         /// Gets a route for provider configuration
         /// </summary>
@@ -256,23 +275,28 @@ namespace Nop.Plugin.Payments.Payu
             routeValues = new RouteValueDictionary() { { "Namespaces", "Nop.Plugin.Payments.Payu.Controllers" }, { "area", null } };
         }
 
-        /// <summary>
-        /// Gets a route for payment info
-        /// </summary>
-        /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller name</param>
-        /// <param name="routeValues">Route values</param>
-        public void GetPaymentInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        public void GetPublicViewComponent(out string viewComponentName)
         {
-            actionName = "PaymentInfo";
-            controllerName = "PaymentPayu";
-            routeValues = new RouteValueDictionary() { { "Namespaces", "Nop.Plugin.Payments.Payu.Controllers" }, { "area", null } };
+            viewComponentName = "PaymentPayu";
         }
 
-        public Type GetControllerType()
-        {
-            return typeof(PaymentPayuController);
-        }
+        ///// <summary>
+        ///// Gets a route for payment info
+        ///// </summary>
+        ///// <param name="actionName">Action name</param>
+        ///// <param name="controllerName">Controller name</param>
+        ///// <param name="routeValues">Route values</param>
+        //public void GetPaymentInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        //{
+        //    actionName = "PaymentInfo";
+        //    controllerName = "PaymentPayu";
+        //    routeValues = new RouteValueDictionary() { { "Namespaces", "Nop.Plugin.Payments.Payu.Controllers" }, { "area", null } };
+        //}
+
+        //public Type GetControllerType()
+        //{
+        //    return typeof(PaymentPayuController);
+        //}
 
         public override void Install()
         {
@@ -398,7 +422,12 @@ namespace Nop.Plugin.Payments.Payu
             }
         }
 
-      
+        public string PaymentMethodDescription
+        {
+            //return description of this payment method to be display on "payment method" checkout step. good practice is to make it localizable
+            //for example, for a redirection payment method, description may be like this: "You will be redirected to PayPal site to complete the payment"
+            get { return _localizationService.GetResource("Plugins.Payments.Payu.PaymentMethodDescription"); }
+        }
 
 
         #endregion

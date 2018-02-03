@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Payment methods",
+  "FriendlyName": "PayUMoney",
+  "SystemName": "Payments.Payu",
+  "Version": "1.42",
+  "SupportedVersions": [ "4.00" ],
+  "Author": "Kiru Marimuthu",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.Payu.dll",
+  "Description": "This plugin allows paying with Payu"
+}
