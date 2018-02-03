@@ -1150,6 +1150,11 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 #checkout-step-confirm-order .order-summary-content .panel.panel-default.cart-item-table{margin-top:20px;}
 
 /*New Checkout Page Style*/
+.checkout-page .order-summary-content .order-review-data li span{
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
 .new-checkout .step-title.panel-heading {
     background-color: #ea5648;
 }
