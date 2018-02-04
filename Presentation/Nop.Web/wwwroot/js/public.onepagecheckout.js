@@ -14,7 +14,7 @@ var tab = {
         var $active = $('.wizard .nav-tabs li.active'); 
         var isBillingAddSame = $('.opc #opc-shipping').find('#BillingAddressSame');
         
-        if (!isBillingAddSame.is(":checked") && $active.find('#opc-payment_info').length > 0) {
+        if (isBillingAddSame.is(":checked") && $active.find('#opc-payment_info').length > 0) {
             $active = $active.prev();
         }       
         $active.prev().removeClass('disabled');

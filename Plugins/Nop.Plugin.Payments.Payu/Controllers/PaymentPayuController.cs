@@ -60,7 +60,7 @@ namespace Nop.Plugin.Payments.Payu.Controllers
 
             // return View("Nop.Plugin.Payments.Payu.Views.PaymentPayu.Configure", model);
 
-            return View("~/Plugins/Payments.Payu/Views/PaymentPayu/Configure.cshtml", model);
+            return View("~/Plugins/Payments.Payu/Views/Configure.cshtml", model);
 
             //return View("~/Plugins/Payments.PayPalStandard/Views/PaymentPayPalStandard/Configure.cshtml", model);
         }

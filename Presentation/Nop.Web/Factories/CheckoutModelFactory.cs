@@ -181,9 +181,9 @@ namespace Nop.Web.Factories
         {
             var model = new CheckoutShippingAddressModel
             {
-
                 //allow pickup in store?
-                AllowPickUpInStore = _shippingSettings.AllowPickUpInStore
+                AllowPickUpInStore = _shippingSettings.AllowPickUpInStore,
+                BillingAddressSame = true
             };
             if (model.AllowPickUpInStore)
             {

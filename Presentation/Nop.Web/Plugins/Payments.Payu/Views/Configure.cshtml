@@ -1,19 +1,19 @@
 ﻿@{
-    Layout = "";
+    Layout = "_ConfigurePlugin";
 }
+
 @model ConfigurationModel
 @using Nop.Plugin.Payments.Payu.Models;
-<form asp-controller="PaymemntPayu" asp-action="Configure" method="post">
-</form>
+<form asp-controller="PaymentPayu" asp-action="Configure" method="post">
     <table class="adminContent">
         <tr>
         <tr>
             <td class="adminTitle">
-                <nop-label asp-for="MerchantId" />                
+                <nop-label asp-for="MerchantId" />
             </td>
             <td class="adminData">
                 <nop-editor asp-for="MerchantId" />
-                <span asp-validation-for="MerchantId"></span>                
+                <span asp-validation-for="MerchantId"></span>
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                <nop-label asp-for="MerchantParam" />                
+                <nop-label asp-for="MerchantParam" />
             </td>
             <td class="adminData">
                 <nop-editor asp-for="MerchantParam" />
@@ -40,12 +40,12 @@
             </td>
             <td class="adminData">
                 <nop-editor asp-for="PayUri" />
-                <span asp-validation-for="PayUri"></span>                
+                <span asp-validation-for="PayUri"></span>
             </td>
         </tr>
         <tr>
             <td class="adminTitle">
-                <nop-label asp-for="AdditionalFee" />                
+                <nop-label asp-for="AdditionalFee" />
             </td>
             <td class="adminData">
                 <nop-editor asp-for="AdditionalFee" />
@@ -60,3 +60,4 @@
             </td>
         </tr>
     </table>
+</form>    
