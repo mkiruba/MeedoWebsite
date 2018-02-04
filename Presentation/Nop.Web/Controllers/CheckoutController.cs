@@ -1294,6 +1294,10 @@ namespace Nop.Web.Controllers
                     if (address == null)
                         throw new Exception("Address can't be loaded");
 
+                    if (model.BillingAddressSame)
+                    {
+                        _workContext.CurrentCustomer.BillingAddress = address;
+                    }                        
                     _workContext.CurrentCustomer.ShippingAddress = address;
                     _customerService.UpdateCustomer(_workContext.CurrentCustomer);
                 }
@@ -1357,10 +1361,14 @@ namespace Nop.Web.Controllers
                             address.StateProvinceId = null;
                         _workContext.CurrentCustomer.Addresses.Add(address);
                     }
+                    if (model.BillingAddressSame)
+                    {
+                        _workContext.CurrentCustomer.BillingAddress = address;
+                    }
                     _workContext.CurrentCustomer.ShippingAddress = address;
                     _customerService.UpdateCustomer(_workContext.CurrentCustomer);
                 }
-                if (model.BillingAddressDifferent)
+                if (!model.BillingAddressSame)
                 {
                     var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
                        selectedCountryId: model.ShippingNewAddress.CountryId); 

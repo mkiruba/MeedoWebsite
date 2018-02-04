@@ -12,9 +12,9 @@ var tab = {
     },
     prevTab: function () {
         var $active = $('.wizard .nav-tabs li.active'); 
-        var isBillingAddDifferent = $('.opc #opc-shipping').find('#BillingAddressDifferent');
+        var isBillingAddSame = $('.opc #opc-shipping').find('#BillingAddressSame');
         
-        if (!isBillingAddDifferent.is(":checked") && $active.find('#opc-payment_info').length > 0) {
+        if (!isBillingAddSame.is(":checked") && $active.find('#opc-payment_info').length > 0) {
             $active = $active.prev();
         }       
         $active.prev().removeClass('disabled');
@@ -215,12 +215,12 @@ var Billing = {
 var Shipping = {
     form: false,
     saveUrl: false,
-    differentBilling: false,
-    init: function (form, saveUrl, differentBilling) {
+    sameBilling: false,
+    init: function (form, saveUrl, sameBilling) {
         this.form = form;
         this.saveUrl = saveUrl;
-        this.differentBilling = differentBilling;
-        this.toggleBillingAddress(differentBilling);
+        this.sameBilling = sameBilling;
+        this.toggleBillingAddress(sameBilling);
     },
 
     newAddress: function (isNew) {
@@ -286,17 +286,17 @@ var Shipping = {
         Checkout.setStepResponse(response);
     },
 
-    toggleBillingAddressDifferent: function (billingAddressDifferent) {
-        differentBilling = billingAddressDifferent.checked;
-        this.toggleBillingAddress(billingAddressDifferent.checked);
+    toggleBillingAddressSame: function (billingAddressSame) {
+        sameBilling = billingAddressSame.checked;
+        this.toggleBillingAddress(billingAddressSame.checked);
     },
 
-    toggleBillingAddress: function (differentBilling) {
-        if (differentBilling) {
-            $('#opc-billing').show();
+    toggleBillingAddress: function (sameBilling) {
+        if (sameBilling) {
+            $('#opc-billing').hide();
         }
         else {
-            $('#opc-billing').hide();
+            $('#opc-billing').show();
         }
     }
 };
