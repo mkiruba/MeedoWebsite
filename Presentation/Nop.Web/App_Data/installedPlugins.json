@@ -15,5 +15,6 @@
   "Tax.FixedOrByCountryStateZip",
   "Widgets.GoogleAnalytics",
   "Widgets.NivoSlider",
-  "Payments.PurchaseOrder"
+  "Payments.PurchaseOrder",
+  "Payments.Payu"
 ]
