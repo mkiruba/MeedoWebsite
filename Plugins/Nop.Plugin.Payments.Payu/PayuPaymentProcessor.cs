@@ -85,12 +85,13 @@ namespace Nop.Plugin.Payments.Payu
 			remotePostHelper.Add("productinfo", "productinfo");
             remotePostHelper.Add("Currency", _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode);
             remotePostHelper.Add("Order_Id", orderId.ToString());
-			remotePostHelper.Add("txnid", orderId.ToString());
-            remotePostHelper.Add("service_provider", "payu_paisa");
+            var txnId = Guid.NewGuid().ToString();
+            remotePostHelper.Add("txnid", txnId);
+            //remotePostHelper.Add("service_provider", "payu_paisa");
             remotePostHelper.Add("surl", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPayu/Return");
 			remotePostHelper.Add("furl", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPayu/Return");
-            remotePostHelper.Add("hash", myUtility.getchecksum(_payuPaymentSettings.MerchantId.ToString(), 
-                postProcessPaymentRequest.Order.Id.ToString(), postProcessPaymentRequest.Order.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat),
+            remotePostHelper.Add("hash", myUtility.getchecksum(_payuPaymentSettings.MerchantId.ToString(),
+                txnId, postProcessPaymentRequest.Order.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat),
                 "productinfo",postProcessPaymentRequest.Order.BillingAddress.FirstName.ToString(),
                 postProcessPaymentRequest.Order.BillingAddress.Email.ToString(), _payuPaymentSettings.Key));
 
