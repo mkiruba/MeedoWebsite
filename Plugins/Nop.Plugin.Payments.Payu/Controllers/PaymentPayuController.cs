@@ -113,7 +113,7 @@ namespace Nop.Plugin.Payments.Payu.Controllers
         //    return paymentInfo;
         //}
                 
-        public ActionResult Return(FormCollection form)
+        public ActionResult Return(IFormCollection form)
         {
             var processor = _paymentService.LoadPaymentMethodBySystemName("Payments.Payu") as PayuPaymentProcessor;
             if (processor == null ||
