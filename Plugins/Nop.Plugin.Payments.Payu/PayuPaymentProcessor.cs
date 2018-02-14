@@ -85,7 +85,9 @@ namespace Nop.Plugin.Payments.Payu
 			remotePostHelper.Add("productinfo", "productinfo");
             remotePostHelper.Add("Currency", _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode);
             remotePostHelper.Add("Order_Id", orderId.ToString());
-            var txnId = Guid.NewGuid().ToString();
+            if (_payuPaymentSettings.PayUri.Contains("test.payu.in"))
+            { }
+            var txnId = _payuPaymentSettings.PayUri.Contains("test.payu.in") ? Guid.NewGuid().ToString() : orderId.ToString();
             remotePostHelper.Add("txnid", txnId);
             //remotePostHelper.Add("service_provider", "payu_paisa");
             remotePostHelper.Add("surl", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPayu/Return");

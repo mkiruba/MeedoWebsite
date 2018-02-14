@@ -293,10 +293,10 @@ var Shipping = {
 
     toggleBillingAddress: function (sameBilling) {
         if (sameBilling) {
-            $('#opc-billing').hide();
+            $('#opc-billing').parent().hide();
         }
         else {
-            $('#opc-billing').show();
+            $('#opc-billing').parent().show();
         }
     }
 };
