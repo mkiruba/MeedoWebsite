@@ -65,13 +65,11 @@
                 @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_after" })
             </ul>
         </div><!-- /.navbar-collapse -->
-        <div class="header-upper-right pull-right col-xs-12 col-sm-6 col-md-6 col-lg-6">   
-            <div class="header-links-wrapper">
-                @await Component.InvokeAsync("FlyoutShoppingCart")
-            </div>
+        <div class="header-upper-right pull-right col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="header-links-wrapper">
                 @await Component.InvokeAsync("HeaderLinks")
             </div>
+            
         </div>
     </nav>
 </div>

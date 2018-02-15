@@ -202,7 +202,7 @@
     .header-lower .search-box{float:none;margin:0 auto 15px;width:260px;text-align:center;overflow:hidden;}
     .search-box .navbar-form{width:auto;margin:0 auto;padding:0;position:relative;}
     .header-lower .search-box{position:static;}
-    .flyout-main-wrapper{float:none;text-align:center;}
+    .flyout-main-wrapper{/*float:none;*/text-align:center;}
     .flyout-main-wrapper .shopping-cart-link .ico-cart{float:none;margin-top:10px;}
     .footer-disclaimer{display:block;text-align:center;}
     .footer-upper .information , .footer-upper .customer-service , .footer-upper .my-account , .footer-upper .follow-us{margin-bottom:25px;}

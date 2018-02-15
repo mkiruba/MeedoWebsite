@@ -50,6 +50,7 @@ else
 {
     <li class="login"><a href="@Url.RouteUrl("Login")" title="@T("Account.Login")" class="ico-login"><span>@T("Account.Login")</span></a></li>
 }
+        @await Component.InvokeAsync("FlyoutShoppingCart")
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_after" })
     </ul>
     @if (Model.AllowPrivateMessages && !string.IsNullOrEmpty(Model.AlertMessage))
