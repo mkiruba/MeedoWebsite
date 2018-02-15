@@ -1,4 +1,4 @@
-/*!
+ /*!
  * nopAccelerate Simplex Theme v2.0.0 (http://themes.nopaccelerate.com/themes/nopaccelerate-simplex-theme-3/)
  * Copyright 2017 Xcellence-IT.
  * Licensed under LICENSETYPE (http://www.nopaccelerate.com/terms/)
@@ -56,6 +56,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .admin-header-links{display:block !important;}
 .header-links-wrapper .header-top-right{float:right;width:auto;position:relative;}
 .header-top-right ul li{float:left;}
+
 .header-top-right ul li.my-account a,.header-top-right ul li.register a{border-left:1px solid #ccc;}
 .email span {
     text-transform: lowercase;
@@ -63,7 +64,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .header-top-right ul .email a {
     padding: 8px 8px 8px 8px;
 }
-.phone {
+/*.phone {
     padding: 8px 15px 8px 0px;
     float: left;
     border-right: 1px solid #ccc;
@@ -73,7 +74,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     color: #333;
     text-decoration: none;
     margin: 6px 0px;
-}
+}*/
 
 .header-top-right ul li a{padding:8px 15px 8px 35px;float:left;border-right:1px solid #ccc;font-size:12px;float:left;line-height:18px;color:#333;text-decoration:none;margin:6px 0px;text-transform:capitalize;}
 .header-top-right ul li a:hover{color:#ea5648;}

@@ -50,7 +50,7 @@
     .currency-selector, .language-selector,.tax-display-type-selector{display:inline-block;float:none;}
     .header-selectors-wrapper{width:100%;text-align:center;border-bottom:1px solid #ddd;padding-bottom:10px;}
     .header-links-wrapper .header-top-right{display:inline-block;text-align:center;width:100%;}
-    .header-top-right ul li{display:inline-block;float:none;}
+    .header-top-right ul li{display:inline-block;/*float:none;*/}
     .header-top-right ul li.my-account a, .header-top-right ul li.register a{border-left:none;}
     .header-top-right ul li a{border-right:none;float:left;display:inline-block;}
     .header-upper-right{float:none !important;}
@@ -453,7 +453,7 @@
     .product-filters .filter-content .nav > li > a{width:100%;}
     .product-details-page .product-reviews-overview .product-no-reviews{width:100%;}
     .order-details-page .products .panel panel-default{overflow-x:hidden !important;}
-    .header-top-right ul li a{margin:0;}
+    /*.header-top-right ul li a{margin:0;}*/
     .lt-ie9 .box-shadow-wrapper,.box-shadow-wrapper{width:100%;margin-right:0px;}
     .block.block-account-navigation.well.box-shadow-wrapper{float:left;width:100%;margin-bottom:30px;}
     .product-details-page .overview-buttons .add-to-wishlist-button,.product-details-page .overview-buttons .add-to-compare-list-button{margin-right:0px;}
