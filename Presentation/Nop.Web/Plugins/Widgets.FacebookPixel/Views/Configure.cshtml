@@ -1,0 +1,103 @@
+﻿@model Nop.Plugin.Widgets.FacebookPixel.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@{
+    Layout = "_ConfigurePlugin";
+
+    var FACEBOOKPIXEL_SCRIPT_FIRSTPART = @"<!-- Facebook Pixel Code -->
+<script>
+!function (f, b, e, v, n, t, s) {
+if (f.fbq) return; n = f.fbq = function () {
+n.callMethod ?
+n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+}; if (!f._fbq) f._fbq = n;
+n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+}(window,
+document, 'script', '//connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1769980523222843');";
+
+    var FACEBOOKPIXEL_SCRIPT_LASTPART = @"    fbq('track', ""PageView"");
+</script>
+<noscript>
+<img height="" 1"" width="" 1"" style="" display:none""
+     src="" https://www.facebook.com/tr?id=1769980523222843&ev=PageView&noscript=1"" />
+</noscript>
+<!-- End Facebook Pixel Code -->";
+}
+
+@await Component.InvokeAsync("StoreScopeConfiguration")
+
+@{
+    var facebookPixel_facebookPixelScriptFirstPart = Html.Raw(JavaScriptEncoder.Default.Encode(FACEBOOKPIXEL_SCRIPT_FIRSTPART));
+    var facebookPixel_facebookPixelScriptLastPart = Html.Raw(JavaScriptEncoder.Default.Encode(FACEBOOKPIXEL_SCRIPT_LASTPART));
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#pre-configure-google-adwords").click(preConfigurefacebookPixel);
+    });
+
+    function preConfigurefacebookPixel() {
+
+        $('#@Html.IdFor(model => model.FacebookPixelScriptFirstPart)').val('@facebookPixel_facebookPixelScriptFirstPart');
+        $('#@Html.IdFor(model => model.FacebookPixelScriptLastPart)').val('@facebookPixel_facebookPixelScriptLastPart');
+    }
+
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle" colspan="2">
+                @T("Plugins.Widgets.FacebookPixel.Configure.Description")
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle" colspan="2" align="center">
+                <span style="font-weight:bold;padding:20px">
+
+                </span>
+            </td>
+        </tr>
+
+        <tr id="pnlRemarketingScript">
+            <td class="adminTitle">
+                <nop-override-store-checkbox asp-for="FacebookPixelScriptFirstPart_OverrideForStore" asp-input="FacebookPixelScriptFirstPart" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                <nop-label asp-for="FacebookPixelScriptFirstPart" />
+                @*@Html.OverrideStoreCheckboxFor(model => model.FacebookPixelScriptFirstPart_OverrideForStore, model => model.FacebookPixelScriptFirstPart, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.FacebookPixelScriptFirstPart):*@
+            </td>
+            <td class="adminData">
+                <nop-textarea asp-for="FacebookPixelScriptFirstPart" />
+                <span asp-validation-for="FacebookPixelScriptFirstPart"></span>
+                @*@Html.TextAreaFor(model => model.FacebookPixelScriptFirstPart, new { style = "Width: 600px; Height: 200px;" })
+                    @Html.ValidationMessageFor(model => model.FacebookPixelScriptFirstPart)*@
+            </td>
+        </tr>
+
+        <tr id="pnlRemarketingScript">
+            <td class="adminTitle">
+                <nop-override-store-checkbox asp-for="FacebookPixelScriptLastPart_OverrideForStore" asp-input="FacebookPixelScriptLastPart" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                <nop-label asp-for="FacebookPixelScriptLastPart" />
+                @*@Html.OverrideStoreCheckboxFor(model => model.FacebookPixelScriptLastPart_OverrideForStore, model => model.FacebookPixelScriptLastPart, Model.ActiveStoreScopeConfiguration)
+                    @Html.NopLabelFor(model => model.FacebookPixelScriptLastPart):*@
+            </td>
+            <td class="adminData">
+                <nop-textarea asp-for="FacebookPixelScriptLastPart" />
+                <span asp-validation-for="FacebookPixelScriptLastPart"></span>
+                @*@Html.TextAreaFor(model => model.FacebookPixelScriptLastPart, new { style = "Width: 600px; Height: 200px;" })
+                    @Html.ValidationMessageFor(model => model.FacebookPixelScriptLastPart)*@
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2" width="100%">
+                <input type="submit" name="save" class="t-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+}

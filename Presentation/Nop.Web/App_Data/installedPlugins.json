@@ -16,5 +16,7 @@
   "Widgets.GoogleAnalytics",
   "Widgets.NivoSlider",
   "Payments.PurchaseOrder",
-  "Payments.Payu"
+  "Payments.Payu",
+  "Misc.FacebookShop",
+  "Widgets.FacebookPixel"
 ]

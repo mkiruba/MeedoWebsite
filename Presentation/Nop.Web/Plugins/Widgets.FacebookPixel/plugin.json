@@ -1,0 +1,15 @@
+{
+  "Group": "Widgets",
+  "FriendlyName": "Scripts for Facebook Pixel",
+  "SystemName": "Widgets.FacebookPixel",
+  "Version": "4.00",
+  "SupportedVersions": [
+    "4.00"
+  ],
+  "Author": "Kiru Marimuthu",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.FacebookPixel.dll",
+  "Description": "This plugin integrates with Facebook pixel.",
+  "LimitedToStores": [],
+  "LimitedToCustomerRoles": []
+}
