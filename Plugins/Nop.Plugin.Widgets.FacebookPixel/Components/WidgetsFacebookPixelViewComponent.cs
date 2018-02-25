@@ -294,7 +294,7 @@ namespace Nop.Plugin.Widgets.FacebookPixel.Components
                     }
                     strBuilder.Append("]");
                 }
-                str = strBuilder.ToString();
+                str = strBuilder.ToString();    
             }
             else
             {
