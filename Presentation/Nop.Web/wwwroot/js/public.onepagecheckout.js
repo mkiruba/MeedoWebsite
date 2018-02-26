@@ -293,9 +293,11 @@ var Shipping = {
 
     toggleBillingAddress: function (sameBilling) {
         if (sameBilling) {
+            $('.connecting-line').width('50%');
             $('#opc-billing').parent().hide();
         }
         else {
+            $('.connecting-line').width('80%');
             $('#opc-billing').parent().show();
         }
     }

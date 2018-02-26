@@ -35,7 +35,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li role="presentation" class="disabled">
+                        <li role="presentation" class="disabled" style="display: none">
                             <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Billing Address" id="opc-billing">
                                 <span class="round-tab">
                                     <i class="fa fa-address-card-o"></i>
@@ -327,6 +327,7 @@
             Checkout.init('@(storeLocation)cart/');
             //hide billing address
             $('#opc-billing').parent().hide();
+            $('.connecting-line').width('50%');
             //Add Inactive Class To All Accordion Headers
             $('.accordion-header').toggleClass('inactive-header');
 
