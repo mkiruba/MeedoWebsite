@@ -35,7 +35,14 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     position: fixed;
     max-width: 100% !important;
     border-radius: 0px;
-    background: #c3c2c2;
+    /*Opacity start*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+    /*Opacity end*/
+    background: #e3dede;
     box-shadow: 0px 0px 5px #444;
     -webkit-box-shadow: 0px 0px 5px #444;
     -moz-box-shadow: 0px 0px 5px #444;
@@ -76,7 +83,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     margin: 6px 0px;
 }*/
 
-.header-top-right ul li a{padding:8px 15px 8px 35px;float:left;border-right:1px solid #ccc;font-size:12px;float:left;line-height:18px;color:#333;text-decoration:none;margin:6px 0px;text-transform:capitalize;}
+.header-top-right ul li a{padding:8px 15px 8px 35px;float:left;border-right:1px solid #ccc;font-size:14px;float:left;line-height:18px;color:#333;text-decoration:none;margin:6px 0px;text-transform:capitalize;}
 .header-top-right ul li a:hover{color:#ea5648;}
 .header-top-right ul li .ico-account{background:url(../images/user-icon.png) no-repeat 10px 9px;height:30px;}
 .header-top-right ul li .ico-account:hover{background:url(../images/user-icon.png) no-repeat 15px -16px;height:30px;}
@@ -191,7 +198,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
 .slider-wrapper.theme-custom{margin-top:0px;display:none;}
 #index-page .slider-wrapper.theme-custom{display:block;margin-bottom:20px;}
 /*.main-menu.goToTop .navbar.navbar-inverse.category-menu{margin: 0 auto;width: 1140px !important;}*/
-.header-menu .main-menu{width: 100% !important;transition:all 0.5s ease-in-out 0s;}
+.header-menu .main-menu{width: 100% !important;transition:all 1s ease-in-out 0s;}
 #index-page .header-menu{margin-bottom:0px;}
 .theme-custom .nivo-controlNav a.active{background-color:#ea5648 !important;}
 

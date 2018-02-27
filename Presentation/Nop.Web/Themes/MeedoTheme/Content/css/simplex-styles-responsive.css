@@ -245,7 +245,7 @@
     .side-content{clear:both;}
     .listbox,.lt-ie9 .listbox{display:none;}
     .block.block-newsletter .listbox{display:block;}
-    .sidebar .title{background:url("../images/toggle-down-arrow.png") no-repeat #ea5648  right center;font-size:16px;padding:15px;cursor:pointer;border-bottom:1px solid #ddd;box-shadow:0 -3px 5px #aaaaaa;-moz-box-shadow:0 -3px 5px #aaa;-web-box-shadow:0 -3px 5px #aaaaaa;}
+    .sidebar .title{/*background:url("../images/toggle-down-arrow.png") no-repeat #ea5648  right center;*/font-size:16px;padding:15px;/*cursor:pointer;*/border-bottom:1px solid #ddd;box-shadow:0 -3px 5px #aaaaaa;-moz-box-shadow:0 -3px 5px #aaa;-web-box-shadow:0 -3px 5px #aaaaaa;}
     .sidebar .title.arrow-up-down{background:url("../images/toggle-up-arrow.png") no-repeat #ea5648 right center;}
     .box-shadow-wrapper{width:49%;margin-right:2%;}
     .lt-ie9 .box-shadow-wrapper{width:48%;margin-right:2%;}
