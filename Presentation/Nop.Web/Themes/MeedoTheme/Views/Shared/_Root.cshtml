@@ -27,7 +27,7 @@
     <div class="master-wrapper-content">
 
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     @await Component.InvokeAsync("Widget", new { widgetZone = "content_before" })
@@ -40,11 +40,11 @@
             </div>
         </div>
         <div class="master-column-wrapper">
-            @*<div class="container">*@
+            <div class="container-fluid">
                 <div class="row">
                     @RenderBody()
                 </div>
-            @*</div>*@
+            </div>
         </div>
         @await Component.InvokeAsync("Widget", new { widgetZone = "content_after" })
     </div>
