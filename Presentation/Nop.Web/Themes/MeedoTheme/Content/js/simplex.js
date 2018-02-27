@@ -9,11 +9,11 @@
 $(document).ready(function () {
     //Used js for Header Sticky Menu  
     //http://www.jqueryscript.net/menu/Sticky-Navigation-Bar-with-jQuery-Bootstrap.html
-    $(window).bind('scroll', function() {
-        var navHeight = $("div.header").height();
-        var navWidth = $("div.header").width();
-        ($(window).scrollTop() > navHeight) ? $('.main-menu').addClass('goToTop').width(navWidth) : $('.main-menu').removeClass('goToTop');
-    });
+    //$(window).bind('scroll', function() {
+    //    var navHeight = $("div.header").height();
+    //    var navWidth = $("div.header").width();
+    //    ($(window).scrollTop() > navHeight) ? $('.main-menu').addClass('goToTop').width(navWidth) : $('.main-menu').removeClass('goToTop');
+    //});
 
     //Used js for Responsive Website Checker
     $('#exit').click(function (e) {
