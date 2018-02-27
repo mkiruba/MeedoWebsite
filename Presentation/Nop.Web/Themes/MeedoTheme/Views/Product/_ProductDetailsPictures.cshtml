@@ -1,8 +1,8 @@
 ﻿@model ProductDetailsModel
 @{
     Html.AddScriptParts(ResourceLocation.Footer, "~/lib/elevatezoom/jquery.elevateZoom.min.js");
-    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/pgwslider/pgwslider.min.js");
-    Html.AppendCssFileParts($"~/lib/pgwslider/pgwslider.min.css");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/pgwslider/pgwslider.js");
+    Html.AppendCssFileParts($"~/lib/pgwslider/pgwslider.css");
 }
 <div class="gallery">
 
@@ -24,22 +24,51 @@
 
         <script>
             $(document).ready(function () {
+                var isMobile = {
+                    Android: function () {
+                        return navigator.userAgent.match(/Android/i);
+                    },
+                    BlackBerry: function () {
+                        return navigator.userAgent.match(/BlackBerry/i);
+                    },
+                    iOS: function () {
+                        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                    },
+                    Opera: function () {
+                        return navigator.userAgent.match(/Opera Mini/i);
+                    },
+                    Windows: function () {
+                        return navigator.userAgent.match(/IEMobile/i);
+                    },
+                    any: function () {
+                        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                    }
+                };
+
                 $('.pgwSlider').pgwSlider({
                     autoSlide: false,
                     listPosition: 'left',
-                    transitionEffect: 'sliding',
-                    beforeSlide: function () { 
-                        $('.zoomContainer').remove();
+                    adaptiveHeight: true,
+                    transitionEffect: 'sliding',                    
+                    beforeSlide: function () {
+                        if (!isMobile.any()) {
+                            $('.zoomContainer').remove();
+                        }                                
                     },
                     //hide the caption
+                    
                     afterSlide: function () {
-                        $('.pgwSlider .ps-current .ps-caption').hide();                        
-                        $('.pgwSlider .ps-current img').elevateZoom({
-                            cursor: "crosshair",
-                            zoomWindowFadeIn: 500,
-                            zoomWindowFadeOut: 750
-                        }); 
-                    }
+                        $('.pgwSlider .ps-current .ps-caption').hide();
+                        if (!isMobile.any()) { 
+                            $('.pgwSlider .ps-current img').elevateZoom({
+                                cursor: "crosshair",
+                                zoomWindowFadeIn: 500,
+                                zoomWindowFadeOut: 750,
+                                zoomWindowHeight: 600,
+                                zoomWindowWidth: 600
+                            });
+                        }                        
+                    }                
                 });
                 $('.pgwSlider .ps-current img').each(function () {
                     $(this).attr('data-zoom-image', $(this).attr('src'));

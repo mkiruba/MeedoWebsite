@@ -6,8 +6,8 @@
         <strong>@T("HomePage.Products")</strong>
     </div>
     <div class="row">
-        @if (Model.Count <= 4)
-        {
+        @*@if (Model.Count <= 4)
+        {*@
             @foreach (var item in Model)
             {
                 <div class="item-box product-grid col-xs-12 col-sm-4 col-md-3 clearfix">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             }
-        }
+        @*}
         else
         {
             <div id="home-features-slider" class="home-features-slider">
@@ -29,7 +29,7 @@
                     </div>
                 }
             </div>
-        }
+        }*@
     </div>
 </div>
 }

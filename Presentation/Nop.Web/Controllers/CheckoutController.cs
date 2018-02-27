@@ -1093,7 +1093,7 @@ namespace Nop.Web.Controllers
             var model = _checkoutModelFactory.PrepareOnePageCheckoutModel(cart);
             return View(model);
         }
-        
+    
         public virtual IActionResult OpcSaveBilling(CheckoutBillingAddressModel model)
         {
             try
@@ -1200,17 +1200,18 @@ namespace Nop.Web.Controllers
                     }
 
                     //do not ship to the same address
-                    var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true);
+                    //var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true);
 
-                    return Json(new
-                    {
-                        update_section = new UpdateSectionJsonModel
-                        {
-                            name = "shipping",
-                            html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
-                        },
-                        goto_section = "shipping"
-                    });
+                    //return Json(new
+                    //{
+                    //    update_section = new UpdateSectionJsonModel
+                    //    {
+                    //        name = "shipping",
+                    //        html = RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
+                    //    },
+                    //    goto_section = "shipping"
+                    //});
+                    return OpcLoadStepAfterShippingAddress(cart);
                 }
 
                 //shipping is not required
@@ -1293,6 +1294,10 @@ namespace Nop.Web.Controllers
                     if (address == null)
                         throw new Exception("Address can't be loaded");
 
+                    if (model.BillingAddressSame)
+                    {
+                        _workContext.CurrentCustomer.BillingAddress = address;
+                    }                        
                     _workContext.CurrentCustomer.ShippingAddress = address;
                     _customerService.UpdateCustomer(_workContext.CurrentCustomer);
                 }
@@ -1317,6 +1322,7 @@ namespace Nop.Web.Controllers
                             selectedCountryId: newAddress.CountryId,
                             overrideAttributesXml: customAttributes);
                         shippingAddressModel.NewAddressPreselected = true;
+                        
                         return Json(new
                         {
                             update_section = new UpdateSectionJsonModel
@@ -1355,10 +1361,29 @@ namespace Nop.Web.Controllers
                             address.StateProvinceId = null;
                         _workContext.CurrentCustomer.Addresses.Add(address);
                     }
+                    if (model.BillingAddressSame)
+                    {
+                        _workContext.CurrentCustomer.BillingAddress = address;
+                    }
                     _workContext.CurrentCustomer.ShippingAddress = address;
                     _customerService.UpdateCustomer(_workContext.CurrentCustomer);
                 }
+                if (!model.BillingAddressSame)
+                {
+                    var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
+                       selectedCountryId: model.ShippingNewAddress.CountryId); 
+                    billingAddressModel.NewAddressPreselected = false;
 
+                    return Json(new
+                    {
+                        update_section = new UpdateSectionJsonModel
+                        {
+                            name = "billing",
+                            html = RenderPartialViewToString("OpcBillingAddress", billingAddressModel)
+                        },
+                        goto_section = "billing"
+                    });                    
+                }
                 return OpcLoadStepAfterShippingAddress(cart);
             }
             catch (Exception exc)

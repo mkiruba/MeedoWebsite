@@ -1,7 +1,26 @@
 /*
 ** nopCommerce one page checkout
 */
-
+/*
+** new checkout 
+*/
+var tab = {
+    nextTab: function () {
+        var $active = $('.wizard .nav-tabs li.active');
+        $active.next().removeClass('disabled');
+        $active.next().find('a[data-toggle="tab"]').click();
+    },
+    prevTab: function () {
+        var $active = $('.wizard .nav-tabs li.active'); 
+        var isBillingAddSame = $('.opc #opc-shipping').find('#BillingAddressSame');
+        
+        if (isBillingAddSame.is(":checked") && $active.find('#opc-payment_info').length > 0) {
+            $active = $active.prev();
+        }       
+        $active.prev().removeClass('disabled');
+        $active.prev().find('a[data-toggle="tab"]').click();
+    }
+}
 
 var Checkout = {
     loadWaiting: false,
@@ -62,14 +81,21 @@ var Checkout = {
     },
 
     gotoSection: function (section) {
-        section = $('#opc-' + section);
+        var sectionName = 'opc-' + section;
+        section = $('#'+sectionName);
+        //Todo: 25/01/18 need to navigate to paymentinfo tab
         section.addClass('allow');
-        Accordion.openSection(section);
+        //$('.wizard .nav-tabs li>a' + section).click();
+        //Accordion.openSection(section);
+        $('.wizard .nav-tabs li a[id="' + sectionName + '"]').removeClass('disabled');
+        $('.wizard .nav-tabs li a[id="' + sectionName + '"]').parent().removeClass('disabled');
+        $('.wizard .nav-tabs li a[id="' + sectionName +'"]').click()
     },
 
     back: function () {
         if (this.loadWaiting) return;
-        Accordion.openPrevSection(true, true);
+        //Accordion.openPrevSection(true, true);
+        tab.prevTab();
     },
 
     setStepResponse: function (response) {
@@ -165,7 +191,8 @@ var Billing = {
             if (response.wrong_billing_address) {
                 Accordion.showSection('#opc-billing');
             } else {
-                Accordion.hideSection('#opc-billing');
+                tab.nextTab();
+                //Accordion.hideSection('#opc-billing');
             }
         }
 
@@ -181,7 +208,7 @@ var Billing = {
         }
 
         Checkout.setStepResponse(response);
-    }
+    }    
 };
 
 
@@ -189,11 +216,12 @@ var Billing = {
 var Shipping = {
     form: false,
     saveUrl: false,
-    isSameShippingAddress: true,
-
-    init: function (form, saveUrl) {
+    sameBilling: false,
+    init: function (form, saveUrl, sameBilling) {
         this.form = form;
         this.saveUrl = saveUrl;
+        this.sameBilling = sameBilling;
+        this.toggleBillingAddress(sameBilling);
     },
 
     newAddress: function (isNew) {
@@ -206,7 +234,7 @@ var Shipping = {
         $.event.trigger({ type: "onepagecheckout_shipping_address_new" });
     },
 
-    togglePickUpInStore: function (pickupInStoreInput) {
+    togglePickUpInStore: function (pickupInStoreInput) {        
         if (pickupInStoreInput.checked) {
             $('#pickup-points-form').show();
             $('#shipping-addresses-form').hide();
@@ -215,15 +243,8 @@ var Shipping = {
             $('#pickup-points-form').hide();
             $('#shipping-addresses-form').show();
         }
-    },
-    toggleSameShippingAddress: function (shipToSameAddressInput) {
-        if (shipToSameAddressInput.checked) {
-            $('#opc-shipping').hide();
-        }
-        else {
-            $('#opc-shipping').show();
-        }
-    },
+    },   
+   
     resetSelectedAddress: function () {
         var selectElement = $('#shipping-address-select');
         if (selectElement) {
@@ -236,7 +257,7 @@ var Shipping = {
         //if (Checkout.loadWaiting != false) return;
 
         Checkout.setLoadWaiting('shipping');
-
+       
         $.ajax({
             cache: false,
             url: this.saveUrl,
@@ -264,6 +285,22 @@ var Shipping = {
         }
 
         Checkout.setStepResponse(response);
+    },
+
+    toggleBillingAddressSame: function (billingAddressSame) {
+        sameBilling = billingAddressSame.checked;
+        this.toggleBillingAddress(billingAddressSame.checked);
+    },
+
+    toggleBillingAddress: function (sameBilling) {
+        if (sameBilling) {
+            $('.connecting-line').width('50%');
+            $('#opc-billing').parent().hide();
+        }
+        else {
+            $('.connecting-line').width('80%');
+            $('#opc-billing').parent().show();
+        }
     }
 };
 

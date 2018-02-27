@@ -1,11 +1,17 @@
 ﻿@model CheckoutShippingAddressModel
 @using System.Text
 <div class="checkout-data">
+    <div class="section ship-to-same-address">
+    <p class="selector">
+        <input asp-for="BillingAddressSame" onclick="Shipping.toggleBillingAddressSame(this)" />
+        <label asp-for="BillingAddressSame">Are Billing address same?</label>
+    </p>
+</div>
     @if (Model.AllowPickUpInStore && !Model.PickUpInStoreOnly && Model.PickupPoints.Any())
     {
         <div class="section pickup-in-store">
             <p class="selector">
-                <input asp-for="PickUpInStore" onclick="Shipping.togglePickUpInStore(this)" />              
+                <input asp-for="PickUpInStore" onclick="Shipping.togglePickUpInStore(this)" />
                 <label asp-for="PickUpInStore">
                     @T("Checkout.PickupPoints")
                 </label>
@@ -187,98 +193,59 @@
         <div class="shipping-addresses" id="shipping-addresses-form">
             @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_shipping_address_top" })
             @if (Model.ExistingAddresses.Count > 0)
-            {  
-                <script type="text/javascript" asp-location="Footer">
-                    //select first item by default
-                            Shipping.newAddress(!$(".list-group").find("a.active").data("value"));
-                            $("#shipping-address-input").val($(".list-group").find("a.active").data("value"));
-                    $("#opc-shipping").find(".list-group-item").click(function () {
-                        $(this).parent().children("a").removeClass("active");
-                        $(this).parent().find("a>span").addClass("glyphicon-unchecked");
-                        $(this).parent().find("a>span").removeClass("glyphicon-check");
-                        $(this).addClass("active");
-                        $(this).find("span").removeClass("glyphicon-unchecked");
-                        $(this).find("span").addClass("glyphicon-check");
-                        console.log("CallingShipping");
-                        Shipping.newAddress(!$(this).data("value"));
-                        $("#shipping-address-input").val($(this).data("value"));
-                    });
-                </script>
-                <div class="section select-shipping-address">
-
-                    <label for="shipping-address-select">@T("Checkout.SelectShippingAddressOrEnterNewOne")</label>
-                    <div>
-                        <div class="well" style="max-height: 300px;overflow: auto;">
-                            <div class="list-group">
-                                <input type="hidden" id="shipping-address-input" name="shipping_address_id" value="">
-                                @*<select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
-        title="" onchange="Shipping.newAddress(!this.value)">*@
-                                @foreach (var address in Model.ExistingAddresses)
     {
-        var addressLine = "";
-        addressLine += address.FirstName;
-        addressLine += " " + address.LastName;
-        if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
-        {
-            addressLine += ", " + address.Address1;
-        }
-        if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
-        {
-            addressLine += ", " + address.City;
-        }
-        if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
-        {
-            addressLine += ", " + address.StateProvinceName;
-        }
-        if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
-        {
-            addressLine += " " + address.ZipPostalCode;
-        }
-        if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
-        {
-            addressLine += ", " + address.CountryName;
-        }
-        //how should we render "FormattedCustomAddressAttributes" here?
-        if (!Model.NewAddressPreselected && Model.ExistingAddresses.IndexOf(address) == 0)
-        {
-                            <a href="#" class="list-group-item active" data-value="@(address.Id)"><span class="glyphicon glyphicon-check"></span>@(addressLine)</a>
+        <div class="section select-shipping-address">
+            <label for="shipping-address-select">@T("Checkout.SelectShippingAddressOrEnterNewOne")</label>
+            <div>
+                <select name="shipping_address_id" id="shipping-address-select" class="address-select form-control dropdown-toggle"
+                        title="" onchange="Shipping.newAddress(!this.value)">
+                    @foreach (var address in Model.ExistingAddresses)
+            {
+                var addressLine = "";
+                addressLine += address.FirstName;
+                addressLine += " " + address.LastName;
+                if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
+                {
+                    addressLine += ", " + address.Address1;
+                }
+                if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
+                {
+                    addressLine += ", " + address.City;
+                }
+                if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
+                {
+                    addressLine += ", " + address.StateProvinceName;
+                }
+                if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
+                {
+                    addressLine += " " + address.ZipPostalCode;
+                }
+                if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
+                {
+                    addressLine += ", " + address.CountryName;
+                }
+                //how should we render "FormattedCustomAddressAttributes" here?
+                <option value="@(address.Id)">@(addressLine)</option>
+    }
+                    <option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
+                </select>
+            </div>
+        </div>
 }
-else
-{
-                            <a href="#" class="list-group-item" data-value="@(address.Id)"><span class="glyphicon glyphicon-unchecked"></span>@(addressLine)</a>
-}
-                            @*<option value="@(address.Id)">@(addressLine)</option>*@
-}
-                                @if (Model.NewAddressPreselected)
-    {
-                            <a href="#" class="list-group-item active " data-value=""><span class="glyphicon glyphicon-check"></span>@T("Checkout.NewAddress")</a>
-}
-else
-{
-                            <a href="#" class="list-group-item" data-value=""><span class="glyphicon glyphicon-unchecked"></span>@T("Checkout.NewAddress")</a>
-}
-
-                                @*<option value="" selected="@Model.NewAddressPreselected">@T("Checkout.NewAddress")</option>
-        </select>*@
-                            </div>
-                </div>
-                    </div>
-                </div>
-            }
             @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_shipping_address_middle" })
             <div class="section new-shipping-address" id="shipping-new-address-form">
                 <div class="enter-address">
                     <div asp-validation-summary="ModelOnly" class="message-error"></div>
                     <div class="enter-address-body form-horizontal">
                         @{
-                            var dataDictAddress = new ViewDataDictionary(ViewData);
-                            dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ShippingNewAddress";
-                            @await Html.PartialAsync("_CreateOrUpdateAddress", Model.ShippingNewAddress, dataDictAddress)
+                    var dataDictAddress = new ViewDataDictionary(ViewData);
+                    dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ShippingNewAddress";
+                    @await Html.PartialAsync("_CreateOrUpdateAddress", Model.ShippingNewAddress, dataDictAddress)
                         }
                     </div>
                 </div>
             </div>
             @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_shipping_address_bottom" })
-        </div>
-    }        
+        </div> 
+                            }    
 </div>

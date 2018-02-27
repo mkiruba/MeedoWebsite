@@ -9,9 +9,5 @@ namespace Nop.Web.Models.Checkout
 
         public CheckoutBillingAddressModel BillingAddress { get; set; }
         public CheckoutShippingAddressModel ShippingAddress { get; set; }
-        public CheckoutShippingMethodModel ShippingMethod { get; set; }
-        public CheckoutPaymentMethodModel PaymentMethod { get; set; }
-        public CheckoutPaymentInfoModel PaymentInfo { get; set; }
-        public CheckoutConfirmModel ConfirmOrder { get; set; }
     }
 }

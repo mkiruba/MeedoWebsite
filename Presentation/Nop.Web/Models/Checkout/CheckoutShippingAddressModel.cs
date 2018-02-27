@@ -33,5 +33,6 @@ namespace Nop.Web.Models.Checkout
         public bool PickUpInStoreOnly { get; set; }
         public bool DisplayPickupPointsOnMap { get; set; }
         public string GoogleMapsApiKey { get; set; }
+        public bool BillingAddressSame { get; set; }
     }
 }

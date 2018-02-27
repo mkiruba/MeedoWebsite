@@ -181,9 +181,9 @@ namespace Nop.Web.Factories
         {
             var model = new CheckoutShippingAddressModel
             {
-
                 //allow pickup in store?
-                AllowPickUpInStore = _shippingSettings.AllowPickUpInStore
+                AllowPickUpInStore = _shippingSettings.AllowPickUpInStore,
+                BillingAddressSame = true
             };
             if (model.AllowPickUpInStore)
             {
@@ -545,10 +545,6 @@ namespace Nop.Web.Factories
                 DisableBillingAddressCheckoutStep = _orderSettings.DisableBillingAddressCheckoutStep,
                 BillingAddress = PrepareBillingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true),
                 ShippingAddress = PrepareShippingAddressModel(prePopulateNewAddressWithCustomerFields: true),
-                ShippingMethod = PrepareShippingMethodModel(cart, _workContext.CurrentCustomer.ShippingAddress),
-                PaymentMethod = PreparePaymentMethodModel(cart, filterByCountryId),
-                PaymentInfo = PreparePaymentInfoModel(paymentMethod),
-                ConfirmOrder = PrepareConfirmOrderModel(cart)
             };
             return model;
         }

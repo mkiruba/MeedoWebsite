@@ -10,9 +10,13 @@
   "Payments.PayPalStandard",
   "Pickup.PickupInStore",
   "Shipping.FedEx",
-  "Shipping.FixedOrByWeight",
   "Shipping.UPS",
+  "Shipping.FixedOrByWeight",
   "Tax.FixedOrByCountryStateZip",
   "Widgets.GoogleAnalytics",
-  "Widgets.NivoSlider"
+  "Widgets.NivoSlider",
+  "Payments.PurchaseOrder",
+  "Payments.Payu",
+  "Misc.FacebookShop",
+  "Widgets.FacebookPixel"
 ]

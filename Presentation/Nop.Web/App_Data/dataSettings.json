@@ -1,5 +1,26 @@
+//Azure db connection
+//{
+//  "DataProvider": "sqlserver",
+//  "DataConnectionString": "Server=tcp:meedodb.database.windows.net,1433;Initial Catalog=meedodb;Persist Security Info=False;User ID=meedodb;Password=Paddington2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+//  "RawDataSettings": {}
+//}
+
+//Local db connection
+//{
+//  "DataProvider": "sqlserver",
+//  "DataConnectionString": "Data Source=DESKTOP-6U3OSU9;Initial Catalog=meedodb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;",
+//  "RawDataSettings": {}
+//} 
+
+//Live db connection
 {
   "DataProvider": "sqlserver",
-  "DataConnectionString": "Server=tcp:meedodb.database.windows.net,1433;Initial Catalog=meedodb;Persist Security Info=False;User ID=meedodb;Password=Paddington2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+  "DataConnectionString": "Data Source=103.14.120.132;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
   "RawDataSettings": {}
-}
+} 
+////Live deployment db connection
+//{
+//  "DataProvider": "sqlserver",
+//  "DataConnectionString": "Data Source=localhost;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+//  "RawDataSettings": {}
+//} 

@@ -64,7 +64,7 @@
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_subcategories", additionalData = Model.Id })
         @*subcategories*@
-        @if (Model.SubCategories.Count > 0)
+        @*@if (Model.SubCategories.Count > 0)
         {
             <div class="sub-category-grid row">
                 @if (Model.SubCategories.Count <= 3)
@@ -106,7 +106,7 @@
                     </div>
                 }
             </div>
-        }
+        }*@
         @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_featured_products", additionalData = Model.Id })
         @*featured products*@
         @if (Model.FeaturedProducts.Count > 0)

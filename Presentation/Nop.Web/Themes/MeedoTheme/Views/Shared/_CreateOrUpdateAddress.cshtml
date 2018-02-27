@@ -32,49 +32,49 @@
 }
 <div class="edit-address form-horizontal">
     <input asp-for="Id" type="hidden" />
-    <div class="form-group">
-        <label class="control-label col-sm-2 col-md-2" asp-for="FirstName" asp-postfix=":"></label>
+    <div class="form-group col-md-6">
+        <label class="control-label col-sm-3 col-md-3" asp-for="FirstName" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>                       
         <div class="col-sm-6 col-md-6">
             <input class="form-control" asp-for="FirstName" />
         </div>
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
             <span asp-validation-for="FirstName"></span>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2 col-md-2" asp-for="LastName" asp-postfix=":"></label>
+    <div class="form-group col-md-6">
+        <label class="control-label col-sm-3 col-md-3" asp-for="LastName" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
             <input class="form-control" asp-for="LastName" />
         </div>
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
             <span asp-validation-for="LastName"></span>
         </div>
 
         </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2 col-md-2" asp-for="Email" asp-postfix=":"></label>
+    <div class="form-group col-md-6">
+        <label class="control-label col-sm-3 col-md-3" asp-for="Email" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
             <input class="form-control" asp-for="Email" />
         </div>
-        <div class="col-sm-4 col-md-4">
+        <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
             <span asp-validation-for="Email"></span>
         </div>
         </div>
     @if (Model.CompanyEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="Company" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="Company" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="Company" />
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.CompanyRequired)
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -85,13 +85,13 @@
     }
     @if (Model.CountryEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="CountryId" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="CountryId" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <select class="form-control dropdown-toggle form-control category-iteam category-select" asp-for="CountryId" asp-items="Model.AvailableCountries"></select>
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
                 <span asp-validation-for="CountryId"></span>
             </div>
@@ -100,8 +100,8 @@
 
     @if (Model.CountryEnabled && Model.StateProvinceEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="StateProvinceId" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="StateProvinceId" asp-postfix=":"></label>
             <div class="col-sm-6 col-md-6">
                 <select class="form-control dropdown-toggle category-iteam form-control category-select" asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
                 <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
@@ -111,13 +111,13 @@
     }
     @if (Model.CityEnabled)
     {
-         <div class="form-group">
-             <label class="control-label col-sm-2 col-md-2" asp-for="City" asp-postfix=":"></label>
+         <div class="form-group col-md-6">
+             <label class="control-label col-sm-3 col-md-3" asp-for="City" asp-postfix=":"></label>
              <div class="visible-xs form-title-rquired"><nop-required /></div>
              <div class="col-sm-6 col-md-6">
                  <input class="form-control" asp-for="City" />
              </div>
-             <div class="col-sm-4 col-md-4">
+             <div class="col-sm-3 col-md-3">
                  @if (Model.CityRequired)
                  {
                      <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -128,13 +128,13 @@
     }
     @if (Model.StreetAddressEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="Address1" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="Address1" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="Address1" />
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.StreetAddressRequired)
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -146,13 +146,13 @@
     }
     @if (Model.StreetAddress2Enabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="Address2" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="Address2" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="Address2" />
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.StreetAddress2Required)
                 {
                    <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -163,13 +163,13 @@
     }
     @if (Model.ZipPostalCodeEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="ZipPostalCode" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="ZipPostalCode" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="ZipPostalCode" />
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.ZipPostalCodeRequired)
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -180,13 +180,13 @@
     }
     @if (Model.PhoneEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="PhoneNumber" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="PhoneNumber" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="PhoneNumber" />
             </div> 
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.PhoneRequired)
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -197,13 +197,13 @@
     }
     @if (Model.FaxEnabled)
     {
-        <div class="form-group">
-            <label class="control-label col-sm-2 col-md-2" asp-for="FaxNumber" asp-postfix=":"></label>
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="FaxNumber" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="FaxNumber" />
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-3 col-md-3">
                 @if (Model.FaxRequired)
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
