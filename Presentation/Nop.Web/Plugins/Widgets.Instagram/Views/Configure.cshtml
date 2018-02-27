@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "_ConfigurePlugin";
+}
+@model Nop4you.Plugin.Widgets.Instagram.Models.ConfigurationModel
+<form asp-controller="Instagram" asp-action="Configure" method="post">
+    <div class="content-header clearfix">
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div id="tabStrip" class="nav-tabs-custom">
+
+                    <nop-tabs id="htmlsettings-edit">
+                        <nop-tab asp-name="tab-general" asp-title="@T("nop4you.widget.instagram.info")">@await Html.PartialAsync("TabInfo.cshtml", Model)</nop-tab>
+                        <nop-tab asp-name="tab-Css" asp-title="@T("nop4you.widget.instagram.tabsettomgs")" asp-default="true">@await Html.PartialAsync("TabSettings.cshtml", Model)</nop-tab>
+                    </nop-tabs>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="panel-group">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <img src="https://www.nop4you.com/Themes/QuickTemplate/Content/images/thumbs/logo-nop4you.png" style="width: 100px;" />
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="https://www.nopcommerce.com/p/2808/instagram-widget-nop4youcom.aspx" target="_blank" class="list-group-item"><i class="fa fa-star" aria-hidden="true"></i> Please rate</a>
+                                <a href="https://www.nop4you.com/contactus" target="_blank" class="list-group-item"><i class="fa fa-bug" aria-hidden="true"></i> Report bug</a>
+                                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=support@nop4you.com&item_name=Donation+for+developer&item_number=Instagram+Widget" target="_blank" class="list-group-item"><i class="fa fa-money" aria-hidden="true"></i> Tip jar</a>
+                                <a href="https://www.nop4you.com" target="_blank" class="list-group-item list-group-item-success"><i class="fa fa-plug" aria-hidden="true"></i> More plugins</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            bindBootstrapTabSelectEvent('tabStrip');
+        });
+    </script>
+</form>

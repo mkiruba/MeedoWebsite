@@ -1,0 +1,11 @@
+﻿.instagram-grid {
+    margin: 20px 0 50px;
+}
+.instagram-grid .title {
+    margin: 0 0 30px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 15px;
+    font-size: 30px;
+    font-weight: normal;
+    color: #444;
+}

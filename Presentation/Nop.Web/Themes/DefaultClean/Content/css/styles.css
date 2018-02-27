@@ -987,7 +987,12 @@ label, label + * {
 .follow-us .social .google-plus a {
 	background-position: -152px 0;
 }
-
+.follow-us .social .instagram a {
+    background-position: 0 0;
+}
+.follow-us .social .whatsapp a {
+    background-position: 0 0;
+}
 .newsletter-email { 
 	display: inline-block;
 	overflow: hidden; 

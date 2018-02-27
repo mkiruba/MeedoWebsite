@@ -14,7 +14,15 @@
     }
     @if (!string.IsNullOrEmpty(Model.YoutubeLink))
     {
-        <li class="youtube"><a href="@Model.YoutubeLink" target="_blank"><i class="fa  fa-youtube"></i></a></li>
+        <li class="youtube"><a href="@Model.YoutubeLink" target="_blank"><i class="fa fa-youtube"></i></a></li>
+    }
+    @if (!string.IsNullOrEmpty(Model.InstagramLink))
+    {
+        <li class="instagram"><a href="@Model.InstagramLink" target="_blank"><i class="fa fa-instagram"></i></a></li>
+    }
+    @if (!string.IsNullOrEmpty(Model.WhatsappLink))
+    {
+        <li class="whatsapp"><a href="@Model.WhatsappLink" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
     }
     @if (Model.NewsEnabled)
     {

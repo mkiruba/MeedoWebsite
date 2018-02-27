@@ -4,15 +4,16 @@
     <ul>
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_before" })
         @await Component.InvokeAsync("AdminHeaderLinks")
+        @*<li class="instagram"><a href="@Model.InstagramLink" target="_blank"><i class="fa fa-instagram"></i></a></li>*@
         <li class="phone">
-            <a>
-                <span class="glyphicon glyphicon-phone"></span>
-                <span>98417 41234</span>
+            <a href="https://api.whatsapp.com/send?phone=919841741237&text=I'm%20interested%20in%20your%20tees" target="_blank">
+                <i class="fa fa-whatsapp fa-lg"></i>
+                <span style="margin-left:5px;">98417 41237</span>
             </a>
         </li>
         <li class="email">
-            <a href="mailto:support@meedo.in?Subject=Enquiry">
-                <span class="glyphicon glyphicon-envelope"></span>
+            <a href="mailto:support@meedo.in?Subject=Enquiry" target="_blank">
+                <span class="fa fa-envelope-o fa-lg"></span>
                 <span style="margin-left:5px;">@T("Email.SupportEmail")</span>
             </a>
         </li>

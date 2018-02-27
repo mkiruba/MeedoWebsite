@@ -1,0 +1,15 @@
+{
+  "Group": "Widgets",
+  "FriendlyName": "Instagram",
+  "SystemName": "Widgets.Instagram",
+  "Version": "1.01",
+  "SupportedVersions": [
+    "4.00"
+  ],
+  "Author": "nop4you.com",
+  "DisplayOrder": 1,
+  "FileName": "Nop4you.Plugin.Widgets.Instagram.dll",
+  "Description": "This plugin allows you to display your instagram at the store",
+  "LimitedToStores": [],
+  "LimitedToCustomerRoles": []
+}

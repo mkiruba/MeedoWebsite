@@ -904,6 +904,8 @@ namespace Nop.Services.Messages
             tokens.Add(new Token("Twitter.URL", _storeInformationSettings.TwitterLink));
             tokens.Add(new Token("YouTube.URL", _storeInformationSettings.YoutubeLink));
             tokens.Add(new Token("GooglePlus.URL", _storeInformationSettings.GooglePlusLink));
+            tokens.Add(new Token("Instagram.URL", _storeInformationSettings.InstagramLink));
+            tokens.Add(new Token("Whatsapp.URL", _storeInformationSettings.WhatsappLink));
 
             //event notification
             _eventPublisher.EntityTokensAdded(store, tokens);

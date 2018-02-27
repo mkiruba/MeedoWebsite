@@ -1,0 +1,18 @@
+﻿@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework.Localization;
+@using Nop.Services.Localization;
+@using Nop.Core;
+@model Nop4you.Plugin.Widgets.Instagram.Models.ConfigurationModel
+@{
+    Html.AddCssFileParts("~/Plugins/Widgets.Instagram/Content/css/instagram.css");
+}
+
+    <div class="instagram-grid home-page-instagram-grid">
+        <div class="title">
+            <span><i class="fa fa-instagram" aria-hidden="true"></i>@T("nop4you.widget.instagram.instagramtitle")</span>
+        </div>
+        <div class="item-grid">
+            <script src="//lightwidget.com/widgets/lightwidget.js"></script>
+            <iframe src="//lightwidget.com/widgets/@(Model.InstagramKey).html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
+        </div>
+    </div>

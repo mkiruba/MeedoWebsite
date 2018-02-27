@@ -80,6 +80,13 @@ namespace Nop.Web.Areas.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.GooglePlusLink")]
             public string GooglePlusLink { get; set; }
             public bool GooglePlusLink_OverrideForStore { get; set; }
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.InstagramLink")]
+            public string InstagramLink { get; set; }
+            public bool InstagramLink_OverrideForStore { get; set; }
+
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.WhatsappLink")]
+            public string WhatsappLink { get; set; }
+            public bool WhatsappLink_OverrideForStore { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.SubjectFieldOnContactUsForm")]
             public bool SubjectFieldOnContactUsForm { get; set; }

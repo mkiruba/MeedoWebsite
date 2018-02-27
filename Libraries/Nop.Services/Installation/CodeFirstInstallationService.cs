@@ -6182,6 +6182,8 @@ namespace Nop.Services.Installation
                 TwitterLink = "https://twitter.com/nopCommerce",
                 YoutubeLink = "http://www.youtube.com/user/nopCommerce",
                 GooglePlusLink = "https://plus.google.com/+nopcommerce",
+                InstagramLink = "https://www.instagram.com/meedoindia/",
+                WhatsappLink = "https://api.whatsapp.com/send?phone=919841741237&text=I'm%20interested%20in%20your%20tees",
                 HidePoweredByNopCommerce = false
             });
 
