@@ -15,5 +15,6 @@ namespace Nop.Web.Models.Checkout
         public string MinOrderTotalWarning { get; set; }
 
         public IList<string> Warnings { get; set; }
+        public string PaymentViewComponentName { get; set; }
     }
 }

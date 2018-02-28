@@ -13,20 +13,24 @@
     @if (Model.ExistingAddresses.Count > 0)
     {
         <script type="text/javascript" asp-location="Footer">
-            //select first item by default
-            Billing.newAddress(!$(".list-group").find("a.active").data("value"));
-            $("#billing-address-input").val($(".list-group").find("a.active").data("value"));
-            $("#opc-billing").find(".list-group-item").click(function () {
-                $(this).parent().children("a").removeClass("active");
-                $(this).parent().find("a>span").removeClass("glyphicon-check");
-                $(this).parent().find("a>span").addClass("glyphicon-unchecked");
-                $(this).addClass("active");
-                $(this).find("span").removeClass("glyphicon-unchecked");
-                $(this).find("span").addClass("glyphicon-check");
-                console.log("CallingBilling");
-                Billing.newAddress(!$(this).data("value"));
-                $("#billing-address-input").val($(this).data("value"));
-            });
+            $(document).ready(function () {
+                //select first item by default
+                var dataValue = $("#billing-address-input").val($(".list-group").find("a.active").data("value"));
+
+                Billing.newAddress(!dataValue);
+                $('#checkout-steps').on('click', 'div#billing-address-list-group .list-group-item', function () {
+                    console.log(this);
+                    $(this).parent().children("a").removeClass("active");
+                    $(this).parent().find("a>span").removeClass("glyphicon-check");
+                    $(this).parent().find("a>span").addClass("glyphicon-unchecked");
+                    $(this).addClass("active");
+                    $(this).find("span").removeClass("glyphicon-unchecked");
+                    $(this).find("span").addClass("glyphicon-check");
+                    console.log("CallingBilling");
+                    Billing.newAddress(!$(this).data("value"));
+                    $("#billing-address-input").val($(this).data("value"));
+                });               
+            });            
         </script>
         <div class="section select-billing-address">
             <label for="billing-address-input">@T("Checkout.SelectBillingAddressOrEnterNewOne")</label>
@@ -35,7 +39,7 @@
                 @*<select name="billing_address_id" id="billing-address-select" class="address-select form-control dropdown-toggle"
                     title="" onchange="Billing.newAddress(!this.value)">*@
                 <div class="well" style="max-height: 300px; overflow: auto;">
-                    <div class="list-group">
+                    <div id="billing-address-list-group" class="list-group checked-list-box">
                         @foreach (var address in Model.ExistingAddresses)
                         {
                             var addressLine = "";

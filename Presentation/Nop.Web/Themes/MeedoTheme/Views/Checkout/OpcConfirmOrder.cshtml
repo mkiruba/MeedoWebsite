@@ -1,5 +1,11 @@
 ﻿@model CheckoutConfirmModel
 <div class="checkout-data">
+    <div class="section payment-info">
+        <div class="info">
+            @await Component.InvokeAsync(Model.PaymentViewComponentName)
+        </div>
+        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+    </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_confirm_top" })
     @if (!string.IsNullOrEmpty(Model.MinOrderTotalWarning) || Model.Warnings.Count > 0)
     {
@@ -26,14 +32,14 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_confirm_bottom" })
     <div class="order-summary-body">
         @await Component.InvokeAsync("OrderSummary", new { prepareAndDisplayOrderReviewData = true })
-    </div>    
+    </div>
     @if (string.IsNullOrEmpty(Model.MinOrderTotalWarning) && Model.TermsOfServiceOnOrderConfirmPage)
     {
         <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display:none;">
             <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
         </div>
         <div class="terms-of-service">
-            <input id="termsofservice" type="checkbox" name="termsofservice"/>
+            <input id="termsofservice" type="checkbox" name="termsofservice" />
             <label for="termsofservice">
                 @T("Checkout.TermsOfService.IAccept")
                 @if (Model.TermsOfServicePopup)

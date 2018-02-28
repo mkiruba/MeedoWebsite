@@ -475,6 +475,16 @@ namespace Nop.Web.Factories
                 var minOrderTotalAmount = _currencyService.ConvertFromPrimaryStoreCurrency(_orderSettings.MinOrderTotalAmount, _workContext.WorkingCurrency);
                 model.MinOrderTotalWarning = string.Format(_localizationService.GetResource("Checkout.MinOrderTotalAmount"), _priceFormatter.FormatPrice(minOrderTotalAmount, true, false));
             }
+            //load payment method
+            var paymentMethodSystemName = _workContext.CurrentCustomer.GetAttribute<string>(
+                SystemCustomerAttributeNames.SelectedPaymentMethod,
+                _genericAttributeService, _storeContext.CurrentStore.Id);
+            var paymentMethod = _paymentService.LoadPaymentMethodBySystemName(paymentMethodSystemName);
+            if (paymentMethod != null)
+            {
+                paymentMethod.GetPublicViewComponent(out string viewComponentName);
+                model.PaymentViewComponentName = viewComponentName;
+            }
             return model;
         }
 

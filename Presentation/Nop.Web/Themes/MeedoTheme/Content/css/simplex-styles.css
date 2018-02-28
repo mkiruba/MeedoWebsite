@@ -1194,7 +1194,7 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -1451,9 +1451,10 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
     }
 }
 
-
 /* MULTIPLE CHEKOUT PAGE STYLE */
-.checkout-page .address-grid{margin-bottom:20px;}
+.checkout-page .address-grid {
+    margin-bottom: 20px;
+}
 .checkout-data .address-grid .address-item .select-button{margin-bottom:20px;text-align:center;}
 .checkout-data .section .address-box{list-style:none;padding:15px 15px 15px 15px;margin:0;box-shadow:0px 0px 10px #ddd;-webkit-box-shadow: 0px 0px 10px #ddd;-moz-box-shadow: 0px 0px 10px #ddd;text-align:center;margin-bottom:30px;min-height:260px;word-wrap:break-word;}
 .checkout-data .section .address-box li{color:#777;margin-bottom:5px;}

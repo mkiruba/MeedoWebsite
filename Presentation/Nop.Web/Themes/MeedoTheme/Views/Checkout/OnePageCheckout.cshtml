@@ -56,13 +56,13 @@
                                     </span>
                                 </a>
                             </li>*@
-                        <li role="presentation" class="disabled">
+                        @*<li role="presentation" class="disabled">
                             <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Payment Information" id="opc-payment_info">
                                 <span class="round-tab">
                                     <i class="glyphicon glyphicon-credit-card"></i>
                                 </span>
                             </a>
-                        </li>
+                        </li>*@
                         <li role="presentation" class="disabled">
                             <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Confirmation" id="opc-confirm_order">
                                 <span class="round-tab">
@@ -218,7 +218,7 @@
                                                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                                                         </ul>*@
                                                 @*</div>*@
-                    <div class="tab-pane" role="tabpanel" id="step5">
+                    @*<div class="tab-pane" role="tabpanel" id="step5">
                         <div class="step5">
                             <div class="step_51">
                                 <div id="opc-payment_info" class="tab-section">
@@ -229,7 +229,7 @@
                                         <form id="co-payment-info-form">
                                             <div id="checkout-payment-info-load">
                                                 @*payment info content will be loaded here*@ @*Payment is not required*@
-                                            </div>
+                                            @*</div>
                                         </form>
                                         <script type="text/javascript" asp-location="Footer">
                                             PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
@@ -244,19 +244,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         @*<ul class="list-inline pull-right">
                                 <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                                 <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                             </ul>*@
-                    </div>
+                    @*</div>*@
 
 
 
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <div class="step6">
-                            <h5>Completed</h5>
-
                             <div id="opc-confirm_order" class="tab-section">
                                 <div class="step-title">
                                     <h2>@T("Checkout.ConfirmOrder")</h2>
@@ -265,7 +263,7 @@
                                     <div id="checkout-confirm-order-load">
                                         @*confirm order content will be loaded here*@
                                     </div>
-                                    <script type="text/javascript" asp-location="Footer">
+                                    <script type="text/javascript" asp-location="Footer">                                        
                                         ConfirmOrder.init('@(storeLocation)checkout/OpcConfirmOrder/', '@(storeLocation)checkout/completed');
                                     </script>
                                     <div class="buttons" id="confirm-order-buttons-container">
@@ -327,7 +325,7 @@
             Checkout.init('@(storeLocation)cart/');
             //hide billing address
             $('#opc-billing').parent().hide();
-            $('.connecting-line').width('50%');
+            $('.connecting-line').width('30%');
             //Add Inactive Class To All Accordion Headers
             $('.accordion-header').toggleClass('inactive-header');
 

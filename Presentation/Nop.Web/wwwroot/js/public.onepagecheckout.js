@@ -14,7 +14,7 @@ var tab = {
         var $active = $('.wizard .nav-tabs li.active'); 
         var isBillingAddSame = $('.opc #opc-shipping').find('#BillingAddressSame');
         
-        if (isBillingAddSame.is(":checked") && $active.find('#opc-payment_info').length > 0) {
+        if (isBillingAddSame.is(":checked")) {// && $active.find('#opc-payment_info').length > 0) {
             $active = $active.prev();
         }       
         $active.prev().removeClass('disabled');
@@ -110,7 +110,8 @@ var Checkout = {
         
         //TODO move it to a new method
         if ($("#billing-address-input").length > 0) {
-            Billing.newAddress(!$('#billing-address-input').val());
+            var dataValue = $("#billing-address-input").val($(".list-group").find("a.active").data("value"));
+            Billing.newAddress(!dataValue);
         }
         if ($("#shipping-address-input").length > 0) {
             Shipping.newAddress(!$('#shipping-address-input').val());
@@ -294,11 +295,11 @@ var Shipping = {
 
     toggleBillingAddress: function (sameBilling) {
         if (sameBilling) {
-            $('.connecting-line').width('50%');
+            $('.connecting-line').width('30%');
             $('#opc-billing').parent().hide();
         }
         else {
-            $('.connecting-line').width('80%');
+            $('.connecting-line').width('50%');
             $('#opc-billing').parent().show();
         }
     }
@@ -528,7 +529,7 @@ var ConfirmOrder = {
     saveUrl: false,
     isSuccess: false,
 
-    init: function (saveUrl, successUrl) {
+    init: function (saveUrl, successUrl) {        
         this.saveUrl = saveUrl;
         this.successUrl = successUrl;
     },
