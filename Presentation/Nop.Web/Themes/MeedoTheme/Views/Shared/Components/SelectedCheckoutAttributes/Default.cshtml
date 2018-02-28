@@ -1,4 +1,7 @@
 ﻿@model string
-<div class="selected-checkout-attributes">
-    @Html.Raw(Model)
-</div>
+@if (!string.IsNullOrEmpty(Model))
+{
+    <div class="selected-checkout-attributes">
+        @Html.Raw(Model)
+    </div>
+}
