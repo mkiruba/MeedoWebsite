@@ -807,6 +807,7 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 .product-details-page .attributes .textbox{width:100%;}
 .product-details-page .attributes textarea{width:280px;height:150px;border:1px solid #ddd;}
 .product-details-page .attributes .btn.btn-primary { margin-right:10px; }
+.product-details-page .attributes .btn.btn-primary.active { background-color: #333333; z-index:0;}
 .product-details-page .add-to-cart .qty-input{width:60px;float:left;margin:0;height:40px;}
 .product-details-page .addtocart-quantity-box{float:left;margin-right:35px;width:80px;}
 .product-details-page .add-to-cart .qty-.dropdown{width:80px;}

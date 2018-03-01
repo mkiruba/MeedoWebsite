@@ -132,11 +132,11 @@
                 // Adjust right list
                 var elementHeight = ((height - ((pgwSlider.slideCount - 1) * 6)) / pgwSlider.slideCount);
                 var elementWidth;
-                if (pgwSlider.slideCount > 1) {
-                    var elementWidth = (100 / pgwSlider.slideCount);
-                } else if (pgwSlider.slideCount = 1) {
-                    var elementWidth = (50 / pgwSlider.slideCount);
-                }
+                //if (pgwSlider.slideCount > 1) {
+                    elementWidth = (100 / pgwSlider.slideCount);
+                //} else if (pgwSlider.slideCount = 1) {
+                //    elementWidth = (50 / pgwSlider.slideCount);
+                //}
                 
                 pgwSlider.plugin.find('.ps-list > li').css({ width: elementWidth + '%' });
 

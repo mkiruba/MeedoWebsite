@@ -179,11 +179,11 @@ ul.pgwSlider.wide > li,
     min-height: inherit;
 }
 
-.pgwSlider.narrow .ps-current,
+/*.pgwSlider.narrow .ps-current,
 ul.pgwSlider.narrow,
 .pgwSlider.narrow > ul {
     width: 100%;
-}
+}*/
 
 ul.pgwSlider.narrow > li,
 .pgwSlider.narrow > .ps-list > li {
