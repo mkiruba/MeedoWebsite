@@ -76,6 +76,8 @@ var AjaxCart = {
     },
 
     success_process: function (response) {
+        fbq('track', 'AddToWishlist');
+        fbq('track', 'AddToCart');
         if (response.updatetopcartsectionhtml) {
             $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
         }

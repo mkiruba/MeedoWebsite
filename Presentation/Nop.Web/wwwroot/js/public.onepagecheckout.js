@@ -529,7 +529,8 @@ var ConfirmOrder = {
     saveUrl: false,
     isSuccess: false,
 
-    init: function (saveUrl, successUrl) {        
+    init: function (saveUrl, successUrl) { 
+        fbq('track', 'AddPaymentInfo');
         this.saveUrl = saveUrl;
         this.successUrl = successUrl;
     },
@@ -580,6 +581,8 @@ var ConfirmOrder = {
         
         if (response.redirect) {
             ConfirmOrder.isSuccess = true;
+            console.log('orderTotal - ' + response.orderTotal);
+            fbq('track', 'Purchase', { value: response.orderTotal, currency: 'INR' });
             location.href = response.redirect;
             return;
         }

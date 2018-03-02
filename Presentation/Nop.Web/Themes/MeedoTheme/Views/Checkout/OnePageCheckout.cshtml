@@ -283,7 +283,8 @@
             </div>
         </div>
         <script type="text/javascript" asp-location="Footer">
-        $(document).ready(function () {
+            $(document).ready(function () {
+            fbq('track', 'InitiateCheckout');
             //Initialize tooltips
             $('.nav-tabs > li a[title]').tooltip();
 

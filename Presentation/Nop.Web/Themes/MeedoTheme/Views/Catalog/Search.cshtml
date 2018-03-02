@@ -9,6 +9,7 @@
 }
 <script type="text/javascript" asp-location="Footer">
     $(document).ready(function () {
+        fbq('track', 'Search');
 
         $("#@Html.IdFor(model => model.adv)").click(toggleAdvancedSearch);
 
