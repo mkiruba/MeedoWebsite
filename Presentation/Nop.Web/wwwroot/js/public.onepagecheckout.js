@@ -581,7 +581,6 @@ var ConfirmOrder = {
         
         if (response.redirect) {
             ConfirmOrder.isSuccess = true;
-            console.log('orderTotal - ' + response.orderTotal);
             fbq('track', 'Purchase', { value: response.orderTotal, currency: 'INR' });
             location.href = response.redirect;
             return;
