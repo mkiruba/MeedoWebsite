@@ -25,11 +25,12 @@ namespace Nop.Plugin.Payments.Payu
             return checksumString;
         }
 
-        public string verifychecksum(string MerchantId, string OrderId, string Amount, string productinfo, string firstname, string email , string status , string salt)
+        public string Verifychecksum(string merchantId, string orderId, string amount, string productinfo, string firstname, string email , string status , string salt)
         {
             string hashStr;
-            hashStr = salt + "|" + status + "|||||||||||" + email + "|" + firstname + "|" + productinfo + "|" + Amount + "|" + OrderId + "|" + MerchantId;
-            
+            //hashStr = salt + "|" + status + "|||||||||||" + email + "|" + firstname + "|" + productinfo + "|" + Amount + "|" + OrderId + "|" + MerchantId;
+            hashStr = merchantId + "|" + orderId + "|" + amount + "|" + productinfo + "|" + firstname + "|" + email + "|||||||||||" + salt;
+
             return Generatehash512(hashStr);
         }
         

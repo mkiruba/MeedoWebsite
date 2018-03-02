@@ -122,7 +122,7 @@ namespace Nop.Plugin.Payments.Payu.Controllers
 
 
             var myUtility = new PayuHelper();
-            string orderId, merchantId, Amount, productinfo, firstname, email, hash, status, checksum;
+            string orderId, merchantId, amount, productinfo, firstname, email, hash, status, checksum;
 
             //Assign following values to send it to verifychecksum function.
             if (String.IsNullOrWhiteSpace(_PayuPaymentSettings.Key))
@@ -131,14 +131,14 @@ namespace Nop.Plugin.Payments.Payu.Controllers
 
             merchantId = _PayuPaymentSettings.MerchantId.ToString();
             orderId = form["txnid"];
-            Amount = form["amount"];
+            amount = form["amount"];
             productinfo = form["productinfo"];
             firstname = form["firstname"];
             email = form["email"];
             hash = form["hash"];
             status = form["status"];
 
-            checksum = myUtility.verifychecksum(merchantId, orderId, Amount, productinfo, firstname, email, status, _PayuPaymentSettings.Key);
+            checksum = myUtility.Verifychecksum(merchantId, orderId, amount, productinfo, firstname, email, status, _PayuPaymentSettings.Key);
 
             if (checksum == hash)
             {
