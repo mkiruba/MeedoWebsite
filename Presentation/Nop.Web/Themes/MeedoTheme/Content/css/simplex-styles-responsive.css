@@ -366,7 +366,18 @@
     .header-menu li.dropdown.open .dropdown-menu {
         display: block;
     }
-
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background-color:#333;
+    }
+    .header-links .phone .phone-number,.email-address {
+        display:none;
+    }
+    .header-links .logout span{
+        display: none;
+    }
+    .header-links .login span {
+        display: none;
+    }
     #mobile-menu .dropdown .fa-angle-down {
         position: absolute;
         padding: 0px 25px;

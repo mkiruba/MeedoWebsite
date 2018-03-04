@@ -4,17 +4,16 @@
     <ul>
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_before" })
         @await Component.InvokeAsync("AdminHeaderLinks")
-        @*<li class="instagram"><a href="@Model.InstagramLink" target="_blank"><i class="fa fa-instagram"></i></a></li>*@
         <li class="phone">
             <a href="https://api.whatsapp.com/send?phone=919841741237&text=I'm%20interested%20in%20your%20tees" target="_blank">
                 <i class="fa fa-whatsapp fa-lg"></i>
-                <span style="margin-left:5px;">98417 41237</span>
+                <span class="phone-number" style="margin-left:5px;">98417 41237</span>
             </a>
         </li>
         <li class="email">
             <a href="mailto:support@meedo.in?Subject=Enquiry" target="_blank">
                 <span class="fa fa-envelope-o fa-lg"></span>
-                <span style="margin-left:5px;">@T("Email.SupportEmail")</span>
+                <span class="email-address" style="margin-left:5px;">@T("Email.SupportEmail")</span>
             </a>
         </li>
         @*@if (Model.IsAuthenticated)
@@ -45,11 +44,11 @@
 }
         @if (Model.IsAuthenticated)
     {
-        <li class="logout"><a href="@Url.RouteUrl("Logout")" title="@T("Account.Logout")" class="ico-logout"><span>@T("Account.Logout")</span></a></li>
+        <li class="logout"><a href="@Url.RouteUrl("Logout")" title="@T("Account.Logout")"><i class="fa fa-unlock fa-lg"></i><span style="margin-left:5px;">@T("Account.Logout")</span></a></li>
 }
 else
 {
-    <li class="login"><a href="@Url.RouteUrl("Login")" title="@T("Account.Login")" class="ico-login"><span>@T("Account.Login")</span></a></li>
+    <li class="login"><a href="@Url.RouteUrl("Login")" title="@T("Account.Login")"><i class="fa fa-lock fa-lg"></i><span style="margin-left:5px;">@T("Account.Login")</span></a></li>
 }
         @await Component.InvokeAsync("FlyoutShoppingCart")
         @await Component.InvokeAsync("Widget", new { widgetZone = "header_links_after" })        

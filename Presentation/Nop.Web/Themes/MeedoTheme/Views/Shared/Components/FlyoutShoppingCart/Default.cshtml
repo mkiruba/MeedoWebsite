@@ -1,8 +1,9 @@
 ﻿@model MiniShoppingCartModel
 <div id="flyout-cart" class="flyout-main-wrapper">
     <div class="shopping-cart-link">
-        <a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">
-            <span class="badge badge-notify">@Model.TotalProducts</span>
+        <a href="@Url.RouteUrl("ShoppingCart")">
+            <span class="fa fa-shopping-bag fa-lg"><span class="badge badge-notify">@Model.TotalProducts</span></span>
+            
             @*<span class="cart-label">@T("ShoppingCart")</span>*@
             @*<span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.TotalProducts) @T("admin.currentcarts.totalitems")</span>*@
         </a>

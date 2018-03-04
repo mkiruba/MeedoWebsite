@@ -502,7 +502,8 @@ namespace Nop.Web.Factories
             {
                 OrderId = order.Id,
                 OnePageCheckoutEnabled = _orderSettings.OnePageCheckoutEnabled,
-                CustomOrderNumber = order.CustomOrderNumber
+                CustomOrderNumber = order.CustomOrderNumber,
+                OrderTotal = order.OrderTotal
             };
 
             return model;

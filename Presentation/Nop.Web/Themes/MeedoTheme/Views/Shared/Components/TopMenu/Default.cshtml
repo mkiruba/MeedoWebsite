@@ -74,6 +74,67 @@
         </div>
     </nav>
 </div>
+
+<div class="scroll-menu col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display:none;">
+    <nav class="navbar navbar-inverse">        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="mobile-menu" class="collapse navbar-collapse col-xs-12 col-sm-12 col-md-6 col-lg-offset-4">
+            <ul class="nav navbar-nav">
+                @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_before" })
+                @if (Model.DisplayHomePageMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
+                }
+                @{
+                    var rootCategories1 = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
+                }
+                @foreach (var category in rootCategories1)
+                {
+                    var categoryLineModel = new TopMenuModel.CategoryLineModel
+                    {
+                        Category = category
+                    };
+                    @await Html.PartialAsync("_CategoryLine.TopMenu", categoryLineModel)
+                }
+                @foreach (var topic in Model.Topics)
+                {
+                    <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                }
+                @if (Model.NewProductsEnabled && Model.DisplayNewProductsMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+                }
+                @if (Model.DisplayProductSearchMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a></li>
+                }
+                @if (Model.DisplayCustomerInfoMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+                }
+                @if (Model.BlogEnabled && Model.DisplayBlogMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                }
+                @if (Model.ForumEnabled && Model.DisplayForumsMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                }
+                @if (Model.DisplayContactUsMenuItem)
+                {
+                    <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                }
+                @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_after" })
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        <div class="header-upper-right pull-right col-xs-12 col-sm-12 col-md-6 col-lg-5">
+            <div class="header-links-wrapper">
+                @await Component.InvokeAsync("HeaderLinks")
+            </div>
+
+        </div>
+    </nav>
+</div>
 <script type="text/javascript" asp-location="Footer">
     $(document).ready(function () {
         $("#mobile-menu .dropdown .fa-angle-down").click(function () {

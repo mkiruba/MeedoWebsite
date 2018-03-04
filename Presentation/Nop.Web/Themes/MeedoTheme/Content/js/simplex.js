@@ -10,11 +10,24 @@ $(document).ready(function () {
     //Used js for Header Sticky Menu  
     //http://www.jqueryscript.net/menu/Sticky-Navigation-Bar-with-jQuery-Bootstrap.html
     $(window).bind('scroll', function () {
-        $('.main-menu').removeClass('goToTop');
+        //$('.main-menu').removeClass('goToTop');
+        $('.scroll-menu').hide();
+        $('.scroll-menu').removeClass('goToTop');        
         $.doTimeout('scroll', 500, function () {
             var navHeight = $("div.header").height();
             var navWidth = $("div.header").width();
-            ($(window).scrollTop() > navHeight) ? $('.main-menu').addClass('goToTop').width(navWidth) : $('.main-menu').removeClass('goToTop');
+            if ($(window).scrollTop() > navHeight) {
+                //$('.header-logo').hide();
+                //$('.main-menu').addClass('goToTop').width(navWidth);
+                $('.scroll-menu').addClass('goToTop');//.width(navWidth);
+                $('.scroll-menu').show();
+            } else {
+                //$('.header-logo').show();
+                //$('.main-menu').removeClass('goToTop');
+                $('.scroll-menu').hide();
+                $('.scroll-menu').removeClass('goToTop');                
+            }
+            //($(window).scrollTop() > navHeight) ? $('.main-menu').addClass('goToTop').width(navWidth) : $('.main-menu').removeClass('goToTop');
         });        
     });
 
@@ -133,7 +146,7 @@ $(document).ready(function () {
 
             $(document).scroll(function () {
                 var pos = $(window).scrollTop();
-                console.log(pos);
+                //console.log(pos);
 
                 if (pos >= position) {
                     backBtn.fadeIn(speed);
@@ -143,6 +156,7 @@ $(document).ready(function () {
             });
 
             backBtn.click(function () {
+                //$('html,body').scrollTop(0);
                 $("html, body").animate({
                     scrollTop: 0
                 },

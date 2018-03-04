@@ -1,4 +1,5 @@
-﻿@model CheckoutCompletedModel
+﻿@using System.Text.Encodings.Web
+@model CheckoutCompletedModel
 @{
     Layout = "_ColumnsOne";
 
@@ -12,6 +13,11 @@
 {
     @await Component.InvokeAsync("CheckoutProgress", new { step = CheckoutProgressStep.Complete })
 }
+<script type="text/javascript" asp-location="Footer">
+    $(document).ready(function () {
+        fbq('track', 'Purchase', { value: '@Html.Raw(JavaScriptEncoder.Default.Encode(Model.OrderTotal.ToString()))', currency: 'INR' });
+    });
+</script>
 <div class="page checkout-page order-completed-page">
     <div class="page-title panel-heading">
         <h1>@T("Checkout.ThankYou")</h1>
