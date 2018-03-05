@@ -110,11 +110,14 @@ var Checkout = {
         
         //TODO move it to a new method
         if ($("#billing-address-input").length > 0) {
-            var dataValue = $("#billing-address-input").val($(".list-group").find("a.active").data("value"));
-            Billing.newAddress(!dataValue);
+            var billingAddressValue = $("#billing-address-list-group").find("a.active").data("value");
+            $("#billing-address-input").val(billingAddressValue);
+            Billing.newAddress(!billingAddressValue);
         }
         if ($("#shipping-address-input").length > 0) {
-            Shipping.newAddress(!$('#shipping-address-input').val());
+            var shippingAddressValue = $("#shipping-address-list-group").find("a.active").data("value");
+            $("#shipping-address-input").val(shippingAddressValue);
+            Shipping.newAddress(!shippingAddressValue);
         }
 
         if (response.goto_section) {

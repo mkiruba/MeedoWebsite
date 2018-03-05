@@ -15,20 +15,22 @@
         <script type="text/javascript" asp-location="Footer">
             $(document).ready(function () {
                 //select first item by default
-                var dataValue = $("#billing-address-input").val($(".list-group").find("a.active").data("value"));
+                var dataValue = $("#billing-address-input").val($("#billing-address-list-group").find("a.active").data("value"));
 
                 Billing.newAddress(!dataValue);
                 $('#checkout-steps').on('click', 'div#billing-address-list-group .list-group-item', function () {
-                    console.log(this);
                     $(this).parent().children("a").removeClass("active");
                     $(this).parent().find("a>span").removeClass("glyphicon-check");
                     $(this).parent().find("a>span").addClass("glyphicon-unchecked");
                     $(this).addClass("active");
                     $(this).find("span").removeClass("glyphicon-unchecked");
                     $(this).find("span").addClass("glyphicon-check");
-                    console.log("CallingBilling");
-                    Billing.newAddress(!$(this).data("value"));
-                    $("#billing-address-input").val($(this).data("value"));
+                    var datavalue = $(this).data("value");
+                    if (!datavalue) {
+                        $('#billing-new-address-form .field-validation-error').html("");
+                    }
+                    Billing.newAddress(!datavalue);
+                    $("#billing-address-input").val(datavalue);
                 });               
             });            
         </script>

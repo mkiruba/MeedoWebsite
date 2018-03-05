@@ -1144,7 +1144,7 @@ namespace Nop.Web.Controllers
                         var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart,
                             selectedCountryId: newAddress.CountryId,
                             overrideAttributesXml: customAttributes);
-                        billingAddressModel.NewAddressPreselected = true;
+                        billingAddressModel.NewAddressPreselected = false;
                         return Json(new
                         {
                             update_section = new UpdateSectionJsonModel
