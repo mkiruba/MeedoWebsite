@@ -85,26 +85,32 @@ function displayPopupContentFromUrl(url, title, modal, width) {
 var barNotificationTimeout;
 function displayBarNotification(message, messagetype, timeout) {
     clearTimeout(barNotificationTimeout);
-
+    //https://github.com/CodeSeven/toastr
     //types: success, error, warning
-    var cssclass = 'success';
-    if (messagetype == 'success') {
-        cssclass = 'success';
-    }
-    else if (messagetype == 'error') {
-        cssclass = 'error';
-    }
-    else if (messagetype == 'warning') {
-        cssclass = 'warning';
-    }
-    //remove previous CSS classes and notifications
-    $('#bar-notification')
-        .removeClass('success')
-        .removeClass('error')
-        .removeClass('warning');
-    $('#bar-notification .content').remove();
+    //var cssclass = 'success';
+    //if (messagetype == 'success') {
+    //    cssclass = 'success';
+    //}
+    //else if (messagetype == 'error') {
+    //    cssclass = 'error';
+    //}
+    //else if (messagetype == 'warning') {
+    //    cssclass = 'warning';
+    //}
+    ////remove previous CSS classes and notifications
+    //$('#bar-notification')
+    //    .removeClass('success')
+    //    .removeClass('error')
+    //    .removeClass('warning');
+    //$('#bar-notification .content').remove();
 
     //we do not encode displayed message
+
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.options.extendedTimeOut = 1000; //1000;
+    toastr.options.timeOut = 5000;
+    toastr.options.fadeOut = 250;
+    toastr.options.fadeIn = 250;
 
     //add new notifications
     var htmlcode = '';
@@ -115,25 +121,85 @@ function displayBarNotification(message, messagetype, timeout) {
             htmlcode = htmlcode + '<p class="content">' + message[i] + '</p>';
         }
     }
-    $('#bar-notification').append(htmlcode)
-        .addClass(cssclass)
-        .fadeIn('slow')
-        .mouseenter(function ()
-            {
-                clearTimeout(barNotificationTimeout);
-            });
-
-    $('#bar-notification .close').unbind('click').click(function () {
-        $('#bar-notification').fadeOut('slow');
-    });
-
-    //timeout (if set)
-    if (timeout > 0) {
-        barNotificationTimeout = setTimeout(function () {
-            $('#bar-notification').fadeOut('slow');
-        }, timeout);
+    if (messagetype == 'success') {
+        toastr.success(htmlcode);
     }
+    else if (messagetype == 'error') {
+        toastr.error(htmlcode);
+    }
+    else if (messagetype == 'warning') {
+        toastr.warning(htmlcode);
+    }
+
+    //$('#bar-notification').append(htmlcode)
+    //    .addClass(cssclass)
+    //    .fadeIn('slow')
+    //    .mouseenter(function () {
+    //        clearTimeout(barNotificationTimeout);
+    //    });
+
+    //$('#bar-notification .close').unbind('click').click(function () {
+    //    $('#bar-notification').fadeOut('slow');
+    //});
+
+    ////timeout (if set)
+    //if (timeout > 0) {
+    //    barNotificationTimeout = setTimeout(function () {
+    //        $('#bar-notification').fadeOut('slow');
+    //    }, timeout);
+    //}
 }
+//function displayBarNotification(message, messagetype, timeout) {
+//    clearTimeout(barNotificationTimeout);
+
+//    //types: success, error, warning
+//    var cssclass = 'success';
+//    if (messagetype == 'success') {
+//        cssclass = 'success';
+//    }
+//    else if (messagetype == 'error') {
+//        cssclass = 'error';
+//    }
+//    else if (messagetype == 'warning') {
+//        cssclass = 'warning';
+//    }
+//    //remove previous CSS classes and notifications
+//    $('#bar-notification')
+//        .removeClass('success')
+//        .removeClass('error')
+//        .removeClass('warning');
+//    $('#bar-notification .content').remove();
+
+//    //we do not encode displayed message
+
+//    //add new notifications
+//    var htmlcode = '';
+//    if ((typeof message) == 'string') {
+//        htmlcode = '<p class="content">' + message + '</p>';
+//    } else {
+//        for (var i = 0; i < message.length; i++) {
+//            htmlcode = htmlcode + '<p class="content">' + message[i] + '</p>';
+//        }
+//    }
+//    $('#bar-notification').append(htmlcode)
+//        .addClass(cssclass)
+//        .fadeIn('slow')
+//        .mouseenter(function ()
+//            {
+//                clearTimeout(barNotificationTimeout);
+//            });
+
+//    $('#bar-notification .close').unbind('click').click(function () {
+//        $('#bar-notification').fadeOut('slow');
+//    });
+
+//    //timeout (if set)
+//    if (timeout > 0) {
+//        barNotificationTimeout = setTimeout(function () {
+//            $('#bar-notification').fadeOut('slow');
+//        }, timeout);
+//    }
+//}
 
 function htmlEncode(value) {
     return $('<div/>').text(value).html();

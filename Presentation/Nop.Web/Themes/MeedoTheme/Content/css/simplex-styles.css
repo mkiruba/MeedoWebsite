@@ -1386,6 +1386,37 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
     font-weight: normal;
 }
 
+/*Toast notifications*/
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+#toast-container > .toast:before {
+    position: fixed;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}
+
+#toast-container > .toast-warning:before {
+    content: "\f003";
+}
+
+#toast-container > .toast-error:before {
+    content: "\f001";
+}
+
+#toast-container > .toast-info:before {
+    content: "\f005";
+}
+
+#toast-container > .toast-success:before {
+    content: "\f002";
+}
 
 /* according menu */
 .new-checkout #accordion-container {
