@@ -106,12 +106,23 @@ function displayBarNotification(message, messagetype, timeout) {
 
     //we do not encode displayed message
 
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.options.extendedTimeOut = 1000; //1000;
-    toastr.options.timeOut = 5000;
-    toastr.options.fadeOut = 250;
-    toastr.options.fadeIn = 250;
-
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
     //add new notifications
     var htmlcode = '';
     if ((typeof message) == 'string') {

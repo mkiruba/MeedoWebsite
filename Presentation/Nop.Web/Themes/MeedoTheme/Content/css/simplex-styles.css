@@ -1403,19 +1403,19 @@ a.eu-cookie-privacyinfo-tag{color:#B80709 !important;text-decoration:underline;}
 }
 
 #toast-container > .toast-warning:before {
-    content: "\f003";
+    content: "\f12a";
 }
 
 #toast-container > .toast-error:before {
-    content: "\f001";
+    content: "\f12a";
 }
 
 #toast-container > .toast-info:before {
-    content: "\f005";
+    content: "\f129";
 }
 
 #toast-container > .toast-success:before {
-    content: "\f002";
+    content: "\f00c";
 }
 
 /* according menu */
