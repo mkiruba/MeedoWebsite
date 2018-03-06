@@ -24,18 +24,25 @@
 }
 <div class="product-item clearfix" data-productid="@Model.Id">
     <div class="picture">
-        <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })" title="@Model.DefaultPictureModel.Title">
-            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" />
+        <a href="@Url.RouteUrl("Product", new {SeName = Model.SeName})" title="@Model.DefaultPictureModel.Title">
+            @if (Model.DefaultPictureModel.ImageUrl.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
+            {
+                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" />
+            }
+            else
+            {
+                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" />
+            }
         </a>
         <div class="wishlist-compare-wrapper">
-            <input type="button" title="@T("ShoppingCart.AddToCart")" value="Add to Cart" class="button-2 add-to-shoppingcart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;"/>
+            <input type="button" title="@T("ShoppingCart.AddToCart")" value="Add to Cart" class="button-2 add-to-shoppingcart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
             @if (!Model.ProductPrice.DisableWishlistButton)
             {
-                <input type="button" title="@T("ShoppingCart.AddToWishlist")" value="Add to Wishlist" class="button-2 add-to-wishlist-button" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;"/>
+                <input type="button" title="@T("ShoppingCart.AddToWishlist")" value="Add to Wishlist" class="button-2 add-to-wishlist-button" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;" />
             }
             @if (!Model.ProductPrice.DisableAddToCompareListButton)
             {
-                <input type="button" title="@T("ShoppingCart.AddToCompareList")" value="Add to Compare List" class="button-2 add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;"/>
+                <input type="button" title="@T("ShoppingCart.AddToCompareList")" value="Add to Compare List" class="button-2 add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;" />
             }
         </div>
     </div>
@@ -77,7 +84,7 @@
                 int ratingPercent = 0;
                 if (Model.ReviewOverviewModel.TotalReviews != 0)
                 {
-                    ratingPercent = ((Model.ReviewOverviewModel.RatingSum*100)/Model.ReviewOverviewModel.TotalReviews)/5;
+                    ratingPercent = ((Model.ReviewOverviewModel.RatingSum * 100) / Model.ReviewOverviewModel.TotalReviews) / 5;
                 }
                 <div class="product-rating-box" title="@string.Format(T("Reviews.TotalReviews").Text, Model.ReviewOverviewModel.TotalReviews)">
                     <div class="rating">
@@ -90,7 +97,7 @@
                 @Html.Raw(Model.ShortDescription)
             </p>
             <div class="add-info">
-		        @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_before", additionalData = Model.Id }) 
+                @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_before", additionalData = Model.Id })
                 @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_middle", additionalData = Model.Id })
                 <div class="buttons">
                     @*<input type="button" value="@T("Products.Details")" class="btn btn-primary product-box-detail-button" onclick="setLocation('@Url.RouteUrl("Product", new { SeName = Model.SeName })')" />*@
@@ -106,7 +113,7 @@
                             addToCartText = T("ShoppingCart.PreOrder").Text;
                         }
                         @*<input type="button" value="@(addToCartText)" class="btn btn-primary product-box-add-to-cart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />*@
-                    }	
+                    }
                 </div>
                 @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_after", additionalData = Model.Id })
             </div>

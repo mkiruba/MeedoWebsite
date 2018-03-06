@@ -804,6 +804,10 @@ namespace Nop.Services.Media
         /// <returns>Picture binary or throws an exception</returns>
         public virtual byte[] ValidatePicture(byte[] pictureBinary, string mimeType)
         {
+            if (mimeType.Contains("gif"))
+            {
+                return pictureBinary;
+            }
             using (var destStream = new MemoryStream())
             {
                 ImageBuilder.Current.Build(pictureBinary, destStream, new ResizeSettings
