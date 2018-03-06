@@ -3,8 +3,22 @@
 <div class="checkout-data">
     <div class="section ship-to-same-address">
         <p class="selector">
-            <input asp-for="BillingAddressSame" onclick="Shipping.toggleBillingAddressSame(this)" />
-            <label asp-for="BillingAddressSame">Are Billing address same?</label>
+            <div class="form-group">
+                @*<input type="checkbox" name="billingAddress-checkbox" id="billingAddressSame" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)"/>*@
+                <input asp-for="BillingAddressSame" name="billingAddress-checkbox" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)"/>
+                <div class="btn-group">
+                    <label asp-for="BillingAddressSame" class="btn btn-default">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span> </span>
+                    </label>
+                    <label asp-for="BillingAddressSame" class="btn btn-default active">Are Billing address same?</label>
+                    @*<label for="billingAddressSame" class="btn btn-default active">
+            Are Billing address same?
+        </label>*@
+                </div>
+            </div>
+            @*<input asp-for="BillingAddressSame" onclick="Shipping.toggleBillingAddressSame(this)"/>
+            <label asp-for="BillingAddressSame">Are Billing address same?</label>*@
         </p>
     </div>
     @if (Model.AllowPickUpInStore && !Model.PickUpInStoreOnly && Model.PickupPoints.Any())

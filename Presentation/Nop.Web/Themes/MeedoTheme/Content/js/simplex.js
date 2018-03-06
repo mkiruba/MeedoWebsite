@@ -52,11 +52,11 @@ $(document).ready(function () {
     });
 
     //Used js for flayout cart
-    $("#flyout-cart").live("mouseenter", function () {
+    $("#flyout-cart").on("mouseenter", function () {
         $('#flyout-cart-wrapper').addClass('active');
     });
 
-    $("#flyout-cart").live("mouseleave", function () {
+    $("#flyout-cart").on("mouseleave", function () {
         $('#flyout-cart-wrapper').removeClass('active');
     });
     //$(".shopping-cart-link").mouseenter(function () {
