@@ -50,7 +50,7 @@
     .currency-selector, .language-selector,.tax-display-type-selector{display:inline-block;float:none;}
     .header-selectors-wrapper{width:100%;text-align:center;border-bottom:1px solid #ddd;padding-bottom:10px;}
     .header-links-wrapper .header-top-right{display:inline-block;text-align:center;width:100%;}
-    .header-top-right ul li{display:inline-block;/*float:none;*/}
+    .header-top-right ul li{display:inline-block;float:none;}
     .header-top-right ul li.my-account a, .header-top-right ul li.register a{border-left:none;}
     .header-top-right ul li a{border-right:none;float:left;display:inline-block;}
     .header-upper-right{float:none !important;}
