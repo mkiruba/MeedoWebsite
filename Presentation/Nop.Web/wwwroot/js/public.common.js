@@ -212,6 +212,40 @@ function displayBarNotification(message, messagetype, timeout) {
 //    }
 //}
 
+function displayRecentSalesNotification() {
+    
+    var message = "Someone from Chennai bought CSK Tshirt 2 hours ago.";
+    //we do not encode displayed message
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    //add new notifications
+    var htmlcode = '';
+    if ((typeof message) == 'string') {
+        htmlcode = '<p class="content">' + message + '</p>';
+    } else {
+        for (var i = 0; i < message.length; i++) {
+            htmlcode = htmlcode + '<p class="content">' + message[i] + '</p>';
+        }
+    }
+    toastr.info(htmlcode);
+}
+
 function htmlEncode(value) {
     return $('<div/>').text(value).html();
 }
