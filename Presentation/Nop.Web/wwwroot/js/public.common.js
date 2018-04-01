@@ -76,7 +76,7 @@ function displayPopupContentFromUrl(url, title, modal, width) {
             width: targetWidth,
             maxHeight: maxHeight,
             title: title,
-            close: function(event, ui) {
+            close: function (event, ui) {
                 $(this).dialog('destroy').remove();
             }
         });
@@ -213,19 +213,23 @@ function displayBarNotification(message, messagetype, timeout) {
 //}
 
 function displayRecentSalesNotification() {
-    
-    var message = "Someone from Chennai bought CSK Tshirt 2 hours ago.";
-    //we do not encode displayed message
 
+    var message = ["Someone from Chennai bought CSK Tshirt 6 hours ago.",
+        "Someone from Coimbatore bought dogbone Tshirt 2 hours ago.",
+        "Someone from Chennai bought Need a plan bro Tshirt 12 hours ago.",
+        "Someone from Chennai bought Whistle podu Tshirt 1 hour ago."
+    ];
+    //we do not encode displayed message
+    console.log("hey it works");
     toastr.options = {
         "closeButton": true,
         "debug": false,
-        "newestOnTop": true,
+        "newestOnTop": false,
         "progressBar": false,
         "positionClass": "toast-bottom-right",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": "300",
+        "showDuration": "1000",
         "hideDuration": "1000",
         "timeOut": "5000",
         "extendedTimeOut": "1000",
@@ -235,15 +239,16 @@ function displayRecentSalesNotification() {
         "hideMethod": "fadeOut"
     }
     //add new notifications
-    var htmlcode = '';
-    if ((typeof message) == 'string') {
-        htmlcode = '<p class="content">' + message + '</p>';
-    } else {
-        for (var i = 0; i < message.length; i++) {
-            htmlcode = htmlcode + '<p class="content">' + message[i] + '</p>';
+    var htmlcode = '';  
+    var i = 0;
+    setInterval(function () {        
+        htmlcode = '<p class="content">' + message[i] + '</p>';
+        toastr.info(htmlcode);
+        i++;
+        if (i == message.length) {
+            i = 0;
         }
-    }
-    toastr.info(htmlcode);
+    }, 10000);     
 }
 
 function htmlEncode(value) {
