@@ -105,7 +105,8 @@ function displayBarNotification(message, messagetype, timeout) {
     //$('#bar-notification .content').remove();
 
     //we do not encode displayed message
-
+    stopNotification();
+    toastr.clear();
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -132,16 +133,19 @@ function displayBarNotification(message, messagetype, timeout) {
             htmlcode = htmlcode + '<p class="content">' + message[i] + '</p>';
         }
     }
-    if (messagetype == 'success') {
+    if (messagetype == 'success') {       
+        toastr.options.positionClass = 'toast-top-center';
         toastr.success(htmlcode);
     }
     else if (messagetype == 'error') {
+        toastr.options.positionClass = 'toast-top-center';
         toastr.error(htmlcode);
     }
     else if (messagetype == 'warning') {
+        toastr.options.positionClass = 'toast-top-center';
         toastr.warning(htmlcode);
     }
-
+    startNotification();
     //$('#bar-notification').append(htmlcode)
     //    .addClass(cssclass)
     //    .fadeIn('slow')
@@ -212,16 +216,12 @@ function displayBarNotification(message, messagetype, timeout) {
 //    }
 //}
 
+var cities = null, allProducts = null, timer = null, innerhtml = '', interval = 10000;
+
 function displayRecentSalesNotification(productUrl) {
 
-    var message = ["Someone from Chennai bought One Life Take It Easy Tshirt 6 hours ago.",
-        "Someone from Coimbatore bought Dog and Human Tshirt 2 hours ago.",
-        "Someone from Chennai bought Need a Bar Code Tshirt 12 hours ago.",
-        "Someone from Delhi bought Need a Bar Code Tshirt 12 hours ago.",
-        "Someone from Pune bought Iron Man Tshirt 1 hour ago."
-    ];
-    var cities = ["Chennai", "Pune", "Mumbai", "Kolkata", "Bangalore", "Cochin", "Coimbatore", "Madurai"];
-        
+    cities = ["Chennai", "Pune", "Mumbai", "Kolkata", "Bangalore", "Cochin", "Coimbatore", "Madurai"];
+    toastr.clear();
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -230,8 +230,8 @@ function displayRecentSalesNotification(productUrl) {
         "positionClass": "toast-bottom-right",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
+        "showDuration": "1000",
+        "hideDuration": "100",
         "timeOut": "5000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
@@ -239,7 +239,6 @@ function displayRecentSalesNotification(productUrl) {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    var allProducts;
     $.ajax({
         cache: false,
         type: "GET",
@@ -247,27 +246,47 @@ function displayRecentSalesNotification(productUrl) {
         success: function (data) { 
             if (data.success) {
                 allProducts = data.products;
+                //add new notifications
+                startNotification();
             }            
         }        
     });
 
-    //add new notifications
-    var htmlcode = '';  
-    //var i = 0;
-    setInterval(function () {   
+    ////add new notifications
+    //startNotification();
+    //var htmlcode = '';  
+    //setInterval(function () {   
+    //    if (allProducts && allProducts.length > 0) {
+    //        var randProductIndex = Math.floor((Math.random() * allProducts.length));
+    //        var randCityIndex = Math.floor((Math.random() * cities.length));
+    //        var product = allProducts[randProductIndex];
+    //        var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
+    //        htmlcode = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
+    //        toastr.options.positionClass = 'toast-bottom-right';
+    //        toastr.info(htmlcode);                      
+    //    }       
+    //}, 10000);     
+}
+
+function startNotification() {
+    if (timer !== null) return;
+    timer = setInterval(function () {
         if (allProducts && allProducts.length > 0) {
-            var randProductIndex = Math.floor((Math.random() * allProducts.length) + 1);
+            var randProductIndex = Math.floor((Math.random() * allProducts.length));
             var randCityIndex = Math.floor((Math.random() * cities.length));
             var product = allProducts[randProductIndex];
-            //var imgTag = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
-            //$('<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">').insertBefore($("#toast-container .toast-info"));
             var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
-            htmlcode = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
-            toastr.info(htmlcode);
-            $(".toast-info").prepend('');
-            //$('<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">').before($(".toast-info"));
-        }       
-    }, 10000);     
+            innerhtml = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
+            toastr.options.positionClass = 'toast-bottom-right';
+            toastr.info(innerhtml);            
+        }
+    }, interval); 
+}
+
+function stopNotification() {
+    toastr.cl
+    clearInterval(timer);
+    timer = null;
 }
 
 function htmlEncode(value) {
