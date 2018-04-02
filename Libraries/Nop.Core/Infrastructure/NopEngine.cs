@@ -145,7 +145,7 @@ namespace Nop.Core.Infrastructure
         public void Initialize(IServiceCollection services)
         {
             //most of API providers require TLS 1.2 nowadays
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 
             //set base application path
             var provider = services.BuildServiceProvider();

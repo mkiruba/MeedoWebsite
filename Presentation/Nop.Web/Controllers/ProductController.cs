@@ -200,6 +200,22 @@ namespace Nop.Web.Controllers
 
         #region New (recently added) products page
 
+        public virtual IActionResult AllProducts()
+        {           
+            var products = _productService.SearchProducts(
+                storeId: _storeContext.CurrentStore.Id,
+                visibleIndividuallyOnly: true,
+                orderBy: ProductSortingEnum.CreatedOn);
+
+            var productOverviews = new List<ProductOverviewModel>();
+            productOverviews.AddRange(_productModelFactory.PrepareProductOverviewModels(products));
+            return Json(new
+            {
+                success = true,
+                products = productOverviews
+            });
+        }
+
         [HttpsRequirement(SslRequirement.No)]
         public virtual IActionResult NewProducts()
         {

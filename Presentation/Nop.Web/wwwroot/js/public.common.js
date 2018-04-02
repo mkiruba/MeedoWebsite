@@ -212,15 +212,16 @@ function displayBarNotification(message, messagetype, timeout) {
 //    }
 //}
 
-function displayRecentSalesNotification() {
+function displayRecentSalesNotification(productUrl) {
 
-    var message = ["Someone from Chennai bought CSK Tshirt 6 hours ago.",
-        "Someone from Coimbatore bought dogbone Tshirt 2 hours ago.",
-        "Someone from Chennai bought Need a plan bro Tshirt 12 hours ago.",
-        "Someone from Chennai bought Whistle podu Tshirt 1 hour ago."
+    var message = ["Someone from Chennai bought One Life Take It Easy Tshirt 6 hours ago.",
+        "Someone from Coimbatore bought Dog and Human Tshirt 2 hours ago.",
+        "Someone from Chennai bought Need a Bar Code Tshirt 12 hours ago.",
+        "Someone from Delhi bought Need a Bar Code Tshirt 12 hours ago.",
+        "Someone from Pune bought Iron Man Tshirt 1 hour ago."
     ];
-    //we do not encode displayed message
-    console.log("hey it works");
+    var cities = ["Chennai", "Pune", "Mumbai", "Kolkata", "Bangalore", "Cochin", "Coimbatore", "Madurai"];
+        
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -229,7 +230,7 @@ function displayRecentSalesNotification() {
         "positionClass": "toast-bottom-right",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": "1000",
+        "showDuration": "300",
         "hideDuration": "1000",
         "timeOut": "5000",
         "extendedTimeOut": "1000",
@@ -238,16 +239,34 @@ function displayRecentSalesNotification() {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+    var allProducts;
+    $.ajax({
+        cache: false,
+        type: "GET",
+        url: productUrl,        
+        success: function (data) { 
+            if (data.success) {
+                allProducts = data.products;
+            }            
+        }        
+    });
+
     //add new notifications
     var htmlcode = '';  
-    var i = 0;
-    setInterval(function () {        
-        htmlcode = '<p class="content">' + message[i] + '</p>';
-        toastr.info(htmlcode);
-        i++;
-        if (i == message.length) {
-            i = 0;
-        }
+    //var i = 0;
+    setInterval(function () {   
+        if (allProducts && allProducts.length > 0) {
+            var randProductIndex = Math.floor((Math.random() * allProducts.length) + 1);
+            var randCityIndex = Math.floor((Math.random() * cities.length));
+            var product = allProducts[randProductIndex];
+            //var imgTag = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
+            //$('<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">').insertBefore($("#toast-container .toast-info"));
+            var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
+            htmlcode = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
+            toastr.info(htmlcode);
+            $(".toast-info").prepend('');
+            //$('<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">').before($(".toast-info"));
+        }       
     }, 10000);     
 }
 

@@ -227,7 +227,7 @@ namespace Nop.Core
             //try to get host from the request HOST header
             var hostHeader = _httpContextAccessor.HttpContext.Request.Headers[HeaderNames.Host];
             if (!StringValues.IsNullOrEmpty(hostHeader))
-                result = "http://" + hostHeader.FirstOrDefault();
+                result = $"{_httpContextAccessor.HttpContext.Request.Scheme}://" + hostHeader.FirstOrDefault();
 
             //whether database is installed
             if (DataSettingsHelper.DatabaseIsInstalled())
@@ -243,21 +243,23 @@ namespace Nop.Core
                     //in this case use URL of a store entity configured in admin area
                     result = currentStore.Url;
                 }
-
-                if (useSsl)
+                if (!result.StartsWith("https"))
                 {
-                    //if secure URL specified let's use this URL, otherwise a store owner wants it to be detected automatically
-                    result = !string.IsNullOrWhiteSpace(currentStore.SecureUrl) ? currentStore.SecureUrl : result.Replace("http://", "https://");
-                }
-                else
-                {
-                    if (currentStore.SslEnabled && !string.IsNullOrWhiteSpace(currentStore.SecureUrl))
+                    if (useSsl)
                     {
-                        //SSL is enabled in this store and secure URL is specified, so a store owner don't want it to be detected automatically.
-                        //in this case let's use the specified non-secure URL
-                        result = currentStore.Url;
+                        //if secure URL specified let's use this URL, otherwise a store owner wants it to be detected automatically
+                        result = !string.IsNullOrWhiteSpace(currentStore.SecureUrl) ? currentStore.SecureUrl : result.Replace("http://", "https://");
                     }
-                }
+                    else
+                    {
+                        if (currentStore.SslEnabled && !string.IsNullOrWhiteSpace(currentStore.SecureUrl))
+                        {
+                            //SSL is enabled in this store and secure URL is specified, so a store owner don't want it to be detected automatically.
+                            //in this case let's use the specified non-secure URL
+                            result = currentStore.Url;
+                        }
+                    }
+                }                
             }
             else
             {

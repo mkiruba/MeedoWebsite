@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:15536/",
+      "applicationUrl": "https://localhost:44335/",
       "sslPort": 44335
     }
   },
@@ -16,7 +16,7 @@
       }
     },
     "Nop.Web": {
-      "commandName": "Project",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -64,7 +64,7 @@ namespace Nop.Services.Tasks
                     {
                         client.UploadValues(_scheduleTaskUrl, postData);
                     }
-                }
+                }                           
                 catch (Exception ex)
                 {
                     var logger = EngineContext.Current.Resolve<ILogger>();

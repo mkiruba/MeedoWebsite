@@ -97,7 +97,7 @@ namespace Nop.Data
             {
                 if (entity == null)
                     throw new ArgumentNullException(nameof(entity));
-
+                    
                 Entities.Add(entity);
 
                 _context.SaveChanges();

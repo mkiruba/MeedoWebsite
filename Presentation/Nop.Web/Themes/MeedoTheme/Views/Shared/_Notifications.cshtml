@@ -1,4 +1,6 @@
 ﻿@using System.Text.Encodings.Web
+@using Nop.Core
+@inject IWebHelper webHelper
 @{
     //success messages
     var successMessages = new List<string>();
@@ -62,11 +64,14 @@
         });
     </script>
 }
-    <script type="text/javascript" asp-location="Footer">
-        $(document).ready(function () {            
-            displayRecentSalesNotification();
-        });
-    </script>
+@{
+    var storeLocation = webHelper.GetStoreLocation();
+}
+<script type="text/javascript" asp-location="Footer">
+    $(document).ready(function () {
+        displayRecentSalesNotification('@(storeLocation)product/AllProducts/');
+    });
+</script>
 <div class="ajax-loading-block-window" style="display: none">
 </div>
 <div id="dialog-notifications-success" title="@T("Common.Notification")" style="display:none;">
