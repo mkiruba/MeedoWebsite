@@ -220,7 +220,8 @@ var cities = null, allProducts = null, timer = null, innerhtml = '', interval = 
 
 function displayRecentSalesNotification(productUrl) {
 
-    cities = ["Chennai", "Pune", "Mumbai", "Kolkata", "Bangalore", "Cochin", "Coimbatore", "Madurai"];
+    cities = ["Chennai", "Pune", "Mumbai", "Hyderabad", "Kolkata", "Bengaluru", "Madurai", "Kochi", "Palakkad", "New Delhi", "Coimbatore", "Lucknow", "Tiruchirappalli", "Noida", "Ahmedabad", "Chandigarh"];
+    times = ["an hour ago", "today", "one week ago", "two weeks ago", "6 hours ago", "yesterday", "two days ago", "four days ago", "this week"];
     toastr.clear();
     toastr.options = {
         "closeButton": true,
@@ -250,35 +251,26 @@ function displayRecentSalesNotification(productUrl) {
                 startNotification();
             }            
         }        
-    });
-
-    ////add new notifications
-    //startNotification();
-    //var htmlcode = '';  
-    //setInterval(function () {   
-    //    if (allProducts && allProducts.length > 0) {
-    //        var randProductIndex = Math.floor((Math.random() * allProducts.length));
-    //        var randCityIndex = Math.floor((Math.random() * cities.length));
-    //        var product = allProducts[randProductIndex];
-    //        var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
-    //        htmlcode = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
-    //        toastr.options.positionClass = 'toast-bottom-right';
-    //        toastr.info(htmlcode);                      
-    //    }       
-    //}, 10000);     
+    });  
 }
 
 function startNotification() {
     if (timer !== null) return;
     timer = setInterval(function () {
-        if (allProducts && allProducts.length > 0) {
+        if (allProducts && allProducts.length > 0) {           
             var randProductIndex = Math.floor((Math.random() * allProducts.length));
             var randCityIndex = Math.floor((Math.random() * cities.length));
+            var randTimesIndex = Math.floor((Math.random() * times.length));
             var product = allProducts[randProductIndex];
             var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
-            innerhtml = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b>' + product.Name + '</b></p>';
-            toastr.options.positionClass = 'toast-bottom-right';
-            toastr.info(innerhtml);            
+            innerhtml = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b style="color: #ea5648">' + product.Name + '</b> ' + times[randTimesIndex] + '.</p>';
+            toastr.options.positionClass = 'toast-bottom-right';           
+            toastr.info(innerhtml);    
+            if ($('#backTop').is(":visible")) {
+                $('.toast-bottom-right').css({ 'right': '100px', 'left': '' });
+            } else {
+                $('.toast-bottom-right').css({ 'right': '12px', 'left': '' });
+            }
         }
     }, interval); 
 }

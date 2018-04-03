@@ -150,8 +150,10 @@ $(document).ready(function () {
 
                 if (pos >= position) {
                     backBtn.fadeIn(speed);
+                    $('.toast-bottom-right').css({ 'right': '100px', 'left': '' });  
                 } else {
                     backBtn.fadeOut(speed);
+                    $('.toast-bottom-right').css({ 'right': '12px', 'left': '' });
                 }
             });
 
