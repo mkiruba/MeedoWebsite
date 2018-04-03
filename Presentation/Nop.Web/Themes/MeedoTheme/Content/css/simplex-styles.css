@@ -5285,9 +5285,12 @@ a.eu-cookie-privacyinfo-tag {
     margin: 0px 0px 0px -40px;
 }
 #toast-container .toast-info .sales-notification {
-    margin: 0px 0px -20px 10px;
+    margin: -5px 0px 0px 10px;
 }
 
+#toast-container .toast-info .sales-notification-product {
+    margin: 0px 0px -20px 10px;
+}
 /* according menu */
 .new-checkout #accordion-container {
     font-size: 13px

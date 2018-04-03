@@ -263,7 +263,9 @@ function startNotification() {
             var randTimesIndex = Math.floor((Math.random() * times.length));
             var product = allProducts[randProductIndex];
             var thumbnail = '<img src="' + product.DefaultPictureModel.ImageUrl + '" alt="' + product.DefaultPictureModel.AlternateText + '" align="left" height="60" width="45">';
-            innerhtml = thumbnail + '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought <b style="color: #ea5648">' + product.Name + '</b> ' + times[randTimesIndex] + '.</p>';
+            var textOne = '<p class="sales-notification">' + 'Someone from ' + cities[randCityIndex] + ' bought ' + times[randTimesIndex] + '.</p>';
+            var textTwo = '<p class="sales-notification-product"><b style="font-size:120%;">' + product.Name + '</b></p>';
+            innerhtml = thumbnail + textOne+ textTwo;
             toastr.options.positionClass = 'toast-bottom-right';           
             toastr.info(innerhtml);    
             if ($('#backTop').is(":visible")) {
