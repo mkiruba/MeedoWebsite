@@ -115,7 +115,7 @@ function displayBarNotification(message, messagetype, timeout) {
         "positionClass": "toast-top-center",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": "300",
+        "showDuration": "500",
         "hideDuration": "1000",
         "timeOut": "5000",
         "extendedTimeOut": "1000",
@@ -232,9 +232,9 @@ function displayRecentSalesNotification(productUrl) {
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "1000",
-        "hideDuration": "100",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "500",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
@@ -278,7 +278,7 @@ function startNotification() {
 }
 
 function stopNotification() {
-    toastr.cl
+    toastr.clear();
     clearInterval(timer);
     timer = null;
 }

@@ -6,18 +6,18 @@
 //}
 
 //Local db connection
-//{
-//  "DataProvider": "sqlserver",
-//  "DataConnectionString": "Data Source=DESKTOP-6U3OSU9;Initial Catalog=meedodb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;",
-//  "RawDataSettings": {}
-//} 
-
-//Live db connection
 {
   "DataProvider": "sqlserver",
-  "DataConnectionString": "Data Source=103.14.120.132;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+  "DataConnectionString": "Data Source=windows8;Initial Catalog=meedodb;Integrated Security=True",
   "RawDataSettings": {}
 } 
+
+//Live db connection
+//{
+//  "DataProvider": "sqlserver",
+//  "DataConnectionString": "Data Source=103.14.120.132;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+//  "RawDataSettings": {}
+//} 
 ////Live deployment db connection
 //{
 //  "DataProvider": "sqlserver",
