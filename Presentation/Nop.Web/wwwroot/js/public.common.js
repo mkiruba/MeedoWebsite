@@ -216,12 +216,12 @@ function displayBarNotification(message, messagetype, timeout) {
 //    }
 //}
 
-var cities = null, allProducts = null, timer = null, innerhtml = '', interval = 10000;
+var cities = null, allProducts = null, timer = null, innerhtml = '', interval = 20000;
 
 function displayRecentSalesNotification(productUrl) {
 
-    cities = ["Chennai", "Pune", "Mumbai", "Hyderabad", "Kolkata", "Bengaluru", "Madurai", "Kochi", "Palakkad", "New Delhi", "Coimbatore", "Lucknow", "Tiruchirappalli", "Noida", "Ahmedabad", "Chandigarh"];
-    times = ["an hour ago", "today", "one week ago", "two weeks ago", "6 hours ago", "yesterday", "two days ago", "four days ago", "this week"];
+    cities = ["Chennai", "Pune", "Mumbai", "Hyderabad", "Kolkata", "Bengaluru", "Madurai", "Kochi", "Palakkad", "New Delhi", "Coimbatore", "Lucknow", "Tiruchirappalli", "Noida", "Ahmedabad", "Chandigarh", "Puducherry", "Salem", "Tiruppur"];
+    times = ["an hour ago", "two hours ago", " 4 hours ago", "3 hours ago", "today", "one week ago", "6 hours ago", "yesterday", "two days ago", "four days ago", "this week"];
     toastr.clear();
     toastr.options = {
         "closeButton": true,

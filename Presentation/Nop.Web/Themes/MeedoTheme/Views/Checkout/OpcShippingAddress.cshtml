@@ -5,17 +5,19 @@
         <p class="selector">
             <div class="form-group">
                 @*<input type="checkbox" name="billingAddress-checkbox" id="billingAddressSame" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)"/>*@
-                <input asp-for="BillingAddressSame" name="billingAddress-checkbox" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)"/>
-                <div class="btn-group">
-                    <label asp-for="BillingAddressSame" class="btn btn-default">
-                        <span class="glyphicon glyphicon-ok"></span>
-                        <span> </span>
+                @*<input asp-for="BillingAddressSame" type="checkbox" name="billingAddress-checkbox" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)" />*@
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="BillingAddressSame" type="checkbox" class="custom-control-input" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)" />
+                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                        <label asp-for="BillingAddressSame">Is Billing address same?</label>
                     </label>
-                    <label asp-for="BillingAddressSame" class="btn btn-default active">Are Billing address same?</label>
-                    @*<label for="billingAddressSame" class="btn btn-default active">
-            Are Billing address same?
-        </label>*@
                 </div>
+
+                @*<div class="btn-group">
+                    <input asp-for="BillingAddressSame" type="checkbox" class="custom-control-input" name="billingAddress-checkbox" autocomplete="off" onclick="Shipping.toggleBillingAddressSame(this)" />          
+                    <label asp-for="BillingAddressSame" class="btn btn-default active">Are Billing address same?</label>
+                </div>*@
             </div>
             @*<input asp-for="BillingAddressSame" onclick="Shipping.toggleBillingAddressSame(this)"/>
             <label asp-for="BillingAddressSame">Are Billing address same?</label>*@

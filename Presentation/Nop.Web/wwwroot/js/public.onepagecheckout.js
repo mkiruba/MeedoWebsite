@@ -14,9 +14,12 @@ var tab = {
         var $active = $('.wizard .nav-tabs li.active'); 
         var isBillingAddSame = $('.opc #opc-shipping').find('#BillingAddressSame');
         
-        if (isBillingAddSame.is(":checked")) {// && $active.find('#opc-payment_info').length > 0) {
+        //if (isBillingAddSame.is(":checked")) {// && $active.find('#opc-payment_info').length > 0) {
+        //    $active = $active.prev();
+        //}   
+        if ($active.prev().find('a').attr('id') == 'opc-billing' && isBillingAddSame.is(":checked")) {
             $active = $active.prev();
-        }       
+        }
         $active.prev().removeClass('disabled');
         $active.prev().find('a[data-toggle="tab"]').click();
     }
@@ -292,17 +295,17 @@ var Shipping = {
     },
 
     toggleBillingAddressSame: function (billingAddressSame) {
-        sameBilling = billingAddressSame.checked;
+        sameBilling = billingAddressSame.checked;        
         this.toggleBillingAddress(billingAddressSame.checked);
     },
 
     toggleBillingAddress: function (sameBilling) {
         if (sameBilling) {
-            $('.connecting-line').width('30%');
+            $('.connecting-line').width('50%');
             $('#opc-billing').parent().hide();
         }
         else {
-            $('.connecting-line').width('50%');
+            $('.connecting-line').width('80%');
             $('#opc-billing').parent().show();
         }
     }

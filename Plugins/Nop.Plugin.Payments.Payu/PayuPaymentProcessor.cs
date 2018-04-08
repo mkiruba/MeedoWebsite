@@ -324,7 +324,8 @@ namespace Nop.Plugin.Payments.Payu
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.PayUri.Hint", "Enter Pay URI.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee", "Additional fee");
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee.Hint", "Enter additional fee to charge your customers.");
-            
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payment.Payu.PaymentMethodDescription", "Pay by \"PayU\"");
+
             base.Install();
         }
 
@@ -342,7 +343,8 @@ namespace Nop.Plugin.Payments.Payu
             this.DeletePluginLocaleResource("Plugins.Payments.Payu.PayUri.Hint");
             this.DeletePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee");
             this.DeletePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee.Hint");
-            
+            this.DeletePluginLocaleResource("Plugins.Payments.Payu.PaymentMethodDescription");
+
             base.Uninstall();
         }
         #endregion

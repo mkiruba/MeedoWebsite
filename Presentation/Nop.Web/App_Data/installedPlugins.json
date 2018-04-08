@@ -19,5 +19,6 @@
   "Payments.Payu",
   "Misc.FacebookShop",
   "Widgets.FacebookPixel",
-  "Widgets.Instagram"
+  "Widgets.Instagram",
+  "Payments.CashOnDelivery"
 ]

@@ -4806,11 +4806,11 @@ a.eu-cookie-privacyinfo-tag {
         float: left;
         width: 100%;
     }
-
-.select-billing-address label, .select-shipping-address label {
-    margin-bottom: 15px;
-    color: #000;
-}
+    
+    .select-billing-address label, .select-shipping-address label {
+        margin-bottom: 15px;
+        color: #000;
+    }
 
 .select-billing-address .address-box label, .select-shipping-address .address-box label {
     margin-bottom: 0;
@@ -4875,7 +4875,6 @@ a.eu-cookie-privacyinfo-tag {
     width: 100%;
     margin-bottom: 20px;
 }
-
     .checkout-data .payment-method .method-name .payment-logo > label {
         float: left;
         margin-right: 10px;
@@ -5072,7 +5071,7 @@ a.eu-cookie-privacyinfo-tag {
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 30%;
+    width: 50%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -5108,11 +5107,11 @@ a.eu-cookie-privacyinfo-tag {
 
 .new-checkout .wizard li.active span.round-tab {
     background: #fff;
-    border: 2px solid #5bc0de;
+    border: 2px solid #ea5648;
 }
 
     .new-checkout .wizard li.active span.round-tab i {
-        color: #5bc0de;
+        color: #ea5648;
     }
 
 .new-checkout span.round-tab:hover {
@@ -5132,7 +5131,7 @@ a.eu-cookie-privacyinfo-tag {
     margin: 0 auto;
     bottom: 0px;
     border: 5px solid transparent;
-    border-bottom-color: #5bc0de;
+    border-bottom-color: #ea5648;
     transition: 0.1s ease-in-out;
 }
 
@@ -5144,7 +5143,7 @@ a.eu-cookie-privacyinfo-tag {
     margin: 0 auto;
     bottom: 0px;
     border: 10px solid transparent;
-    border-bottom-color: #5bc0de;
+    border-bottom-color: #ea5648;
 }
 
 .new-checkout .wizard .nav-tabs > li a {
@@ -5226,9 +5225,9 @@ a.eu-cookie-privacyinfo-tag {
     font-weight: normal;
 }
 
-.new-checkout .form-group input[type="checkbox"] {
+/*.new-checkout .form-group input[type="checkbox"] {
     display: none;
-}
+}*/
 
 .new-checkout .form-group input[type="checkbox"] + .btn-group > label span {
     width: 20px;
@@ -5367,6 +5366,13 @@ a.eu-cookie-privacyinfo-tag {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     background: #ea5648;
     border-color: #ea5648;
+}
+
+.list-group .list-group-item .glyphicon-check {
+    padding-right: 10px;
+}
+.list-group .list-group-item .glyphicon-unchecked {
+    padding-right: 10px;
 }
 
 @media( max-width : 585px ) {
@@ -8011,7 +8017,72 @@ pre {
         background: url(../images/top-arrow.png) no-repeat center center #333;
     }
 
+    /*Fancy Checkbox and Radio button*/
+.checkbox,
+.radio {
+    font-size: 1.5em;
+}
+/*.checkbox label:after,
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+    
+}*/
 
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: -.5em;
+    color: #ea5648;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+    .checkbox .cr .cr-icon,
+    .radio .cr .cr-icon {
+        position: absolute;
+        font-size: .8em;
+        line-height: 0;
+        top: 50%;
+        left: 20%;
+    }
+
+    .radio .cr .cr-icon {
+        margin-left: 0.04em;
+    }
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+    .checkbox label input[type="checkbox"] + .cr > .cr-icon,
+    .radio label input[type="radio"] + .cr > .cr-icon {
+        transform: scale(3) rotateZ(-20deg);
+        opacity: 0;
+        transition: all .3s ease-in;
+    }
+
+    .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+    .radio label input[type="radio"]:checked + .cr > .cr-icon {
+        transform: scale(1) rotateZ(0deg);
+        opacity: 1;
+    }
+
+    .checkbox label input[type="checkbox"]:disabled + .cr,
+    .radio label input[type="radio"]:disabled + .cr {
+        opacity: .5;
+    }
+/*End of fancy checkbox and radio button*/
 
 /* Bootstrap Hacks & Fixes*/
 /*  Legend not having bottom-margin on Webkit Browsers - Safari and Opera
