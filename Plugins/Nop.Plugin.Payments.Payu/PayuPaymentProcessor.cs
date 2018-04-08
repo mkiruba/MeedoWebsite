@@ -324,7 +324,7 @@ namespace Nop.Plugin.Payments.Payu
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.PayUri.Hint", "Enter Pay URI.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee", "Additional fee");
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.AdditionalFee.Hint", "Enter additional fee to charge your customers.");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payment.Payu.PaymentMethodDescription", "Pay by \"PayU\"");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Payu.PaymentMethodDescription", "Pay by \"PayU\"");
 
             base.Install();
         }
