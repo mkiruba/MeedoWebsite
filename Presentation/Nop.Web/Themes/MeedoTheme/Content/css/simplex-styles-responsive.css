@@ -28,7 +28,7 @@
     .product-details-page .product-reviews-overview .product-review-box{margin-right:15px;}
     .product-details-page .product-reviews-overview .product-no-reviews{margin-top:10px;}
     .product-details-page .customer-entered-price .enter-price-label{width:28%;padding-top:0px;}
-    .flyout-main-wrapper .flyout-cart-wrapper{left:10px;}
+    /*.flyout-main-wrapper .flyout-cart-wrapper{left:10px;}*/
     #index-page .slider-wrapper.theme-custom{max-width:100%;}
     .viewmode-icon.grid{margin-right:-5px;}
     .viewmode-icon{display:inline-block;float:none;}
@@ -53,7 +53,8 @@
     .header-top-right ul li{display:inline-block;float:none;}
     .header-top-right ul li.my-account a, .header-top-right ul li.register a{border-left:none;}
     .header-top-right ul li a{border-right:none;float:left;display:inline-block;}
-    .header-upper-right{float:none !important;}
+    /*.header-upper-right{float:none !important;}*/
+    #mobile-menu { width: 100%; }
     .main-menu.goToTop .navbar.navbar-inverse.category-menu{margin: 0 auto;width: 720px !important;}
     .header-menu .navbar.navbar-inverse .nav.navbar-nav li a{font-size:12px;padding:15px 12px;}
     #index-page .slider-wrapper.theme-custom{width:100%;max-width:100%;}
@@ -95,6 +96,9 @@
 }
 @media (min-width:768px) and (max-width: 991px) { 
     .responsive{display:none;}
+    #mobile-menu {
+        width: 100%;
+    }
     .new-wrapper.register-block{margin-bottom:20px;}
     .forum-search-text.form-control {width:85%;margin-top:1px;margin-right:0px;}
     .forum-edit-page .options-checkbox {padding-left:5px;}
@@ -179,6 +183,9 @@
 }
 
 @media (max-width:767px) {
+    #mobile-menu {
+        width: 100%;
+    }
     .header-menu .navbar.navbar-inverse .nav.navbar-nav{margin:0px;} 
     .header-menu li.dropdown .caret{float: right;margin-top: 8px;}
     .responsive{display:none;}    

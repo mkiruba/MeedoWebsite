@@ -1,7 +1,7 @@
 ﻿@model TopMenuModel
 <div class="main-menu">
     <nav class="navbar navbar-inverse category-menu">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 pull-left">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 pull-left">
             <div class="header-logo col-xs-6 col-sm-2 col-md-2 col-lg-2">
                 @await Component.InvokeAsync("Logo")
             </div>
@@ -15,15 +15,20 @@
                 </button>
             </div>
         </div>
-        
+        <div class="header-upper-right pull-right col-xs-12 col-sm-6 col-md-6 col-lg-8">
+            <div class="header-links-wrapper">
+                @await Component.InvokeAsync("HeaderLinks")
+            </div>
+
+        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="mobile-menu" class="collapse navbar-collapse col-xs-12 col-sm-12 col-md-6 col-lg-4">
+        <div id="mobile-menu" class="collapse navbar-collapse col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ul class="nav navbar-nav">
-               @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_before" })
+                @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_before" })
                 @if (Model.DisplayHomePageMenuItem)
                 {
                     <li><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
-                }                
+                }
                 @{
                     var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
                 }
@@ -66,17 +71,11 @@
                 @await Component.InvokeAsync("Widget", new { widgetZone = "header_menu_after" })
             </ul>
         </div><!-- /.navbar-collapse -->
-        <div class="header-upper-right pull-right col-xs-12 col-sm-12 col-md-6 col-lg-5">
-            <div class="header-links-wrapper">
-                @await Component.InvokeAsync("HeaderLinks")
-            </div>
-            
-        </div>
     </nav>
 </div>
 
 <div class="scroll-menu col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display:none;">
-    <nav class="navbar navbar-inverse">        
+    <nav class="navbar navbar-inverse">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="mobile-menu" class="collapse navbar-collapse col-xs-12 col-sm-12 col-md-6 col-lg-offset-4">
             <ul class="nav navbar-nav">

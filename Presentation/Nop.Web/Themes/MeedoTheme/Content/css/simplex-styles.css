@@ -468,7 +468,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
         background: url(../images/flyout-arrow-top.png) no-repeat center center;
         content: " ";
         height: 14px;
-        left: 70%;
+        left: 83%;
         position: absolute;
         top: -14px;
         width: 26px;
@@ -771,7 +771,9 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     width: 100% !important;
     transition: all 1s ease-in-out 0s;
 }
-
+#mobile-menu {
+    width: 100% !important;    
+}
 #index-page .header-menu {
     margin-bottom: 0px;
 }
