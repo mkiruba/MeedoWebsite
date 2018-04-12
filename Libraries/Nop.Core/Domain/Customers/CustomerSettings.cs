@@ -230,12 +230,12 @@ namespace Nop.Core.Domain.Customers
         public bool StreetAddress2Required { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether 'Zip / postal code' is enabled
+        /// Gets or sets a value indicating whether 'pincode' is enabled
         /// </summary>
         public bool ZipPostalCodeEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether 'Zip / postal code' is required
+        /// Gets or sets a value indicating whether 'pincode' is required
         /// </summary>
         public bool ZipPostalCodeRequired { get; set; }
 

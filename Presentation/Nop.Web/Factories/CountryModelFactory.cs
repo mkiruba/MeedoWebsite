@@ -15,7 +15,7 @@ namespace Nop.Web.Factories
     /// </summary>
     public partial class CountryModelFactory : ICountryModelFactory
     {
-		#region Fields
+        #region Fields
 
         private readonly ICountryService _countryService;
         private readonly IStateProvinceService _stateProvinceService;
@@ -23,22 +23,22 @@ namespace Nop.Web.Factories
         private readonly IWorkContext _workContext;
         private readonly IStaticCacheManager _cacheManager;
 
-	    #endregion
+        #endregion
 
-		#region Ctor
+        #region Ctor
 
-        public CountryModelFactory(ICountryService countryService, 
-            IStateProvinceService stateProvinceService, 
-            ILocalizationService localizationService, 
+        public CountryModelFactory(ICountryService countryService,
+            IStateProvinceService stateProvinceService,
+            ILocalizationService localizationService,
             IWorkContext workContext,
             IStaticCacheManager cacheManager)
-		{
+        {
             this._countryService = countryService;
             this._stateProvinceService = stateProvinceService;
             this._localizationService = localizationService;
             this._workContext = workContext;
             this._cacheManager = cacheManager;
-		}
+        }
 
         #endregion
 
@@ -118,7 +118,24 @@ namespace Nop.Web.Factories
             });
             return cachedModel;
         }
+        public virtual IList<PincodeModel> GetAllPincodes()
+        {
+            var pincodeData = System.IO.File.ReadAllLines("App_Data/All_India_pincode_data_26022018.csv")
+                   .Skip(1)
+                   .Select(x => x.Split(','))
+                   .Select(x => new PincodeModel
+                   {
+                       Office = x[0],
+                       Pincode = x[1],
+                       Division = x[4],
+                       Region = x[5],
+                       Circle = x[6],
+                       District = x[7],
+                       State = x[8]
+                   });
 
+            return pincodeData.ToList();
+        }
         #endregion
     }
 }

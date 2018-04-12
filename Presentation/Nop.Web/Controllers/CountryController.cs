@@ -30,7 +30,13 @@ namespace Nop.Web.Controllers
             var model = _countryModelFactory.GetStatesByCountryId(countryId, addSelectStateItem);
             return Json(model);
         }
-        
+
+        public virtual IActionResult GetAllPincodes()
+        {
+            var model = _countryModelFactory.GetAllPincodes();
+            return Json(model);
+        }
+
         #endregion
     }
 }

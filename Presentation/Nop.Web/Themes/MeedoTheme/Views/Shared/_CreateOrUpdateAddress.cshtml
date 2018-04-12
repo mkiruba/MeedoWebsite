@@ -27,6 +27,40 @@
                     }
                 });
             });
+
+            $("#@Html.IdFor(model => model.ZipPostalCode)").keypress(function () {
+                var pincode = $("#@Html.IdFor(model => model.ZipPostalCode)");
+                console.log(pincode);
+                //if (pincode.length > 2) { 
+                //    getPincode(pincode);
+                //}
+            });
+
+            @*function getPincode(pincode) {
+                //var pincodesProgress = $("#pincodes-loading-progress");
+                //pincodesProgress.show();
+                console.log("@(Url.RouteUrl("GetAllPincodes"))");
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetAllPincodes"))",
+                    data: pincode,
+                    success: function (data) {
+                        console.log(data.pincode);
+                        $("#@Html.IdFor(model => model.ZipPostalCode)").autocomplete({                            
+                            source: data.pincode
+                        });
+                        //pincodesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr);
+                        console.log(ajaxOptions);
+                        console.log(thrownError);
+                        alert('Failed to retrieve pincodes.');
+                        //pincodesProgress.hide();
+                    }
+                });
+            }*@
         });
     </script>
 }
@@ -34,7 +68,7 @@
     <input asp-for="Id" type="hidden" />
     <div class="form-group col-md-6">
         <label class="control-label col-sm-3 col-md-3" asp-for="FirstName" asp-postfix=":"></label>
-        <div class="visible-xs form-title-rquired"><nop-required /></div>                       
+        <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
             <input class="form-control" asp-for="FirstName" />
         </div>
@@ -54,7 +88,7 @@
             <span asp-validation-for="LastName"></span>
         </div>
 
-        </div>
+    </div>
     <div class="form-group col-md-6">
         <label class="control-label col-sm-3 col-md-3" asp-for="Email" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
@@ -65,7 +99,7 @@
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
             <span asp-validation-for="Email"></span>
         </div>
-        </div>
+    </div>
     @if (Model.CompanyEnabled)
     {
         <div class="form-group col-md-6">
@@ -81,7 +115,7 @@
                 }
                 <span asp-validation-for="Company"></span>
             </div>
-      </div>
+        </div>
     }
     @if (Model.CountryEnabled)
     {
@@ -97,7 +131,24 @@
             </div>
         </div>
     }
-
+    @if (Model.ZipPostalCodeEnabled)
+    {
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="ZipPostalCode" asp-postfix=":"></label>
+            <div class="visible-xs form-title-rquired"><nop-required /></div>
+            <div class="col-sm-6 col-md-6">
+                <input class="form-control" asp-for="ZipPostalCode" />
+            </div>
+            <div class="col-sm-3 col-md-3">
+                @if (Model.ZipPostalCodeRequired)
+                {
+                    <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
+                }
+                <span id="pincodes-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                <span asp-validation-for="ZipPostalCode"></span>
+            </div>
+        </div>
+    }
     @if (Model.CountryEnabled && Model.StateProvinceEnabled)
     {
         <div class="form-group col-md-6">
@@ -107,24 +158,24 @@
                 <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
                 <span asp-validation-for="StateProvinceId"></span>
             </div>
-        </div>       
+        </div>
     }
     @if (Model.CityEnabled)
     {
-         <div class="form-group col-md-6">
-             <label class="control-label col-sm-3 col-md-3" asp-for="City" asp-postfix=":"></label>
-             <div class="visible-xs form-title-rquired"><nop-required /></div>
-             <div class="col-sm-6 col-md-6">
-                 <input class="form-control" asp-for="City" />
-             </div>
-             <div class="col-sm-3 col-md-3">
-                 @if (Model.CityRequired)
-                 {
-                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
-                 }
-                 <span asp-validation-for="City"></span>
-             </div>
-        </div>      
+        <div class="form-group col-md-6">
+            <label class="control-label col-sm-3 col-md-3" asp-for="City" asp-postfix=":"></label>
+            <div class="visible-xs form-title-rquired"><nop-required /></div>
+            <div class="col-sm-6 col-md-6">
+                <input class="form-control" asp-for="City" />
+            </div>
+            <div class="col-sm-3 col-md-3">
+                @if (Model.CityRequired)
+                {
+                    <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
+                }
+                <span asp-validation-for="City"></span>
+            </div>
+        </div>
     }
     @if (Model.StreetAddressEnabled)
     {
@@ -141,8 +192,8 @@
                 }
                 <span asp-validation-for="Address1"></span>
             </div>
-        </div>      
-        
+        </div>
+
     }
     @if (Model.StreetAddress2Enabled)
     {
@@ -155,28 +206,11 @@
             <div class="col-sm-3 col-md-3">
                 @if (Model.StreetAddress2Required)
                 {
-                   <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
+                    <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
                 }
                 <span asp-validation-for="Address2"></span>
             </div>
-       </div>    
-    }
-    @if (Model.ZipPostalCodeEnabled)
-    {
-        <div class="form-group col-md-6">
-            <label class="control-label col-sm-3 col-md-3" asp-for="ZipPostalCode" asp-postfix=":"></label>
-            <div class="visible-xs form-title-rquired"><nop-required /></div>
-            <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="ZipPostalCode" />
-            </div>
-            <div class="col-sm-3 col-md-3">
-                @if (Model.ZipPostalCodeRequired)
-                {
-                    <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
-                }
-                <span asp-validation-for="ZipPostalCode"></span>
-            </div>
-      </div>   
+        </div>
     }
     @if (Model.PhoneEnabled)
     {
@@ -185,7 +219,7 @@
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
                 <input class="form-control" asp-for="PhoneNumber" />
-            </div> 
+            </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.PhoneRequired)
                 {
@@ -193,7 +227,7 @@
                 }
                 <span asp-validation-for="PhoneNumber"></span>
             </div>
-         </div>
+        </div>
     }
     @if (Model.FaxEnabled)
     {
@@ -209,8 +243,8 @@
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
                 }
                 <span asp-validation-for="FaxNumber"></span>
-            </div> 
-        </div>  
+            </div>
+        </div>
     }
     @if (Model.CustomAddressAttributes.Count > 0)
     {

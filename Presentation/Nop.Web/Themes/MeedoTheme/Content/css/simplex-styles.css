@@ -741,11 +741,11 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
         word-wrap: break-word;
     }
 
-    .header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu li a:hover {
-        color: #ea5648;
-        background: url("../images/submenu-active-icon.png") no-repeat 20px 10px #f9f9f9;
-    }
-    /*.header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu li a:before {
+        .header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu li a:hover {
+            color: #ea5648;
+            background: url("../images/submenu-active-icon.png") no-repeat 20px 10px #f9f9f9;
+        }
+/*.header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu li a:before {
            
         font-family: FontAwesome;
         content: "\f101";
@@ -771,9 +771,9 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     width: 100% !important;
     transition: all 1s ease-in-out 0s;
 }
-#mobile-menu {
+/*#mobile-menu {
     width: 100% !important;    
-}
+}*/
 #index-page .header-menu {
     margin-bottom: 0px;
 }
@@ -4100,8 +4100,12 @@ a.eu-cookie-privacyinfo-tag {
 
 .login-page .checkout-as-guest-button {
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
+.login-page .register-button {
+    margin-bottom: 10px;
+}
 
 
 /* REGISTRATION PAGE STYLE */
@@ -4808,11 +4812,11 @@ a.eu-cookie-privacyinfo-tag {
         float: left;
         width: 100%;
     }
-    
-    .select-billing-address label, .select-shipping-address label {
-        margin-bottom: 15px;
-        color: #000;
-    }
+
+.select-billing-address label, .select-shipping-address label {
+    margin-bottom: 15px;
+    color: #000;
+}
 
 .select-billing-address .address-box label, .select-shipping-address .address-box label {
     margin-bottom: 0;
@@ -4853,7 +4857,7 @@ a.eu-cookie-privacyinfo-tag {
     margin: 0;
 }
 
-.checkout-page #billing-buttons-container, .next-btn-wrapper {
+.checkout-page #billing-buttons-container, .checkout-page #payment-method-buttons-container, .next-btn-wrapper {
     float: left;
     width: 100%;
 }
@@ -4877,6 +4881,7 @@ a.eu-cookie-privacyinfo-tag {
     width: 100%;
     margin-bottom: 20px;
 }
+
     .checkout-data .payment-method .method-name .payment-logo > label {
         float: left;
         margin-right: 10px;
@@ -5235,13 +5240,13 @@ a.eu-cookie-privacyinfo-tag {
     width: 20px;
 }
 
-.new-checkout .form-group input[type="checkbox"] + .btn-group > label span:first-child {
-    display: none;
-}
+    .new-checkout .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+        display: none;
+    }
 
-.new-checkout .form-group input[type="checkbox"] + .btn-group > label span:last-child {
-    display: inline-block;
-}
+    .new-checkout .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+        display: inline-block;
+    }
 
 .new-checkout .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
     display: inline-block;
@@ -5282,9 +5287,11 @@ a.eu-cookie-privacyinfo-tag {
 #toast-container > .toast-success:before {
     content: "\f00c";
 }
+
 #toast-container .toast-info img {
     margin: 0px 0px 0px -40px;
 }
+
 #toast-container .toast-info .sales-notification {
     margin: -5px 0px 0px 10px;
 }
@@ -5373,6 +5380,7 @@ a.eu-cookie-privacyinfo-tag {
 .list-group .list-group-item .glyphicon-check {
     padding-right: 10px;
 }
+
 .list-group .list-group-item .glyphicon-unchecked {
     padding-right: 10px;
 }
@@ -8019,10 +8027,15 @@ pre {
         background: url(../images/top-arrow.png) no-repeat center center #333;
     }
 
-    /*Fancy Checkbox and Radio button*/
-.checkbox,
-.radio {
-    font-size: 1.5em;
+/*Fancy Checkbox and Radio button*/
+.large.checkbox,
+.large.radio {
+    font-size: 1.2em;
+}
+
+.large.radio .payment-description {
+    font-size: 14px;
+    margin-left: 15px;
 }
 /*.checkbox label:after,
 .radio label:after {

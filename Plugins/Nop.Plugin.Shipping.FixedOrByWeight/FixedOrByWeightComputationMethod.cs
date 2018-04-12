@@ -255,7 +255,7 @@ namespace Nop.Plugin.Shipping.FixedOrByWeight
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.StateProvince", "State / province");
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.StateProvince.Hint", "If an asterisk is selected, then this shipping rate will apply to all customers from the given country, regardless of the state.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.Zip", "Zip");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.Zip.Hint", "Zip / postal code. If zip is empty, then this shipping rate will apply to all customers from the given country or state, regardless of the zip code.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.Zip.Hint", "pincode. If zip is empty, then this shipping rate will apply to all customers from the given country or state, regardless of the zip code.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.ShippingMethod", "Shipping method");
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.ShippingMethod.Hint", "Choose shipping method");
             this.AddOrUpdatePluginLocaleResource("Plugins.Shipping.FixedOrByWeight.Fields.From", "Order weight from");

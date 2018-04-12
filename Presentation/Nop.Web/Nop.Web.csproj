@@ -45,6 +45,7 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <None Remove="App_Data\All_India_pincode_data_26022018.csv" />
     <None Remove="Properties\PublishProfiles\meedo - Web Deploy.pubxml" />
     <None Include="Themes\MeedoTheme\Views\BackInStockSubscription\CustomerSubscriptions.cshtml" />
     <None Include="Themes\MeedoTheme\Views\BackInStockSubscription\SubscribePopup.cshtml" />
@@ -250,12 +251,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Plugins\Misc.FacebookShop\App_Data\" />
     <Folder Include="Plugins\Payments.CCAvenue\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageBestSellers\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageCategories\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomePagePolls\" />
     <Folder Include="Themes\MeedoTheme\Views\Home\Components\HomepageProducts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="App_Data\All_India_pincode_data_26022018.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

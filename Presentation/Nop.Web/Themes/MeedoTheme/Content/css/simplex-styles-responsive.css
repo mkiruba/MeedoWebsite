@@ -143,6 +143,9 @@
     .product-details-page .nav-tabs > li > a{padding:15px;}
 }
 @media (min-width:768px) {
+    /*#mobile-menu {
+        width: 100%;
+    }*/
     .header-menu .navbar.navbar-inverse .nav.navbar-nav > li.dropdown .dropdown-menu {
         border-radius: 0px;
         min-width: 200px;
@@ -458,6 +461,24 @@
     }
 }
 @media (max-width:640px) {
+
+    .opc .step {
+        padding: 5px 0px;
+        float: left;
+        width: 100%;
+    }
+    #mobile-menu {
+        width: 100%;
+    }
+    /*Fancy Checkbox and Radio button*/
+    .large.checkbox,
+    .large.radio {
+        font-size: 14px;
+    }
+    .large.radio .payment-description {
+        font-size: 12px;
+        margin-left: 10px;
+    }
     .footer-tax-shipping{display:block;text-align:center;margin-bottom:8px}
     .tier-prices .prices-list .panel-default{overflow-x:scroll;}
     .item-box.product-grid .product-item .picture a img{width:100%;}
