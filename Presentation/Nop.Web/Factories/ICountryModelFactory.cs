@@ -15,6 +15,6 @@ namespace Nop.Web.Factories
         /// <param name="addSelectStateItem">Whether to add "Select state" item to list of states</param>
         /// <returns>List of identifiers and names of states and provinces</returns>
         IList<StateProvinceModel> GetStatesByCountryId(string countryId, bool addSelectStateItem);
-        IList<PincodeModel> GetAllPincodes();
+        IList<PincodeModel> GetAllPincodes(string searchPincode);
     }
 }

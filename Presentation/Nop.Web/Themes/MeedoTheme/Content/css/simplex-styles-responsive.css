@@ -479,6 +479,15 @@
         font-size: 12px;
         margin-left: 10px;
     }
+    /*#payment-method-block .payment-logo {
+        display:none;
+    }*/
+    .master-column-wrapper .container {
+        padding-left: 0px;
+        padding-right: 0px;
+        max-width: 100%;
+    }
+
     .footer-tax-shipping{display:block;text-align:center;margin-bottom:8px}
     .tier-prices .prices-list .panel-default{overflow-x:scroll;}
     .item-box.product-grid .product-item .picture a img{width:100%;}
@@ -546,7 +555,7 @@
      .header-menu .main-menu.goToTop .navbar.navbar-inverse .nav.navbar-nav,.header-menu .main-menu .navbar.navbar-inverse .nav.navbar-nav{overflow-y:scroll;max-height:400px;}
      .product-details-page .variant-picture img{width:100%;}
      .title.sub-title strong{padding:15px;}
-     .method-list .payment-details{width:170px;}
+     /*.method-list .payment-details{width:170px;}*/
     @media screen and (-webkit-min-device-pixel-ratio:0) {
         .order-summary-content .coupon-box .message, .order-summary-content .giftcard-box .message{float:left!important;margin-top:5px!important;overflow:hidden!important;}
            .forum-topic-page .title .manage{float:right;}

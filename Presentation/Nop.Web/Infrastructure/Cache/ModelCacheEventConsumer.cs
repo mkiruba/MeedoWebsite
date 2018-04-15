@@ -692,6 +692,15 @@ namespace Nop.Web.Infrastructure.Cache
         /// <remarks>
         /// {0} : language ID
         /// </remarks>
+        public const string PINCODE_MODEL_KEY = "Nop.pres.pincodes-{0}";
+        public const string PINODE_PATTERN_KEY = "Nop.pres.pincodes";
+
+        /// <summary>
+        /// Key for return request reasons
+        /// </summary>
+        /// <remarks>
+        /// {0} : language ID
+        /// </remarks>
         public const string RETURNREQUESTREASONS_MODEL_KEY = "Nop.pres.returnrequesreasons-{0}";
         public const string RETURNREQUESTREASONS_PATTERN_KEY = "Nop.pres.returnrequesreasons";
 

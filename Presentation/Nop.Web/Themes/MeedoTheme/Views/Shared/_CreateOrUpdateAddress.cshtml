@@ -28,39 +28,70 @@
                 });
             });
 
-            $("#@Html.IdFor(model => model.ZipPostalCode)").keypress(function () {
-                var pincode = $("#@Html.IdFor(model => model.ZipPostalCode)");
-                console.log(pincode);
-                //if (pincode.length > 2) { 
-                //    getPincode(pincode);
-                //}
-            });
+            @*$("#@Html.IdFor(model => model.ZipPostalCode)").keypress(function () {
+                var pincode = $("#@Html.IdFor(model => model.ZipPostalCode)").val();                
+                if (pincode.length > 2) { 
+                    console.log(pincode);
+                    getPincode(pincode);
+                }
+            });*@
 
-            @*function getPincode(pincode) {
-                //var pincodesProgress = $("#pincodes-loading-progress");
-                //pincodesProgress.show();
-                console.log("@(Url.RouteUrl("GetAllPincodes"))");
-                $.ajax({
-                    cache: false,
-                    type: "GET",
-                    url: "@(Url.RouteUrl("GetAllPincodes"))",
-                    data: pincode,
-                    success: function (data) {
-                        console.log(data.pincode);
-                        $("#@Html.IdFor(model => model.ZipPostalCode)").autocomplete({                            
-                            source: data.pincode
-                        });
-                        //pincodesProgress.hide();
+            $(function () {                  
+                $('#@Html.IdFor(model => model.ZipPostalCode)').autocomplete({ 
+                    source: function (request, response) {
+                        $.ajax({
+                            cache: true,
+                            type: "GET",
+                            data: {
+                                "searchPincode": request.term
+                            },
+                            url: "@(Url.RouteUrl("GetAllPincodes"))",
+                            success: function (data) {
+                                response($.map(data, function (value) {
+                                    return {
+                                        label: value.Pincode + ' ' +  (value.Office),
+                                        value: value.Pincode,
+                                        pincode: value.Pincode,
+                                        office: value.Office,
+                                        region: value.Region,
+                                        taluk: value.Taluk,
+                                        district: value.District,
+                                        stateId: value.StateId
+                                    };
+                                }));                                
+                            }
+                        });                       
                     },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(xhr);
-                        console.log(ajaxOptions);
-                        console.log(thrownError);
-                        alert('Failed to retrieve pincodes.');
-                        //pincodesProgress.hide();
-                    }
-                });
-            }*@
+                    select: function (event, ui) {
+                        var cities = [];
+                        if ($.inArray(ui.item.office, cities) < 0) {
+                            cities.push(ui.item.office); 
+                        }
+                        if ($.inArray(ui.item.region, cities) < 0) {
+                            cities.push(ui.item.region); 
+                        }
+                        if ($.inArray(ui.item.taluk, cities) < 0) {
+                            cities.push(ui.item.taluk); 
+                        }
+                        if ($.inArray(ui.item.district, cities) < 0) {
+                            cities.push(ui.item.district); 
+                        }
+
+                        $('#@Html.IdFor(model => model.ZipPostalCode)').val(ui.item.pincode);
+                        $('#@Html.IdFor(model => model.City)').autocomplete({
+                            source: cities,
+                            minLength: 0
+                        }).focus(function () {
+                            $(this).autocomplete("search");
+                        });
+                        $('#@Html.IdFor(model => model.StateProvinceId)').val(ui.item.stateId);
+                    },                    
+                    minLength: 3,
+                    delay: 500
+                }).focus(function () {
+                    $(this).autocomplete("search");
+                });                               
+            });
         });
     </script>
 }
@@ -144,7 +175,6 @@
                 {
                     <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
                 }
-                <span id="pincodes-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
                 <span asp-validation-for="ZipPostalCode"></span>
             </div>
         </div>
@@ -251,3 +281,4 @@
         @await Html.PartialAsync("_AddressAttributes", Model.CustomAddressAttributes)
     }
 </div>
+

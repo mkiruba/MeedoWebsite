@@ -118,23 +118,32 @@ namespace Nop.Web.Factories
             });
             return cachedModel;
         }
-        public virtual IList<PincodeModel> GetAllPincodes()
+        public virtual IList<PincodeModel> GetAllPincodes(string searchPincode)
         {
-            var pincodeData = System.IO.File.ReadAllLines("App_Data/All_India_pincode_data_26022018.csv")
-                   .Skip(1)
-                   .Select(x => x.Split(','))
-                   .Select(x => new PincodeModel
-                   {
-                       Office = x[0],
-                       Pincode = x[1],
-                       Division = x[4],
-                       Region = x[5],
-                       Circle = x[6],
-                       District = x[7],
-                       State = x[8]
-                   });
+            if (string.IsNullOrEmpty(searchPincode))
+                throw new ArgumentNullException(nameof(searchPincode));
 
-            return pincodeData.ToList();
+            var cacheKey = string.Format(ModelCacheEventConsumer.PINCODE_MODEL_KEY, _workContext.WorkingLanguage.Id);
+            var cachedModel = _cacheManager.Get(cacheKey, () =>
+            {
+                var pincodeData = System.IO.File.ReadAllLines("App_Data/All_India_pincode_data_26022018 _Cleansed.csv")
+                  .Skip(1)
+                  .Select(x => x.Split(','))
+                  .Select(x => new PincodeModel
+                  {
+                      Office = x[0],
+                      Pincode = x[1],
+                      Division = x[2],
+                      Region = x[3],
+                      Taluk = x[4],
+                      District = x[5],
+                      State = x[6],
+                      StateId = x[7]
+                  });
+
+                return pincodeData;
+            });
+            return cachedModel.Where(x => x.Pincode.StartsWith(searchPincode)).OrderBy(x => x.Pincode).ToList();
         }
         #endregion
     }

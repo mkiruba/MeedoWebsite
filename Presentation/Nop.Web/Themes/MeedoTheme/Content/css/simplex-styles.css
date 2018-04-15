@@ -4731,6 +4731,10 @@ a.eu-cookie-privacyinfo-tag {
 
 
 /* ONE PAGE CHECKOUT STYLE */
+.ui-autocomplete-loading {
+    background: url('../images/ajax_loader_small.gif') no-repeat right center;
+    padding-left:20px;
+}
 .checkout-data .opc {
     padding: 0;
     overflow: hidden;

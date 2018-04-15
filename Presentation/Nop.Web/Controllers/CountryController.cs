@@ -31,9 +31,9 @@ namespace Nop.Web.Controllers
             return Json(model);
         }
 
-        public virtual IActionResult GetAllPincodes()
+        public virtual IActionResult GetAllPincodes(string searchPincode)
         {
-            var model = _countryModelFactory.GetAllPincodes();
+            var model = _countryModelFactory.GetAllPincodes(searchPincode);
             return Json(model);
         }
 

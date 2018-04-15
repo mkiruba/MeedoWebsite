@@ -363,7 +363,7 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("GetStatesByCountryId", "country/getstatesbycountryid/",
 				new { controller = "Country", action = "GetStatesByCountryId" });
             //get state list by country ID  (AJAX link)
-            routeBuilder.MapRoute("GetAllPincodes", "country/getallpincodes",
+            routeBuilder.MapRoute("GetAllPincodes", "country/getallpincodes/",
                 new { controller = "Country", action = "GetAllPincodes" });
 
             //EU Cookie law accept button handler (AJAX link)
