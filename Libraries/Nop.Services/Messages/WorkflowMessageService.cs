@@ -697,6 +697,38 @@ namespace Nop.Services.Messages
                 attachmentFilePath, attachmentFileName);
         }
 
+        public virtual int SendPendingOrderReminderNotification(Order order, int languageId,
+            string attachmentFilePath = null, string attachmentFileName = null)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
+            languageId = EnsureLanguageIsActive(languageId, store.Id);
+
+            var messageTemplate = GetActiveMessageTemplate(MessageTemplateSystemNames.PendingOrderReminderNotification, store.Id);
+            if (messageTemplate == null)
+                return 0;
+
+            //email account
+            var emailAccount = GetEmailAccountOfMessageTemplate(messageTemplate, languageId);
+
+            //tokens
+            var tokens = new List<Token>();
+            _messageTokenProvider.AddStoreTokens(tokens, store, emailAccount);
+            _messageTokenProvider.AddOrderTokens(tokens, order, languageId);
+            _messageTokenProvider.AddCustomerTokens(tokens, order.Customer);
+
+            //event notification
+            _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
+
+            var toEmail = order.BillingAddress.Email;
+            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+
+            return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName,
+                attachmentFilePath, attachmentFileName);
+        }
+
         /// <summary>
         /// Sends an order cancelled notification to a customer
         /// </summary>

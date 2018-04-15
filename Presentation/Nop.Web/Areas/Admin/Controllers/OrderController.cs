@@ -1631,6 +1631,40 @@ namespace Nop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("Edit")]
+        [FormValueRequired("sendpendingorderreminder")]
+        public virtual IActionResult SendPendingOrderReminder(int id)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageOrders))
+                return AccessDeniedView();
+
+            var order = _orderService.GetOrderById(id);
+            if (order == null)
+                //No order found with the specified id
+                return RedirectToAction("List");
+
+            //a vendor does not have access to this functionality
+            if (_workContext.CurrentVendor != null)
+                return RedirectToAction("Edit", "Order", new { id = id });
+
+            try
+            {
+                _orderProcessingService.SendPendingOrderReminder(order);
+                LogEditOrder(order.Id);
+                var model = new OrderModel();
+                PrepareOrderDetailsModel(model, order);
+                return View(model);
+            }
+            catch (Exception exc)
+            {
+                //error
+                var model = new OrderModel();
+                PrepareOrderDetailsModel(model, order);
+                ErrorNotification(exc, false);
+                return View(model);
+            }
+        }
+
+        [HttpPost, ActionName("Edit")]
         [FormValueRequired("refundorder")]
         public virtual IActionResult RefundOrder(int id)
         {

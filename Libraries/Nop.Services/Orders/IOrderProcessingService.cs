@@ -134,6 +134,8 @@ namespace Nop.Services.Orders
         /// <param name="order">Order</param>
         void MarkOrderAsPaid(Order order);
 
+        void SendPendingOrderReminder(Order order);
+
         /// <summary>
         /// Gets a value indicating whether refund from admin panel is allowed
         /// </summary>

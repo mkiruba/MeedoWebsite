@@ -80,6 +80,7 @@ namespace Nop.Core.Domain.Messages
         /// Represents system name of notification customer about completed order
         /// </summary>
         public const string OrderCompletedCustomerNotification = "OrderCompleted.CustomerNotification";
+        public const string PendingOrderReminderNotification = "Customer.EmailReminder.PendingOrder";
 
         /// <summary>
         /// Represents system name of notification customer about cancelled order

@@ -144,7 +144,8 @@ namespace Nop.Services.Messages
         /// <returns>Queued email identifier</returns>
         int SendOrderCompletedCustomerNotification(Order order, int languageId, 
             string attachmentFilePath = null, string attachmentFileName = null);
-
+        int SendPendingOrderReminderNotification(Order order, int languageId,
+            string attachmentFilePath = null, string attachmentFileName = null);
         /// <summary>
         /// Sends an order cancelled notification to a customer
         /// </summary>

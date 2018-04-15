@@ -2424,7 +2424,34 @@ namespace Nop.Services.Orders
                 ProcessOrderPaid(order);
             }
         }
-        
+
+        /// <summary>
+        /// Marks order as paid
+        /// </summary>
+        /// <param name="order">Order</param>
+        public virtual void SendPendingOrderReminder(Order order)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            //if (!CanMarkOrderAsPaid(order))
+            //    throw new NopException("You can't mark this order as paid");
+
+            //order.PaymentStatusId = (int)PaymentStatus.Paid;
+            //order.PaidDateUtc = DateTime.UtcNow;
+            _workflowMessageService.SendPendingOrderReminderNotification(order, order.CustomerLanguageId);
+
+            //add a note
+            AddOrderNote(order, "Pending order reminder has been sent.");
+
+            CheckOrderStatus(order);
+
+            //if (order.PaymentStatus == PaymentStatus.Paid)
+            //{
+            //    ProcessOrderPaid(order);
+            //}
+        }
+
         /// <summary>
         /// Gets a value indicating whether refund from admin panel is allowed
         /// </summary>

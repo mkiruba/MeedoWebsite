@@ -63,27 +63,27 @@
                         });                       
                     },
                     select: function (event, ui) {
-                        var cities = [];
-                        if ($.inArray(ui.item.office, cities) < 0) {
-                            cities.push(ui.item.office); 
-                        }
-                        if ($.inArray(ui.item.region, cities) < 0) {
-                            cities.push(ui.item.region); 
-                        }
-                        if ($.inArray(ui.item.taluk, cities) < 0) {
-                            cities.push(ui.item.taluk); 
-                        }
-                        if ($.inArray(ui.item.district, cities) < 0) {
-                            cities.push(ui.item.district); 
-                        }
+                        //var cities = [];
+                        //if ($.inArray(ui.item.office, cities) < 0) {
+                        //    cities.push(ui.item.office); 
+                        //}
+                        //if ($.inArray(ui.item.region, cities) < 0) {
+                        //    cities.push(ui.item.region); 
+                        //}
+                        //if ($.inArray(ui.item.taluk, cities) < 0) {
+                        //    cities.push(ui.item.taluk); 
+                        //}
+                        //if ($.inArray(ui.item.district, cities) < 0) {
+                        //    cities.push(ui.item.district); 
+                        //}
 
                         $('#@Html.IdFor(model => model.ZipPostalCode)').val(ui.item.pincode);
-                        $('#@Html.IdFor(model => model.City)').autocomplete({
+                        @*$('#@Html.IdFor(model => model.City)').autocomplete({
                             source: cities,
                             minLength: 0
                         }).focus(function () {
                             $(this).autocomplete("search");
-                        });
+                        });*@
                         $('#@Html.IdFor(model => model.StateProvinceId)').val(ui.item.stateId);
                     },                    
                     minLength: 3,

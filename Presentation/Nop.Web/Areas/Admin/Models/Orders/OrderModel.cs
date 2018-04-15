@@ -133,6 +133,8 @@ namespace Nop.Web.Areas.Admin.Models.Orders
         //payment info
         [NopResourceDisplayName("Admin.Orders.Fields.PaymentStatus")]
         public string PaymentStatus { get; set; }
+        [NopResourceDisplayName("Admin.Orders.Fields.PendingOrderReminder")]
+        public string PendingOrderReminder { get; set; }
         [NopResourceDisplayName("Admin.Orders.Fields.PaymentStatus")]
         public int PaymentStatusId { get; set; }
         [NopResourceDisplayName("Admin.Orders.Fields.PaymentMethod")]

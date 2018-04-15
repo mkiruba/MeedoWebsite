@@ -10794,6 +10794,9 @@
   <LocaleResource Name="Admin.Orders.Fields.MarkAsPaid">
     <Value>Mark as paid</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Fields.SendPendingOrderReminder">
+    <Value>Send pending order reminder</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Orders.Fields.OrderGuid">
     <Value>Order GUID</Value>
   </LocaleResource>
@@ -10907,6 +10910,12 @@
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Fields.PaymentStatus.Hint">
     <Value>The status of the payment.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Fields.PendingOrderReminder">
+    <Value>Pending order reminder</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Fields.PendingOrderReminder.Hint">
+    <Value>Send pending order reminder</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Fields.PickupAddress">
     <Value>Pickup point address</Value>
