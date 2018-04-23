@@ -20,5 +20,6 @@
   "Misc.FacebookShop",
   "Widgets.FacebookPixel",
   "Widgets.Instagram",
-  "Payments.CashOnDelivery"
+  "Payments.CashOnDelivery",
+  "Payments.Instamojo"
 ]

@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "_ConfigurePlugin";
+}
+
+@model ConfigurationModel
+@using Nop.Plugin.Payments.Instamojo.Models;
+<form asp-controller="PaymentPayu" asp-action="Configure" method="post">
+    <table class="adminContent">
+        <tr>
+        <tr>
+            <td class="adminTitle">
+                <nop-label asp-for="ClientId" />
+            </td>
+            <td class="adminData">
+                <nop-editor asp-for="ClientId" />
+                <span asp-validation-for="ClientId"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <nop-label asp-for="ClientSecret" />
+            </td>
+            <td class="adminData">
+                <nop-editor asp-for="ClientSecret" />
+                <span asp-validation-for="ClientSecret"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <nop-label asp-for="EndPoint" />
+            </td>
+            <td class="adminData">
+                <nop-editor asp-for="EndPoint" />
+                <span asp-validation-for="EndPoint"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <nop-label asp-for="AuthEndPoint" />
+            </td>
+            <td class="adminData">
+                <nop-editor asp-for="AuthEndPoint" />
+                <span asp-validation-for="AuthEndPoint"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <nop-label asp-for="WebHookUrl" />
+            </td>
+            <td class="adminData">
+                <nop-editor asp-for="WebHookUrl" />
+                <span asp-validation-for="WebHookUrl"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" width="100%">
+                <button type="submit" name="save" value="save" class="t-button">
+                    Save
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>    
