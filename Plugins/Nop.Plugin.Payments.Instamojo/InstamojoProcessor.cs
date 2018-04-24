@@ -34,6 +34,7 @@ namespace Nop.Plugin.Payments.Instamojo
         private readonly CurrencySettings _currencySettings;
 
         private readonly IWebHelper _webHelper;
+        private readonly ILocalizationService _localizationService;
 
         public PaymentMethodType PaymentMethodType
         {
@@ -91,15 +92,21 @@ namespace Nop.Plugin.Payments.Instamojo
             }
         }
 
-        public string PaymentMethodDescription => throw new NotImplementedException();
+        public string PaymentMethodDescription
+        {
+            //return description of this payment method to be display on "payment method" checkout step. good practice is to make it localizable
+            //for example, for a redirection payment method, description may be like this: "You will be redirected to PayPal site to complete the payment"
+            get { return _localizationService.GetResource("Plugins.Payments.Instamojo.PaymentMethodDescription"); }
+        }
 
-        public InstamojoProcessor(InstamojoSettings instamojoSettings, ISettingService settingService, ICurrencyService currencyService, CurrencySettings currencySettings, IWebHelper webHelper)
+        public InstamojoProcessor(InstamojoSettings instamojoSettings, ISettingService settingService, ICurrencyService currencyService, ILocalizationService localizationService, CurrencySettings currencySettings, IWebHelper webHelper)
         {
             this._instamojoSettings = instamojoSettings;
             this._settingService = settingService;
             this._currencyService = currencyService;
             this._currencySettings = currencySettings;
             this._webHelper = webHelper;
+            this._localizationService = localizationService;
         }
 
         public CancelRecurringPaymentResult CancelRecurringPayment(CancelRecurringPaymentRequest cancelPaymentRequest)
