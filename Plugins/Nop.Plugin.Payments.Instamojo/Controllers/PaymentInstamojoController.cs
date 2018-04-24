@@ -57,7 +57,7 @@ namespace Nop.Plugin.Payments.Instamojo.Controllers
                 AuthEndPoint = this._instamojoSettings.AuthEndPoint,
                 WebHookUrl = this._instamojoSettings.WebHookUrl
             };
-            return base.View("~/Plugins/Payments.Instamojo/Views/Instamojo/Configure.cshtml", model);
+            return View("~/Plugins/Payments.Instamojo/Views/Configure.cshtml", model);
         }
 
         [HttpPost]
@@ -75,11 +75,11 @@ namespace Nop.Plugin.Payments.Instamojo.Controllers
                 this._instamojoSettings.AuthEndPoint = model.AuthEndPoint;
                 this._instamojoSettings.WebHookUrl = model.WebHookUrl;
                 this._settingService.SaveSetting<InstamojoSettings>(this._instamojoSettings, 0);
-                V_1 = base.View("~/Plugins/Payments.Instamojo/Views/Instamojo/Configure.cshtml", model);
+                V_1 = View("~/Plugins/Payments.Instamojo/Views/Configure.cshtml", model);
             }
             else
             {
-                V_1 = this.Configure();
+                V_1 = Configure();
             }
             return V_1;
         }

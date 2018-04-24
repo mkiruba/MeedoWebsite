@@ -10,7 +10,7 @@ namespace Nop.Plugin.Payments.Payu
         {
             routeBuilder.MapRoute("Plugin.Payments.Instamojo.Configure",
                  "Plugins/PaymentInstamojo/Configure",
-                 new { controller = "PaymentPayu", action = "Configure" });
+                 new { controller = "PaymentInstamojo", action = "Configure" });
 
             routeBuilder.MapRoute("Plugin.Payments.Instamojo.PaymentInfo",
                  "Plugins/PaymentInstamojo/PaymentInfo",

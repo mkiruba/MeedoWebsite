@@ -139,16 +139,21 @@ namespace Nop.Plugin.Payments.Instamojo
             return decimal.Zero;
         }
 
-        //public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
-        //{
-        //    actionName = "Configure";
-        //    controllerName = "Instamojo";
-        //    routeValues = new RouteValueDictionary()
-        //    {
-        //        { "Namespaces", "Antargyan.Plugin.Payments.Instamojo.Controllers" },
-        //        { "area", null }
-        //    };
-        //}
+        public override string GetConfigurationPageUrl()
+        {
+            return $"{_webHelper.GetStoreLocation()}Admin/PaymentInstamojo/Configure";
+        }
+
+        public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        {
+            actionName = "Configure";
+            controllerName = "Instamojo";
+            routeValues = new RouteValueDictionary()
+            {
+                { "Namespaces", "Nop.Plugin.Payments.Instamojo.Controllers" },
+                { "area", null }
+            };
+        }
 
         //public Type GetControllerType()
         //{
@@ -182,23 +187,24 @@ namespace Nop.Plugin.Payments.Instamojo
                 WebHookUrl = ""
             };
             this._settingService.SaveSetting<InstamojoSettings>(instamojoSetting, 0);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.RedirectionTip", "You will be redirected to Instamojo site to complete the order.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientId", "Client ID", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientId.Hint", "Enter Client ID.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientSecret", "Client Secret", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientSecret.Hint", "Enter client secret.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.EndPoint", "End Point", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.EndPoint.Hint", "End Point.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.AuthEndPoint", "Auth End Point", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.AuthEndPoint.Hint", "Auth End Point", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateApiKey", "PrivateApiKey", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateApiKey.Hint", "Enter PrivateApiKey.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateAuthToken", "PrivateAuthToken", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateAuthToken.Hint", "Enter PrivateAuthToken.", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateSalt", "PrivateSalt", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateSalt.Hint", "Enter PrivateSalt", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.WebHookUrl", "WebHookUrl", null);
-            LocalizationExtensions.AddOrUpdatePluginLocaleResource(this, "Plugins.Payments.Instamojo.WebHookUrl.Hint", "Enter WebHookUrl", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip", "You will be redirected to Instamojo site to complete the order.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientId", "Client ID", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientId.Hint", "Enter Client ID.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret", "Client Secret", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret.Hint", "Enter client secret.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint", "End Point", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint.Hint", "End Point.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint", "Auth End Point", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint.Hint", "Auth End Point", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey", "PrivateApiKey", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey.Hint", "Enter PrivateApiKey.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken", "PrivateAuthToken", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken.Hint", "Enter PrivateAuthToken.", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateSalt", "PrivateSalt", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateSalt.Hint", "Enter PrivateSalt", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.WebHookUrl", "WebHookUrl", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.WebHookUrl.Hint", "Enter WebHookUrl", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PaymentMethodDescription", "Pay by \"Instamojo\"");
             base.Install();
         }
 
@@ -232,23 +238,24 @@ namespace Nop.Plugin.Payments.Instamojo
 
         public override void Uninstall()
         {
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.RedirectionTip");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientId");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientId.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientSecret");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.ClientSecret.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.EndPoint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.EndPoint.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.AuthEndPoint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.AuthEndPoint.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateApiKey");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateApiKey.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateAuthToken");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateAuthToken.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateSalt");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.PrivateSalt.Hint");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.WebHookUrl");
-            LocalizationExtensions.DeletePluginLocaleResource(this, "Plugins.Payments.Instamojo.WebHookUrl.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientId");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientId.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateSalt");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateSalt.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.WebHookUrl");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.WebHookUrl.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PaymentMethodDescription");
             base.Uninstall();
         }
 
