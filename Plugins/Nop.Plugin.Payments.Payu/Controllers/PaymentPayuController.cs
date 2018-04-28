@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
+using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.Payments;
 using Nop.Plugin.Payments.Payu.Models;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
+using Nop.Services.Messages;
 using Nop.Services.Orders;
 using Nop.Services.Payments;
 using Nop.Web.Framework;
@@ -27,6 +29,9 @@ namespace Nop.Plugin.Payments.Payu.Controllers
         private readonly PayuPaymentSettings _PayuPaymentSettings;
         private readonly PaymentSettings _paymentSettings;
         private readonly ILocalizationService _localizationService;
+        private readonly IEmailSender _emailSender;
+        private readonly IEmailAccountService _emailAccountService;
+        private readonly EmailAccountSettings _emailAccountSettings;
 
         public PaymentPayuController(ISettingService settingService,
             IPaymentService paymentService, IOrderService orderService,
@@ -35,7 +40,8 @@ namespace Nop.Plugin.Payments.Payu.Controllers
             PayuPaymentSettings PayuPaymentSettings,
             PaymentSettings paymentSettings,
             IWorkContext workContext,
-            IStoreContext storeContext)
+            IStoreContext storeContext, IEmailSender emailSender,
+            IEmailAccountService emailAccountService, EmailAccountSettings emailAccountSettings)
         {
             this._settingService = settingService;
             this._paymentService = paymentService;
@@ -44,6 +50,9 @@ namespace Nop.Plugin.Payments.Payu.Controllers
             this._PayuPaymentSettings = PayuPaymentSettings;
             this._localizationService = localizationService;
             this._paymentSettings = paymentSettings;
+            this._emailSender = emailSender;
+            this._emailAccountService = emailAccountService;
+            this._emailAccountSettings = emailAccountSettings;
         }
 
 
@@ -120,14 +129,12 @@ namespace Nop.Plugin.Payments.Payu.Controllers
                 !processor.IsPaymentMethodActive(_paymentSettings) || !processor.PluginDescriptor.Installed)
                 throw new NopException("Payu module cannot be loaded");
 
-
             var myUtility = new PayuHelper();
             string orderId, merchantId, amount, productinfo, firstname, email, hash, status, checksum;
 
             //Assign following values to send it to verifychecksum function.
             if (String.IsNullOrWhiteSpace(_PayuPaymentSettings.Key))
                 throw new NopException("Payu key is not set");
-
 
             merchantId = _PayuPaymentSettings.MerchantId.ToString();
             orderId = form["txnid"];
@@ -142,7 +149,6 @@ namespace Nop.Plugin.Payments.Payu.Controllers
 
             if (checksum == hash)
             {
-
                 if (status == "success")
                 {
                     /* 
@@ -156,11 +162,9 @@ namespace Nop.Plugin.Payments.Payu.Controllers
                     {
                         _orderProcessingService.MarkOrderAsPaid(order);
                     }
-
                     //Thank you for shopping with us. Your credit card has been charged and your transaction is successful
                     return RedirectToRoute("CheckoutCompleted", new { orderId = order.Id });
                 }
-
                 else
                 {
                     /*
@@ -168,23 +172,31 @@ namespace Nop.Plugin.Payments.Payu.Controllers
                         transaction such as sending an email to customer
                         setting database status etc etc
                     */
-
+                    SendEmail(orderId, firstname, email);
+                    ErrorNotification(_localizationService.GetResource("Plugins.Payments.Instamojo.PaymentFailed"), true);
                     return RedirectToAction("Index", "Home", new { area = "" });
-
                 }
-
             }
-
-
             else
             {
                 /*
                     Here you need to simply ignore this and dont need
                     to perform any operation in this condition
                 */
-
                 return Content("Security Error. Illegal access detected");
             }
-        }        
+        }
+        public void SendEmail(string orderId, string firstName, string email)
+        {
+            var emailAccount = _emailAccountService.GetEmailAccountById(_emailAccountSettings.DefaultEmailAccountId);
+            if (emailAccount != null)
+            {
+                var subject = "Meedo - Important Payment failed in Instamojo";
+                var body = $"Hi, \n Payment been failed for the genuine payment made by the customer. Please be in touch with customer as soon as possible.\n" +
+                    $"OrderId - {orderId}\n CustomerName - {firstName}\n " +
+                    $"CustomerEmailAddress - {email}\n";
+                _emailSender.SendEmail(emailAccount, subject, body, emailAccount.Email, emailAccount.DisplayName, "meedoindia@gmail.com", null);
+            }
+        }
     }
 }

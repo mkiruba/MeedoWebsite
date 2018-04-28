@@ -220,8 +220,8 @@ var cities = null, allProducts = null, timer = null, innerhtml = '', interval = 
 
 function displayRecentSalesNotification(productUrl) {
 
-    cities = ["Chennai", "Pune", "Mumbai", "Hyderabad", "Kolkata", "Bengaluru", "Madurai", "Kochi", "Palakkad", "New Delhi", "Coimbatore", "Lucknow", "Tiruchirappalli", "Noida", "Ahmedabad", "Chandigarh", "Puducherry", "Salem", "Tiruppur"];
-    times = ["an hour ago", "two hours ago", " 4 hours ago", "3 hours ago", "today", "one week ago", "6 hours ago", "yesterday", "two days ago", "four days ago", "this week"];
+    cities = ["Chennai", "Pune", "Mumbai", "Navi Mumbai", "Mysuru", "Jaipur", "Hyderabad", "Vijayawada", "Vishakapatnam", "Hosur", "Hubballi", "Belgaum", "Kolkata", "Bengaluru", "Madurai", "Kochi", "Palakkad", "New Delhi", "Coimbatore", "Lucknow", "Tiruchirappalli", "Thanjavur", "Noida", "Ahmedabad", "Chandigarh", "Puducherry", "Salem"];
+    times = ["30 minutes ago", "10 minutes ago", "15 minutes ago", "5 minutes ago", "an hour ago", "two hours ago", " 4 hours ago", "3 hours ago", "6 hours ago"];
     toastr.clear();
     toastr.options = {
         "closeButton": true,

@@ -36,17 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="InstamojoAPI">
-      <HintPath>InstamojoAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Sp.Agent">
-      <HintPath>Sp.Agent.dll</HintPath>
-    </Reference>
-    <Reference Include="Sp.Agent.37eed">
-      <HintPath>Sp.Agent.37eed.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\InstamojoAPI\InstamojoAPI.csproj" />
   </ItemGroup>
    <!-- This target execute after "Build" target -->
  <Target Name="NopTarget" AfterTargets="Build">

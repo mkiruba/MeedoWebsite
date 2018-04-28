@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Nop.Core;
 using Nop.Core.Domain.Directory;
+using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Payments;
 using Nop.Core.Domain.Shipping;
@@ -13,6 +14,7 @@ using Nop.Plugin.Payments.Payu.Controllers;
 using Nop.Services.Configuration;
 using Nop.Services.Directory;
 using Nop.Services.Localization;
+using Nop.Services.Messages;
 using Nop.Services.Payments;
 using Nop.Web.Framework;
 
@@ -31,6 +33,9 @@ namespace Nop.Plugin.Payments.Payu
         private readonly CurrencySettings _currencySettings;
         private readonly IWebHelper _webHelper;
         private readonly ILocalizationService _localizationService;
+        private readonly IEmailSender _emailSender;
+        private readonly IEmailAccountService _emailAccountService;
+        private readonly EmailAccountSettings _emailAccountSettings;
 
         #endregion
 
@@ -39,7 +44,8 @@ namespace Nop.Plugin.Payments.Payu
         public PayuPaymentProcessor(PayuPaymentSettings PayuPaymentSettings,
             ISettingService settingService, ICurrencyService currencyService,
             ILocalizationService localizationService,
-            CurrencySettings currencySettings, IWebHelper webHelper)
+            CurrencySettings currencySettings, IWebHelper webHelper,
+            IEmailSender emailSender, IEmailAccountService emailAccountService, EmailAccountSettings emailAccountSettings)
         {
             this._payuPaymentSettings = PayuPaymentSettings;
             this._settingService = settingService;
@@ -47,6 +53,9 @@ namespace Nop.Plugin.Payments.Payu
             this._currencySettings = currencySettings;
             this._webHelper = webHelper;
             this._localizationService = localizationService;
+            this._emailSender = emailSender;
+            this._emailAccountService = emailAccountService;
+            this._emailAccountSettings = emailAccountSettings;
         }
 
         #endregion
@@ -137,11 +146,32 @@ namespace Nop.Plugin.Payments.Payu
                     remotePostHelper.Add("delivery_cust_country", "");
             }
 
-          //  remotePostHelper.Add("Merchant_Param", _PayuPaymentSettings.MerchantParam);
-            remotePostHelper.Post();
+            //  remotePostHelper.Add("Merchant_Param", _PayuPaymentSettings.MerchantParam);
+            try
+            {
+                remotePostHelper.Post();
+            }
+            catch (Exception ex)
+            {
+                //Send email SendPaymentFailedStoreOwnerNotification
+                SendEmail(ex.ToString(), postProcessPaymentRequest);
+                throw new Exception(ex.Message);
+            }            
         }
 
-
+        public void SendEmail(string errorMessage, PostProcessPaymentRequest postProcessPaymentRequest)
+        {
+            var emailAccount = _emailAccountService.GetEmailAccountById(_emailAccountSettings.DefaultEmailAccountId);
+            if (emailAccount != null)
+            {
+                var subject = "Meedo - Important Payment failed in Payu";
+                var body = $"Hi, \n Payment been failed for the genuine payment made by the customer. Please be in touch with customer as soon as possible.\n" +
+                    $"OrderId - {postProcessPaymentRequest.Order.Id}\n CustomerName - {postProcessPaymentRequest.Order.BillingAddress.FirstName}\n " +
+                    $"CustomerEmailAddress - {postProcessPaymentRequest.Order.BillingAddress.Email}\n CustomerPhoneNumber - {postProcessPaymentRequest.Order.BillingAddress.PhoneNumber}\n" +
+                    $"Exception - {errorMessage}";
+                _emailSender.SendEmail(emailAccount, subject, body, emailAccount.Email, emailAccount.DisplayName, "meedoindia@gmail.com", null);
+            }
+        }
 
         //Hide payment begins
 
