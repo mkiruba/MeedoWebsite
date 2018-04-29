@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
-using InstamojoAPI;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json.Linq;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Directory;
@@ -159,22 +160,15 @@ namespace Nop.Plugin.Payments.Instamojo
         {
             InstamojoSettings instamojoSetting = new InstamojoSettings()
             {
-                ClientId = "",
-                ClientSecret = "",
+                ApiKey = "",
+                AuthToken = "",
                 EndPoint = "",
-                AuthEndPoint = "",
                 WebHookUrl = ""
             };
             this._settingService.SaveSetting<InstamojoSettings>(instamojoSetting, 0);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip", "You will be redirected to Instamojo site to complete the order.", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientId", "Client ID", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientId.Hint", "Enter Client ID.", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret", "Client Secret", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret.Hint", "Enter client secret.", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint", "End Point", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint.Hint", "End Point.", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint", "Auth End Point", null);
-            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint.Hint", "Auth End Point", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip", "You will be redirected to Instamojo site to complete the order.", null);    
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthToken", "Auth Token", null);
+            this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.AuthToken.Hint", "Auth Token", null);
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey", "PrivateApiKey", null);
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey.Hint", "Enter PrivateApiKey.", null);
             this.AddOrUpdatePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken", "PrivateAuthToken", null);
@@ -191,47 +185,55 @@ namespace Nop.Plugin.Payments.Instamojo
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void PostProcessPayment(PostProcessPaymentRequest postProcessPaymentRequest)
         {
-            //object[] objArray = new object[] { postProcessPaymentRequest };
-            //PermutedExecutionServices2.ExecuteMethod(this, "31877a8cc032424ba9869314152add1b", "84515A2F2188489FA43F609922C17C0C", objArray, null, null);
-            string Insta_client_id = _instamojoSettings.ClientId,// "tmLkZZ0zV41nJwhayBGBOI4m4I7bH55qpUBdEXGS",
-                  Insta_client_secret = _instamojoSettings.ClientSecret,// "IDejdccGqKaFlGav9bntKULvMZ0g7twVFolC9gdrh9peMS0megSFr7iDpWwWIDgFUc3W5SlX99fKnhxsoy6ipdAv9JeQwebmOU6VRvOEQnNMWwZnWglYmDGrfgKRheXs",
-                  Insta_Endpoint = _instamojoSettings.EndPoint,//InstamojoConstants.INSTAMOJO_API_ENDPOINT,
-                  Insta_Auth_Endpoint = _instamojoSettings.AuthEndPoint;//InstamojoConstants.INSTAMOJO_AUTH_ENDPOINT;
-            
-            InstamojoAPI.Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
-            
-            //  Create Payment Order
-            PaymentOrder objPaymentRequest = new PaymentOrder()
+            var orderId = postProcessPaymentRequest.Order.Id;
+            var requestData = new Dictionary<string, string>();
+
+            var requestUrl = _instamojoSettings.EndPoint;// "https://www.instamojo.com/api/1.1/payment-requests/";
+            requestData.Add("buyer_name", postProcessPaymentRequest.Order.BillingAddress.FirstName);
+            requestData.Add("email", postProcessPaymentRequest.Order.BillingAddress.Email);
+            requestData.Add("phone", postProcessPaymentRequest.Order.BillingAddress.PhoneNumber);
+            var nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberDecimalDigits = 2;
+            requestData.Add("amount", postProcessPaymentRequest.Order.OrderTotal.ToString("N", nfi));
+            requestData.Add("purpose",postProcessPaymentRequest.Order.Id.ToString());
+            requestData.Add("send_email", "false");
+            requestData.Add("send_sms", "false");
+            requestData.Add("redirect_url", _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return");
+            if (_webHelper.GetStoreLocation(false).Contains("localhost"))
             {
-                name = postProcessPaymentRequest.Order.BillingAddress.FirstName,
-                email = postProcessPaymentRequest.Order.BillingAddress.Email,
-                phone = postProcessPaymentRequest.Order.BillingAddress.PhoneNumber,
-                amount = double.Parse(postProcessPaymentRequest.Order.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat), CultureInfo.InvariantCulture),
-                currency = _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode,
-                transaction_id = postProcessPaymentRequest.Order.Id.ToString(),
-                //redirect_url = _webHelper.GetStoreLocation(false).Contains("localhost") ? 
-                //_webHelper.GetStoreLocation(false).Replace("localhost", "meedo.in"):
-                //_webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-                webhook_url = _webHelper.GetStoreLocation(false).Contains("localhost") ?
-                _webHelper.GetStoreLocation(false).Replace("localhost", "meedo.in") :
-                _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-                redirect_url = _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-                //webhook_url = _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-                description = $"Name-{postProcessPaymentRequest.Order.BillingAddress.FirstName},OrderId-{postProcessPaymentRequest.Order.Id}"
-            };
-            //Extra POST parameters 
+                requestData.Add("webhook", "https://www.meedo.in/Plugins/PaymentInstamojo/Return");
+            }
+            else
+            {
+                requestData.Add("webhook", _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return");
+            }
+            
+
             try
             {
-                CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
-
-                _httpContextAccessor.HttpContext.Response.Redirect(objPaymentResponse.payment_options.payment_url);
+                string paymentUrl;
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("X-Api-Key", _instamojoSettings.ApiKey);// "abd485fcdfe77d7fb1925ce4899e13fb");
+                    client.DefaultRequestHeaders.Add("X-Auth-Token", _instamojoSettings.AuthToken);// "0057118ff55d97b222d7977a1a5f7ce0");
+                    var task = client.PostAsync(requestUrl, new FormUrlEncodedContent(requestData));
+                    task.Wait();
+                    var responseString = task.Result.Content.ReadAsStringAsync().Result;
+                    JObject rss = JObject.Parse(responseString);
+                    paymentUrl = (string)rss["payment_request"]["longurl"];
+                }
+                var remotePostHelper = new RemotePost();
+                remotePostHelper.FormName = "InstamojoForm";
+                remotePostHelper.Url = paymentUrl;
+                remotePostHelper.Method = "GET";
+                remotePostHelper.Post();
             }
             catch (Exception ex)
             {
                 //Send email SendPaymentFailedStoreOwnerNotification
                 SendEmail(ex.ToString(), postProcessPaymentRequest);
                 throw new Exception(ex.Message);
-            }            
+            }                       
         }
 
         public void SendEmail(string errorMessage, PostProcessPaymentRequest postProcessPaymentRequest)
@@ -263,59 +265,7 @@ namespace Nop.Plugin.Payments.Instamojo
 
 
         public ProcessPaymentResult ProcessPayment(ProcessPaymentRequest processPaymentRequest)
-        {
-            //string Insta_client_id = _instamojoSettings.ClientId,// "tmLkZZ0zV41nJwhayBGBOI4m4I7bH55qpUBdEXGS",
-            //    Insta_client_secret = _instamojoSettings.ClientSecret,// "IDejdccGqKaFlGav9bntKULvMZ0g7twVFolC9gdrh9peMS0megSFr7iDpWwWIDgFUc3W5SlX99fKnhxsoy6ipdAv9JeQwebmOU6VRvOEQnNMWwZnWglYmDGrfgKRheXs",
-            //    Insta_Endpoint = _instamojoSettings.EndPoint,//InstamojoConstants.INSTAMOJO_API_ENDPOINT,
-            //    Insta_Auth_Endpoint = _instamojoSettings.AuthEndPoint;//InstamojoConstants.INSTAMOJO_AUTH_ENDPOINT;
-
-            //InstamojoAPI.Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
-            //var customer = _customerService.GetCustomerById(processPaymentRequest.CustomerId);
-            //if (customer == null)
-            //    throw new Exception("Customer cannot be loaded");
-
-            ////  Create Payment Order
-            //PaymentOrder objPaymentRequest = new PaymentOrder()
-            //{
-            //    name = customer.BillingAddress.FirstName,
-            //    email = customer.BillingAddress.Email,
-            //    phone = customer.BillingAddress.PhoneNumber,
-            //    amount = double.Parse(processPaymentRequest.OrderTotal.ToString(new CultureInfo("en-US", false).NumberFormat), CultureInfo.InvariantCulture),
-            //    currency = _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode,
-            //    transaction_id = processPaymentRequest.OrderGuid.ToString(),
-            //    redirect_url = _webHelper.GetStoreLocation(false).Contains("localhost") ?
-            //    _webHelper.GetStoreLocation(false).Replace("localhost", "meedo.in") :
-            //    _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-            //    webhook_url = _webHelper.GetStoreLocation(false).Contains("localhost") ?
-            //    _webHelper.GetStoreLocation(false).Replace("localhost", "meedo.in") :
-            //    _webHelper.GetStoreLocation(false) + "Plugins/PaymentInstamojo/Return",
-            //    description = $"Name-{customer.BillingAddress.FirstName},OrderId-{processPaymentRequest.InitialOrderId}"
-            //};
-            ////Extra POST parameters 
-            //try
-            //{
-            //    CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
-            //    _httpContextAccessor.HttpContext.Response.Redirect(objPaymentResponse.payment_options.payment_url);
-            //    return;
-            //    //var model = new PaymentInfoModel
-            //    //{
-            //    //    InstamojoLink = objPaymentResponse.payment_options.payment_url
-            //    //};
-            //    //var remotePostHelper = new RemotePost
-            //    //{
-            //    //    FormName = "InstamojoForm",
-            //    //    Url = objPaymentResponse.payment_options.payment_url,
-            //    //    Method = "get"
-            //    //};
-            //    //remotePostHelper.Embed();
-            //}
-            //catch (Exception ex)
-            //{
-            //    //Send email SendPaymentFailedStoreOwnerNotification
-            //    SendEmail(ex.ToString(), processPaymentRequest, customer);
-            //    throw new Exception(ex.Message);
-            //}
-
+        {           
             ProcessPaymentResult result = new ProcessPaymentResult();
             result.NewPaymentStatus = PaymentStatus.Pending;
             return result;
@@ -337,15 +287,9 @@ namespace Nop.Plugin.Payments.Instamojo
 
         public override void Uninstall()
         {
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientId");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientId.Hint");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.ClientSecret.Hint");
+            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.RedirectionTip");            
             this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint");
             this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.EndPoint.Hint");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint");
-            this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.AuthEndPoint.Hint");
             this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey");
             this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateApiKey.Hint");
             this.DeletePluginLocaleResource("Plugins.Payments.Instamojo.PrivateAuthToken");

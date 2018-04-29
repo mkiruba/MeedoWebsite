@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ namespace Nop.Web.Framework
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IWebHelper _webHelper;
         private readonly NameValueCollection _inputValues;
+        private readonly Dictionary<string, string> headers = new Dictionary<string, string>();
 
         /// <summary>
         /// Gets or sets a remote URL
@@ -49,6 +51,14 @@ namespace Nop.Web.Framework
             get
             {
                 return _inputValues;
+            }
+        }
+
+        public Dictionary<string, string> Headers
+        {
+            get
+            {
+                return headers;
             }
         }
 
@@ -135,6 +145,10 @@ namespace Nop.Web.Framework
             var httpContext = _httpContextAccessor.HttpContext;
             var response = httpContext.Response;
             response.Clear();
+            foreach (var header in Headers)
+            {
+                httpContext.Request.Headers.Add(header.Key, header.Value);
+            }
             var data = Encoding.UTF8.GetBytes(sb.ToString());
             response.ContentType = "text/html; charset=utf-8";
             response.ContentLength = data.Length;

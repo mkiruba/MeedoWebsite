@@ -3,7 +3,7 @@
 <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Payments.Instamojo\net461\</OutputPath>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Payments.Instamojo\</OutputPath>
 	<OutDir>$(OutputPath)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
-    <ProjectReference Include="..\InstamojoAPI\InstamojoAPI.csproj" />
   </ItemGroup>
    <!-- This target execute after "Build" target -->
  <Target Name="NopTarget" AfterTargets="Build">

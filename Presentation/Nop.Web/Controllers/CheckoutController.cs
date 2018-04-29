@@ -1820,6 +1820,9 @@ namespace Nop.Web.Controllers
             catch (Exception exc)
             {
                 _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
+
+                //Todo : Redirect to checkout failed or error page
+                //Send emails
                 return Content(exc.Message);
             }
         }

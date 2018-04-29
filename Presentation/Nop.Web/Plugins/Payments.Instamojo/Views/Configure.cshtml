@@ -9,20 +9,20 @@
         <tr>
         <tr>
             <td class="adminTitle">
-                <nop-label asp-for="ClientId" />
+                <nop-label asp-for="AuthToken" />
             </td>
             <td class="adminData">
-                <nop-editor asp-for="ClientId" />
-                <span asp-validation-for="ClientId"></span>
+                <nop-editor asp-for="AuthToken" />
+                <span asp-validation-for="AuthToken"></span>
             </td>
         </tr>
         <tr>
             <td class="adminTitle">
-                <nop-label asp-for="ClientSecret" />
+                <nop-label asp-for="ApiKey" />
             </td>
             <td class="adminData">
-                <nop-editor asp-for="ClientSecret" />
-                <span asp-validation-for="ClientSecret"></span>
+                <nop-editor asp-for="ApiKey" />
+                <span asp-validation-for="ApiKey"></span>
             </td>
         </tr>
         <tr>
@@ -33,16 +33,7 @@
                 <nop-editor asp-for="EndPoint" />
                 <span asp-validation-for="EndPoint"></span>
             </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                <nop-label asp-for="AuthEndPoint" />
-            </td>
-            <td class="adminData">
-                <nop-editor asp-for="AuthEndPoint" />
-                <span asp-validation-for="AuthEndPoint"></span>
-            </td>
-        </tr>
+        </tr>        
         <tr>
             <td class="adminTitle">
                 <nop-label asp-for="WebHookUrl" />
