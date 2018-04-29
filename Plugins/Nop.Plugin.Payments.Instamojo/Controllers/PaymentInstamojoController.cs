@@ -129,14 +129,6 @@ namespace Nop.Plugin.Payments.Instamojo.Controllers
             if (processor == null ||
                 !processor.IsPaymentMethodActive(_paymentSettings) || !processor.PluginDescriptor.Installed)
                 throw new NopException("Instamojo module cannot be loaded");
-
-            //string Insta_client_id = _instamojoSettings.ClientId,// "tmLkZZ0zV41nJwhayBGBOI4m4I7bH55qpUBdEXGS",
-            //      Insta_client_secret = _instamojoSettings.ClientSecret,// "IDejdccGqKaFlGav9bntKULvMZ0g7twVFolC9gdrh9peMS0megSFr7iDpWwWIDgFUc3W5SlX99fKnhxsoy6ipdAv9JeQwebmOU6VRvOEQnNMWwZnWglYmDGrfgKRheXs",
-            //      Insta_Endpoint = _instamojoSettings.EndPoint,//InstamojoConstants.INSTAMOJO_API_ENDPOINT,
-            //      Insta_Auth_Endpoint = _instamojoSettings.AuthEndPoint;//InstamojoConstants.INSTAMOJO_AUTH_ENDPOINT;
-            //InstamojoAPI.Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
-
-            //PaymentOrderDetailsResponse objPaymentRequestDetailsResponse = objClass.getPaymentOrderDetailsByTransactionId(transaction_id);
             try
             {
                 var requestUrl = $"{_instamojoSettings.EndPoint}/{ payment_request_id}";// $"https://www.instamojo.com/api/1.1/payment-requests/{transaction_id}";
