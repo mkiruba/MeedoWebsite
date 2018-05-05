@@ -180,20 +180,31 @@ namespace Nop.Plugin.Payments.Instamojo.Controllers
             }
             catch (Exception ex)
             {
+                SendEmail(ex.ToString());
                 _logger.Error("Error in Instamojo Payment Return.", ex);
                 return RedirectToAction("Index", "Home", new { area = "" });
             }          
         }
-        public void SendEmail(string errorMessage, JObject rss)
+        public void SendEmail(string errorMessage, JObject rss = null)
         {
             var emailAccount = _emailAccountService.GetEmailAccountById(_emailAccountSettings.DefaultEmailAccountId);
             if (emailAccount != null)
             {
+                string body;
+                if (rss != null)
+                {
+                    body = $"Hi, \n Payment been failed for the genuine payment made by the customer. Please be in touch with customer as soon as possible.\n" +
+                   $"OrderId - {rss["payment_request"]["id"]}\n CustomerName - {rss["payment_request"]["buyer_name"]}\n " +
+                   $"CustomerEmailAddress - {rss["payment_request"]["email"]}\n CustomerPhoneNumber - {rss["payment_request"]["phone"]}\n" +
+                   $"Exception - {errorMessage}";
+                }
+                else
+                {
+                    body = $"Hi, \n Payment been failed for the genuine payment made by the customer. Please be in touch with customer as soon as possible.\n" +                   
+                   $"Exception - {errorMessage}";
+                }
                 var subject = "Meedo - Important Payment failed in Instamojo";
-                var body = $"Hi, \n Payment been failed for the genuine payment made by the customer. Please be in touch with customer as soon as possible.\n" +
-                    $"OrderId - {rss["payment_request"]["id"]}\n CustomerName - {rss["payment_request"]["buyer_name"]}\n " +
-                    $"CustomerEmailAddress - {rss["payment_request"]["email"]}\n CustomerPhoneNumber - {rss["payment_request"]["phone"]}\n" +
-                    $"Exception - {errorMessage}";
+               
                 _emailSender.SendEmail(emailAccount, subject, body, emailAccount.Email, emailAccount.DisplayName, "meedoindia@gmail.com", null);
             }
         }
