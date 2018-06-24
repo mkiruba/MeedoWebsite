@@ -15,7 +15,7 @@ namespace Nop.Web.Areas.Admin.Models.Orders
         }
 
         public int order_id { get; set; }
-        public DateTime order_date { get; set; }
+        public string order_date { get; set; }
         public CustomerDetail customer_details { get; set; }
         public DtgAddress shipping_address { get; set; }
         public string self_shipping { get; set; }
@@ -65,7 +65,7 @@ namespace Nop.Web.Areas.Admin.Models.Orders
 
         public class DtgProductDetails
         {
-            public DtgProducts product_detail;
+            public DtgProducts product_detail { get; set; }
         }
 
         public class DtgProducts
@@ -73,14 +73,13 @@ namespace Nop.Web.Areas.Admin.Models.Orders
             public string product_name { get; set; }
             public string product_color { get; set; }
             public string product_design_id { get; set; }
-            public DtgProductSize product_size { get; set; }
-
-            public class DtgProductSize
-            {
-                public string size_name { get; set; }
-                public int size_quantity { get; set; }
-                public decimal unit_price { get; set; }
-            }
-        }        
+            public DtgProductSize product_size { get; set; }                        
+        }
+        public class DtgProductSize
+        {
+            public string size_name { get; set; }
+            public int size_quantity { get; set; }
+            public decimal unit_price { get; set; }
+        }
     }
 }

@@ -507,7 +507,7 @@ namespace Nop.Web.Areas.Admin.Controllers
         {
             model.DtgProcessOrder = new OrderModel.DtgOrder();
             model.DtgProcessOrder.Id = order.Id;
-            model.DtgProcessOrder.OrderDate = order.PaidDateUtc.Value;
+            model.DtgProcessOrder.OrderDate = order.CreatedOnUtc;
             model.DtgProcessOrder.SelfShipping = false;
             model.DtgProcessOrder.Customer = new OrderModel.DtgCustomer
             {
@@ -1982,7 +1982,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 //if orderstatusid = 50, process dtg order
                 if (model.OrderStatusId == (int)OrderStatus.ProcessingDTG)
                 {
-                    var isSuccess = ProcessDTGOrder(order);
+                    var isSuccess = true;//ProcessDTGOrder(order);
                     //if order failed to send to DTG, do not change the status
                     if (isSuccess)
                         order.OrderStatusId = model.OrderStatusId;
@@ -2018,125 +2018,125 @@ namespace Nop.Web.Areas.Admin.Controllers
             }
         }
 
-        private bool ProcessDTGOrder(Order order)
-        {
-            var dtgApiKey = "HDvdxZCpcjVFyRM2Yb:9xThLX4RMZrVbYgFN";
-            var dtgBaseUrl = "http://99prints.99-dot-com-website-testing.com/api2";
-            var dtgOrderModel = new DtgOrderModel {            
-                order_id = GenerateId(),//order.Id,
-                order_date = order.PaidDateUtc.Value,
-                customer_details = new DtgOrderModel.CustomerDetail
-                {
-                    title = "Mr.",// "Mr.",
-                    first_name = order.BillingAddress.FirstName, //"99Prints",
-                    last_name = order.BillingAddress.LastName,//"99INC",
-                    email = order.BillingAddress.Email,//"mkiruba@gmail.com"
-                },
-                shipping_address = new DtgOrderModel.DtgAddress
-                {
-                    title = "Mr.",
-                    first_name = order.ShippingAddress.FirstName,
-                    last_name = order.ShippingAddress.LastName,
-                    address_line1 = order.ShippingAddress.Address1,
-                    address_line2 = order.ShippingAddress.Address2,
-                    country = order.ShippingAddress.Country.Name,
-                    city = order.ShippingAddress.City,
-                    state = order.ShippingAddress.StateProvince.Name,
-                    pincode = order.ShippingAddress.ZipPostalCode,
-                    mobile = order.ShippingAddress.PhoneNumber.Substring(0, 10)
-                },
-                self_shipping = "no",
-                billing_address = new DtgOrderModel.DtgAddress
-                {
-                    title = "Mr.",
-                    first_name = order.BillingAddress.FirstName,
-                    last_name = order.BillingAddress.LastName,
-                    address_line1 = order.BillingAddress.Address1,
-                    address_line2 = order.BillingAddress.Address2,
-                    country = order.BillingAddress.Country.Name,
-                    city = order.BillingAddress.City,
-                    state = order.BillingAddress.StateProvince.Name,
-                    pincode = order.BillingAddress.ZipPostalCode,
-                    mobile = order.BillingAddress.PhoneNumber.Substring(0, 10)
-                },
-                invoice = new DtgOrderModel.DtgInvoice
-                {
-                    invoice_number = order.Id,
-                    invoice_value = order.OrderTotal,
-                    tax_percentage = "5",//order.TaxRates,
-                    tax_value = order.OrderTotal - (order.OrderTotal * 0.95m),//order.OrderTax,
-                    payment_mode = order.PaymentMethodSystemName == "Payments.CashOnDelivery" ? "Cash on Delivery" : "Prepaid",
-                    special_instruction = "",
-                    payment_method = order.PaymentMethodSystemName,
-                    shipping_method = order.ShippingMethod,
-                    order_comment = "",
-                    voucher_text = "",
-                    voucher_value = "",
-                    free_shipping = "",
-                    cod_convenience_fee = order.PaymentMethodSystemName == "Payments.CashOnDelivery" ? order.PaymentMethodAdditionalFeeInclTax : 0.00m,
-                    currency = order.CustomerCurrencyCode
-                }
+        //private bool ProcessDTGOrder(Order order)
+        //{
+        //    var dtgApiKey = "HDvdxZCpcjVFyRM2Yb:9xThLX4RMZrVbYgFN";
+        //    var dtgBaseUrl = "http://99prints.99-dot-com-website-testing.com/api2";
+        //    var dtgOrderModel = new DtgOrderModel {            
+        //        order_id = GenerateId(),//order.Id,
+        //        order_date = order.PaidDateUtc.Value,
+        //        customer_details = new DtgOrderModel.CustomerDetail
+        //        {
+        //            title = "Mr.",// "Mr.",
+        //            first_name = order.BillingAddress.FirstName, //"99Prints",
+        //            last_name = order.BillingAddress.LastName,//"99INC",
+        //            email = order.BillingAddress.Email,//"mkiruba@gmail.com"
+        //        },
+        //        shipping_address = new DtgOrderModel.DtgAddress
+        //        {
+        //            title = "Mr.",
+        //            first_name = order.ShippingAddress.FirstName,
+        //            last_name = order.ShippingAddress.LastName,
+        //            address_line1 = order.ShippingAddress.Address1,
+        //            address_line2 = order.ShippingAddress.Address2,
+        //            country = order.ShippingAddress.Country.Name,
+        //            city = order.ShippingAddress.City,
+        //            state = order.ShippingAddress.StateProvince.Name,
+        //            pincode = order.ShippingAddress.ZipPostalCode,
+        //            mobile = order.ShippingAddress.PhoneNumber.Substring(0, 10)
+        //        },
+        //        self_shipping = "no",
+        //        billing_address = new DtgOrderModel.DtgAddress
+        //        {
+        //            title = "Mr.",
+        //            first_name = order.BillingAddress.FirstName,
+        //            last_name = order.BillingAddress.LastName,
+        //            address_line1 = order.BillingAddress.Address1,
+        //            address_line2 = order.BillingAddress.Address2,
+        //            country = order.BillingAddress.Country.Name,
+        //            city = order.BillingAddress.City,
+        //            state = order.BillingAddress.StateProvince.Name,
+        //            pincode = order.BillingAddress.ZipPostalCode,
+        //            mobile = order.BillingAddress.PhoneNumber.Substring(0, 10)
+        //        },
+        //        invoice = new DtgOrderModel.DtgInvoice
+        //        {
+        //            invoice_number = order.Id,
+        //            invoice_value = order.OrderTotal,
+        //            tax_percentage = "5",//order.TaxRates,
+        //            tax_value = order.OrderTotal - (order.OrderTotal * 0.95m),//order.OrderTax,
+        //            payment_mode = order.PaymentMethodSystemName == "Payments.CashOnDelivery" ? "Cash on Delivery" : "Prepaid",
+        //            special_instruction = "",
+        //            payment_method = order.PaymentMethodSystemName,
+        //            shipping_method = order.ShippingMethod,
+        //            order_comment = "",
+        //            voucher_text = "",
+        //            voucher_value = "",
+        //            free_shipping = "",
+        //            cod_convenience_fee = order.PaymentMethodSystemName == "Payments.CashOnDelivery" ? order.PaymentMethodAdditionalFeeInclTax : 0.00m,
+        //            currency = order.CustomerCurrencyCode
+        //        }
                 
-            };
-            List<DtgOrderModel.DtgProductDetails> productsList = new List<DtgOrderModel.DtgProductDetails>();
-            foreach (var orderItem in order.OrderItems)
-            {
-                var product_detail = new DtgOrderModel.DtgProductDetails()
-                {
-                    product_detail = new DtgOrderModel.DtgProducts
-                    {
-                        product_name = orderItem.Product.Name,
-                        product_color = "Black",
-                        product_design_id = "1111",
-                        product_size = new DtgOrderModel.DtgProducts.DtgProductSize
-                        {
-                            size_name = orderItem.AttributeDescription.Split(':').Last().Trim(),
-                            size_quantity = orderItem.Quantity,
-                            unit_price = orderItem.PriceInclTax
-                        }
-                    }
-                };
-                productsList.Add(product_detail);
-            }
-            dtgOrderModel.products = productsList;
+        //    };
+        //    List<DtgOrderModel.DtgProductDetails> productsList = new List<DtgOrderModel.DtgProductDetails>();
+        //    foreach (var orderItem in order.OrderItems)
+        //    {
+        //        var product_detail = new DtgOrderModel.DtgProductDetails()
+        //        {
+        //            product_detail = new DtgOrderModel.DtgProducts
+        //            {
+        //                product_name = orderItem.Product.Name,
+        //                product_color = "Black",
+        //                product_design_id = "1111",
+        //                product_size = new DtgOrderModel.DtgProducts.DtgProductSize
+        //                {
+        //                    size_name = orderItem.AttributeDescription.Split(':').Last().Trim(),
+        //                    size_quantity = orderItem.Quantity,
+        //                    unit_price = orderItem.PriceInclTax
+        //                }
+        //            }
+        //        };
+        //        productsList.Add(product_detail);
+        //    }
+        //    dtgOrderModel.products = productsList;
 
-            var json = JsonConvert.SerializeObject(dtgOrderModel);
-            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var bearerToken = Base64Encode(dtgApiKey);
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Add("Authorization", $"Basic {bearerToken}");// "abd485fcdfe77d7fb1925ce4899e13fb");
-                var task = client.PostAsync(dtgBaseUrl + "/orders", stringContent);
-                task.Wait();
-                var responseString = task.Result.Content.ReadAsStringAsync().Result;
-                //checkif status is 200 else raise error
-                //if success is true return true with order_id
+        //    var json = JsonConvert.SerializeObject(dtgOrderModel);
+        //    var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+        //    var bearerToken = Base64Encode(dtgApiKey);
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.DefaultRequestHeaders.Add("Authorization", $"Basic {bearerToken}");// "abd485fcdfe77d7fb1925ce4899e13fb");
+        //        var task = client.PostAsync(dtgBaseUrl + "/orders", stringContent);
+        //        task.Wait();
+        //        var responseString = task.Result.Content.ReadAsStringAsync().Result;
+        //        //checkif status is 200 else raise error
+        //        //if success is true return true with order_id
 
-                var rss = JObject.Parse(responseString);
-                if (rss["success"].ToString().ToLower() == "true")
-                {
-                    order.OrderNotes.Add(new OrderNote
-                    {
-                        Note = $"Order been sent for DTG. New status: {order.OrderStatus.GetLocalizedEnum(_localizationService, _workContext)}",
-                        DisplayToCustomer = false,
-                        CreatedOnUtc = DateTime.UtcNow
-                    });
-                    SuccessNotification($"Successfully placed DTG Order. Order Id: {rss["order_id"].ToString()},  Order Code: {rss["order_code"].ToString()}");
-                    return true;
-                }
-                else
-                {
-                    order.OrderNotes.Add(new OrderNote
-                    {
-                        Note = $"Order failed to send for DTG. New status: {order.OrderStatus.GetLocalizedEnum(_localizationService, _workContext)}",
-                        DisplayToCustomer = false,
-                        CreatedOnUtc = DateTime.UtcNow
-                    });
-                    ErrorNotification($"Failed to send order for dtg. Error : {rss["message"].ToString()}");
-                    return false;
-                }
-            }
-        }
+        //        var rss = JObject.Parse(responseString);
+        //        if (rss["success"].ToString().ToLower() == "true")
+        //        {
+        //            order.OrderNotes.Add(new OrderNote
+        //            {
+        //                Note = $"Order been sent for DTG. New status: {order.OrderStatus.GetLocalizedEnum(_localizationService, _workContext)}",
+        //                DisplayToCustomer = false,
+        //                CreatedOnUtc = DateTime.UtcNow
+        //            });
+        //            SuccessNotification($"Successfully placed DTG Order. Order Id: {rss["order_id"].ToString()},  Order Code: {rss["order_code"].ToString()}");
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            order.OrderNotes.Add(new OrderNote
+        //            {
+        //                Note = $"Order failed to send for DTG. New status: {order.OrderStatus.GetLocalizedEnum(_localizationService, _workContext)}",
+        //                DisplayToCustomer = false,
+        //                CreatedOnUtc = DateTime.UtcNow
+        //            });
+        //            ErrorNotification($"Failed to send order for dtg. Error : {rss["message"].ToString()}");
+        //            return false;
+        //        }
+        //    }
+        //}
         //only for testing- need to be removed later
         private static int GenerateId()
         {

@@ -458,9 +458,10 @@
         });
 
         function dtgOrderData() {
+            console.log("date: " + $('#@Html.IdFor(model => model.DtgProcessOrder.OrderDate)').val());
             var data = {
                 order_id: $('#@Html.IdFor(model => model.DtgProcessOrder.Id)').val(),
-                order_date: $('#@Html.IdFor(model => model.DtgProcessOrder.OrderDate)').val(),
+                order_date: convertDate($('#@Html.IdFor(model => model.DtgProcessOrder.OrderDate)').val()),
                 self_shipping: $('#@Html.IdFor(model => model.DtgProcessOrder.SelfShipping)').val(),
                 customer_details: customerDetails(),
                 shipping_address: shippingAddress(),
@@ -470,7 +471,12 @@
             };
             return data;
         }
-
+        function convertDate(dt) {         
+            var date = new Date(dt);
+            console.log("convert dt: " + date);
+            console.log("convert dt: " + date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear());
+            return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+         }
         function customerDetails() {
             var data = {
                 title: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val() == null ? "Mr": $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val(),
@@ -540,17 +546,33 @@
             for (var i = 0; i < productsJsonArr.length; i++) {
                 console.log("product" + productsJsonArr[i].ProductName);
                 var data = {
-                    product_detail: {
-                        product_name: productsJsonArr[i].ProductName,
-                        product_color: productsJsonArr[i].ProductColour,
-                        product_design_id: productsJsonArr[i].ProductDesignId,
-                        product_size: productSize(productsJsonArr[i])
-                    }
+                    product_detail: productDetail(productsJsonArr[i])
                 };
+                //var data = {
+                //    //product_name: productsJsonArr[i].ProductName,
+                //    //product_color: productsJsonArr[i].ProductColour,
+                //    //product_design_id: productsJsonArr[i].ProductDesignId,
+                //    //product_size: productSize(productsJsonArr[i])
+                //    product_detail: {
+                //        product_name: productsJsonArr[i].ProductName,
+                //        product_color: productsJsonArr[i].ProductColour,
+                //        product_design_id: productsJsonArr[i].ProductDesignId,
+                //        product_size: productSize(productsJsonArr[i])
+                //    }
+                //};
                 productArr.push(data);
             }        
             console.log("productArr" + JSON.stringify(productArr));
             return productArr;
+        }
+        function productDetail(product) {
+            var data = {
+                product_name: product.ProductName,
+                product_color: product.ProductColour,
+                product_design_id: product.ProductDesignId,
+                product_size: productSize(product)
+            };
+            return data;
         }
 
         function productSize(product) {
