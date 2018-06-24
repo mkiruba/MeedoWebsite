@@ -1,0 +1,565 @@
+﻿@model OrderModel
+@using Newtonsoft.Json;
+    <div class="panel-group">
+        @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_order_details_dtg_top", additionalData = Model.Id })
+
+        <div class="panel panel-default">
+
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="DtgProcessOrder.Id" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DtgProcessOrder.Id" />
+                        <span asp-validation-for="DtgProcessOrder.Id"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="DtgProcessOrder.OrderDate" />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="checkbox">
+                            <label>
+                                <nop-editor asp-for="DtgProcessOrder.OrderDate" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="DtgProcessOrder.SelfShipping" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DtgProcessOrder.SelfShipping" />
+                        <span asp-validation-for="DtgProcessOrder.SelfShipping"></span>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Customer.FirstName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Customer.FirstName" />
+                                <span asp-validation-for="DtgProcessOrder.Customer.FirstName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Customer.LastName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Customer.LastName" />
+                                <span asp-validation-for="DtgProcessOrder.Customer.LastName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Customer.Email" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Customer.Email" />
+                                <span asp-validation-for="DtgProcessOrder.Customer.Email"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.FirstName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.FirstName" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.FirstName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.LastName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.LastName" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.LastName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.AddressLine1" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.AddressLine1" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.AddressLine1"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.AddressLine2" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.AddressLine2" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.AddressLine2"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.Country" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.Country" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.Country"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.City" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.City" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.City"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.State" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.State" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.State"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.Pincode" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.Pincode" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.Pincode"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.ShippingAddress.Mobile" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.ShippingAddress.Mobile" />
+                                <span asp-validation-for="DtgProcessOrder.ShippingAddress.Mobile"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.FirstName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.FirstName" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.FirstName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.LastName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.LastName" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.LastName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.AddressLine1" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.AddressLine1" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.AddressLine1"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.AddressLine2" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.AddressLine2" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.AddressLine2"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.Country" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.Country" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.Country"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.City" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.City" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.City"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.State" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.State" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.State"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.Pincode" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.Pincode" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.Pincode"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.BillingAddress.Mobile" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.BillingAddress.Mobile" />
+                                <span asp-validation-for="DtgProcessOrder.BillingAddress.Mobile"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.InvoiceNumber" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.InvoiceNumber" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.InvoiceNumber"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.InvoiceValue" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.InvoiceValue" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.InvoiceValue"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.TaxPercentage" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.TaxPercentage" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.TaxPercentage"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.TaxValue" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.TaxValue" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.TaxValue"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.PaymentMode" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.PaymentMode" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.PaymentMode"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.SpecialInstruction" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.SpecialInstruction" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.SpecialInstruction"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.PaymentMethod" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.PaymentMethod" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.PaymentMethod"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.ShippingMethod" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.ShippingMethod" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.ShippingMethod"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.OrderComment" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.OrderComment" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.OrderComment"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.VoucherText" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.VoucherText" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.VoucherText"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.VoucherValue" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.VoucherValue" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.VoucherValue"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.FreeShipping" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.FreeShipping" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.FreeShipping"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.CodConvenienceFee" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.CodConvenienceFee" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.CodConvenienceFee"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DtgProcessOrder.Invoice.Currency" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DtgProcessOrder.Invoice.Currency" />
+                                <span asp-validation-for="DtgProcessOrder.Invoice.Currency"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @foreach (var product in Model.DtgProcessOrder.Products)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductName" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductName" />
+                                    <span asp-validation-for="@product.ProductName"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductColour" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductColour" />
+                                    <span asp-validation-for="@product.ProductColour"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductDesignId" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductDesignId" />
+                                    <span asp-validation-for="@product.ProductDesignId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductSize.SizeName" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductSize.SizeName" />
+                                    <span asp-validation-for="@product.ProductSize.SizeName"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductSize.SizeQuantity" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductSize.SizeQuantity" />
+                                    <span asp-validation-for="@product.ProductSize.SizeQuantity"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="@product.ProductSize.UnitPrice" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="@product.ProductSize.UnitPrice" />
+                                    <span asp-validation-for="@product.ProductSize.UnitPrice"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <button type="button" id="sendDtgOrder" class="btn btn-primary">Send Order to DTG</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_order_details_dtg_bottom", additionalData = Model.Id })
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#sendDtgOrder').click(function () {
+            var postData = {
+                dtgOrder: dtgOrderData()
+            };
+            addAntiForgeryToken(postData);
+            console.log('postData' + JSON.stringify(postData));
+            $.ajax({
+                cache:false,
+                type: "POST",
+                dataType: "json",                
+                url: "@(Url.Action("SendDtgOrder", "Order"))",
+                data: postData,
+            });
+        });
+
+        function dtgOrderData() {
+            var data = {
+                order_id: $('#@Html.IdFor(model => model.DtgProcessOrder.Id)').val(),
+                order_date: $('#@Html.IdFor(model => model.DtgProcessOrder.OrderDate)').val(),
+                self_shipping: $('#@Html.IdFor(model => model.DtgProcessOrder.SelfShipping)').val(),
+                customer_details: customerDetails(),
+                shipping_address: shippingAddress(),
+                billing_address: billingAddress(),
+                invoice: invoice(),
+                products: products()
+            };
+            return data;
+        }
+
+        function customerDetails() {
+            var data = {
+                title: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val() == null ? "Mr": $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val(),
+                first_name: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.FirstName)').val(),
+                last_name: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.LastName)').val(),
+                email: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Email)').val()
+            };
+            return data;
+        }
+
+        function shippingAddress() {
+            var data = {
+                title: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val() == null ? "Mr": $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val(),
+                first_name: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.FirstName)').val(),
+                last_name: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.LastName)').val(),
+                address_line1: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.AddressLine1)').val(),
+                address_line2: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.AddressLine2)').val(),
+                country: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.Country)').val(),
+                city: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.City)').val(),
+                state: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.State)').val(),
+                pincode: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.Pincode)').val(),
+                mobile: $('#@Html.IdFor(model => model.DtgProcessOrder.ShippingAddress.Mobile)').val()
+            };
+            return data;
+        }
+
+         function billingAddress() {
+            var data = {
+                title: $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val() == null ? "Mr": $('#@Html.IdFor(model => model.DtgProcessOrder.Customer.Title)').val(),
+                first_name: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.FirstName)').val(),
+                last_name: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.LastName)').val(),
+                address_line1: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.AddressLine1)').val(),
+                address_line2: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.AddressLine2)').val(),
+                country: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.Country)').val(),
+                city: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.City)').val(),
+                state: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.State)').val(),
+                pincode: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.Pincode)').val(),
+                mobile: $('#@Html.IdFor(model => model.DtgProcessOrder.BillingAddress.Mobile)').val()
+            };
+            return data;
+        }
+
+        function invoice() {
+            var data = {
+                invoice_number: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.InvoiceNumber)').val(),
+                invoice_value: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.InvoiceValue)').val(),
+                tax_percentage: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.TaxPercentage)').val(),
+                tax_value: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.TaxValue)').val(),
+                payment_mode: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.PaymentMode)').val(),
+                special_instruction: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.SpecialInstruction)').val(),
+                payment_method: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.PaymentMethod)').val(),
+                shipping_method: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.ShippingMethod)').val(),
+                order_comment: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.OrderComment)').val(),
+                voucher_text: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.VoucherText)').val(),
+                voucher_value: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.VoucherValue)').val(),
+                free_shipping: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.FreeShipping)').val(),
+                cod_convenience_fee: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.CodConvenienceFee)').val(),
+                currency: $('#@Html.IdFor(model => model.DtgProcessOrder.Invoice.Currency)').val()
+            };
+            return data;
+        }
+        function products() {
+            var productArr = [];
+            var productsJson = '@Html.Raw(JsonConvert.SerializeObject(Model.DtgProcessOrder.Products))';
+            var productsJsonArr = JSON.parse(productsJson);
+            console.log("productsJson" + productsJson);
+            for (var i = 0; i < productsJsonArr.length; i++) {
+                console.log("product" + productsJsonArr[i].ProductName);
+                var data = {
+                    product_detail: {
+                        product_name: productsJsonArr[i].ProductName,
+                        product_color: productsJsonArr[i].ProductColour,
+                        product_design_id: productsJsonArr[i].ProductDesignId,
+                        product_size: productSize(productsJsonArr[i])
+                    }
+                };
+                productArr.push(data);
+            }        
+            console.log("productArr" + JSON.stringify(productArr));
+            return productArr;
+        }
+
+        function productSize(product) {
+            var data = {
+                size_name: product.ProductSize.SizeName,
+                size_quantity: product.ProductSize.SizeQuantity,
+                unit_price: product.ProductSize.UnitPrice,
+            };
+            return data;
+        }
+    });
+    </script>

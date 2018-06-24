@@ -131,7 +131,7 @@ namespace Nop.Plugin.Payments.Instamojo.Controllers
                 throw new NopException("Instamojo module cannot be loaded");
             try
             {
-                var requestUrl = $"{_instamojoSettings.EndPoint}/{ payment_request_id}";// $"https://www.instamojo.com/api/1.1/payment-requests/{transaction_id}";
+                var requestUrl = $"{_instamojoSettings.EndPoint}{ payment_request_id}";// $"https://www.instamojo.com/api/1.1/payment-requests/{transaction_id}";
                 JObject rss;
                 string paymentStatus;
                 string responseString;

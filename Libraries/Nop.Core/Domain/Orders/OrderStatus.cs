@@ -20,6 +20,10 @@ namespace Nop.Core.Domain.Orders
         /// <summary>
         /// Cancelled
         /// </summary>
-        Cancelled = 40
+        Cancelled = 40,
+        /// <summary>
+        /// Order sent for DTG
+        /// </summary>
+        ProcessingDTG = 50
     }
 }

@@ -55,6 +55,10 @@
                 {
                     <nop-tab asp-name="tab-order-notes" asp-title="@T("Admin.Orders.OrderNotes")">@await Html.PartialAsync("_OrderDetails.Notes", Model)</nop-tab>
                 }
+                @*@if (Model.OrderStatus == "Processing D T G")*@
+                {
+                    <nop-tab asp-name="tab-order-dtg" asp-title="DTG Order">@await Html.PartialAsync("_OrderDetails.DTGOrder", Model)</nop-tab>
+                }
             </nop-tabs>
         </div>
     </div>

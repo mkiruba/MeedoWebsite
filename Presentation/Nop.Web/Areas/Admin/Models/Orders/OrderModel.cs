@@ -226,7 +226,7 @@ namespace Nop.Web.Areas.Admin.Models.Orders
         public bool CanPartiallyRefundOffline { get; set; }
         public bool CanVoid { get; set; }
         public bool CanVoidOffline { get; set; }
-        
+        public DtgOrder DtgProcessOrder { get; set; }
         #region Nested Classes
 
         public partial class OrderItemModel : BaseNopEntityModel
@@ -474,6 +474,68 @@ namespace Nop.Web.Areas.Admin.Models.Orders
             public string DiscountName { get; set; }
         }
 
+        public partial class DtgOrder : BaseNopEntityModel
+        {
+            public int OrderId { get; set; }
+            public DateTime OrderDate { get; set; }
+            public bool SelfShipping { get; set; }            
+            public DtgAddress BillingAddress { get; set; }
+            public DtgAddress ShippingAddress { get; set; }
+            public DtgCustomer Customer { get; set; }
+            public DtgInvoice Invoice { get; set; }
+            public List<DtgProductDetail> Products { get; set; }
+        }
+        public partial class DtgCustomer : BaseNopEntityModel
+        {
+            public string Title { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+        }
+        public partial class DtgAddress : BaseNopEntityModel
+        {
+            public string Title { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string AddressLine1 { get; set; }
+            public string AddressLine2 { get; set; }
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string Pincode { get; set; }
+            public string Mobile { get; set; }
+        }
+        
+        public partial class DtgInvoice : BaseNopEntityModel
+        {
+            public int InvoiceNumber { get; set; }
+            public decimal InvoiceValue { get; set; }
+            public decimal TaxPercentage { get; set; }
+            public decimal TaxValue { get; set; }
+            public string PaymentMode { get; set; }
+            public string SpecialInstruction { get; set; }
+            public string PaymentMethod { get; set; }
+            public string ShippingMethod { get; set; }
+            public string OrderComment { get; set; }
+            public string VoucherText { get; set; }
+            public decimal VoucherValue { get; set; }
+            public string FreeShipping { get; set; }
+            public decimal CodConvenienceFee { get; set; }
+            public string Currency { get; set; }
+        }
+        public partial class DtgProductDetail : BaseNopEntityModel
+        {
+            public string ProductName { get; set; }
+            public string ProductColour { get; set; }
+            public string ProductDesignId { get; set; }
+            public DtgProductSize ProductSize { get; set; }            
+        }
+        public partial class DtgProductSize : BaseNopEntityModel
+        {
+            public string SizeName { get; set; }
+            public int SizeQuantity { get; set; }
+            public decimal UnitPrice { get; set; }            
+        }
         #endregion
     }
 

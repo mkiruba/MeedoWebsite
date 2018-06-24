@@ -21,5 +21,6 @@
   "Widgets.FacebookPixel",
   "Widgets.Instagram",
   "Payments.CashOnDelivery",
-  "Payments.Instamojo"
+  "Payments.Instamojo",
+  "Misc.MailChimp"
 ]
