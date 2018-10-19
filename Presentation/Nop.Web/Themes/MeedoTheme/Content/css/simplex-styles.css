@@ -4215,6 +4215,16 @@ a.eu-cookie-privacyinfo-tag {
     .wishlist-content .panel.panel-default > table, .order-summary-content .panel.panel-default.cart-item-table > table {
         border-bottom: 1px solid #ddd;
     }
+    /* Custom remove icon button for each item in the shopping-cart */
+    .order-summary-content .remove-from-cart > input[type='checkbox'] {
+        display: none;
+    }
+    .order-summary-content .remove-from-cart span.remove-from-cart-item-action:hover {
+        color: #ea5648;
+        cursor: pointer;
+    }
+
+   
 
     .order-summary-content .cart .cart-item-row td, .wishlist-content .cart .cart-item-row td {
         vertical-align: middle;

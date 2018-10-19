@@ -136,6 +136,10 @@ function displayBarNotification(message, messagetype, timeout) {
     if (messagetype == 'success') {       
         toastr.options.positionClass = 'toast-top-center';
         toastr.success(htmlcode);
+        $('#flyout-cart-wrapper').addClass('active');
+        setInterval(function() {
+            $('#flyout-cart-wrapper').removeClass('active');
+        }, 5000);
     }
     else if (messagetype == 'error') {
         toastr.options.positionClass = 'toast-top-center';

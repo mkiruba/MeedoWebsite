@@ -90,7 +90,8 @@
                                         else
                                         {
                                             <span class="visible-xs hidden-lg hidden-md hidden-sm">@T("ShoppingCart.Remove")</span>
-                                            <input type="checkbox" name="removefromcart" value="@(item.Id)" />
+                                            <input type="checkbox" id="remove-from-cart-@item.Id" name="removefromcart" value="@(item.Id)" />
+                                            <span data-checkbox-id="remove-from-cart-@item.Id" class="remove-from-cart-item-action fa fa-remove fa-2x"></span>
                                         }
                                     </td>
                                     }
@@ -501,5 +502,13 @@ else
             $("tr.desktop-original").html("");
         }
     }
+
+    $(document).ready(function () {
+        var container = '.order-summary-content';
+        $('.remove-from-cart span.remove-from-cart-item-action', container).on('click', function () {
+            $('#' + $(this).data('checkbox-id'), container).prop('checked', true);
+            $('.update-cart-button', container).click();
+        });
+    });
 </script>
 

@@ -526,8 +526,8 @@ namespace Nop.Web.Areas.Admin.Models.Orders
         public partial class DtgProductDetail : BaseNopEntityModel
         {
             public string ProductName { get; set; }
-            public string ProductColour { get; set; }
-            public string ProductDesignId { get; set; }
+            public List<string> ProductColours { get; set; }
+            public List<string> ProductDesignIds { get; set; }
             public DtgProductSize ProductSize { get; set; }            
         }
         public partial class DtgProductSize : BaseNopEntityModel

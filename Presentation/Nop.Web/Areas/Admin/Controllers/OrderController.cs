@@ -565,8 +565,8 @@ namespace Nop.Web.Areas.Admin.Controllers
                 model.DtgProcessOrder.Products.Add(new OrderModel.DtgProductDetail
                 {
                     ProductName = orderItem.Product.Name,
-                    ProductColour = "Black",
-                    ProductDesignId = "1111",
+                    ProductColours = GetDtgProductColours(order),
+                    ProductDesignIds = GetDtgProductDesigns(order),
                     ProductSize = new OrderModel.DtgProductSize
                     {
                         SizeName = orderItem.AttributeDescription.Split(':').Last().Trim(),
@@ -574,7 +574,55 @@ namespace Nop.Web.Areas.Admin.Controllers
                         UnitPrice = orderItem.PriceInclTax
                     }
                 });
-            }           
+            }
+        }
+
+        private static List<string> GetDtgProductDesigns(Order order)
+        {
+            var dtgApiKey = "HDvdxZCpcjVFyRM2Yb:9xThLX4RMZrVbYgFN";
+            var dtgBaseUrl = "http://99prints.99-dot-com-website-testing.com/api2";
+            var productDesignIds = new List<string>();
+            if (order == null)
+                throw new ArgumentException("No order found with the specified id");
+
+            var bearerToken = Base64Encode(dtgApiKey);
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Basic {bearerToken}");// "abd485fcdfe77d7fb1925ce4899e13fb");
+                var task = client.GetAsync(dtgBaseUrl + "/designs");
+                task.Wait();
+                var responseString = task.Result.Content.ReadAsStringAsync().Result;
+                //checkif status is 200 else raise error
+                //if success is true return true with order_id
+
+                var rss = JArray.Parse(responseString);
+                productDesignIds = rss.Select(c => c["merchant_design_id"].ToString()).ToList();
+            }
+            return productDesignIds;
+        }
+
+        private static List<string> GetDtgProductColours(Order order)
+        {
+            var dtgApiKey = "HDvdxZCpcjVFyRM2Yb:9xThLX4RMZrVbYgFN";
+            var dtgBaseUrl = "http://99prints.99-dot-com-website-testing.com/api2";
+            var productDesignIds = new List<string>();
+            if (order == null)
+                throw new ArgumentException("No order found with the specified id");
+
+            var bearerToken = Base64Encode(dtgApiKey);
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Basic {bearerToken}");// "abd485fcdfe77d7fb1925ce4899e13fb");
+                var task = client.GetAsync(dtgBaseUrl + "/products");
+                task.Wait();
+                var responseString = task.Result.Content.ReadAsStringAsync().Result;
+                //checkif status is 200 else raise error
+                //if success is true return true with order_id
+
+                var rss = JArray.Parse(responseString);
+                productDesignIds = rss.Select(x => x["available_colors"]).Children().Select(p => p["color_name"].ToString()).ToList();
+            }
+            return productDesignIds;
         }
 
         protected virtual void PrepareProducts(OrderModel model, Order order, Currency primaryStoreCurrency)
