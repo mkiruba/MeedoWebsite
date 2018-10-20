@@ -203,10 +203,11 @@
                                                     }
                                                     else
                                                     {
-                                                        <div class="custom-checkbox">
-                                                            <input type="checkbox" name="removefromcart" value="@(item.Id)" id="@(item.Id)-res" />
-                                                            <label for="@(item.Id)-res"></label>
-                                                        </div>
+                                                    <div class="custom-checkbox">
+                                                        <input type="checkbox" name="removefromcart" value="@(item.Id)" id="@(item.Id)-res" />                                                        
+                                                        <span data-checkbox-id="@(item.Id)-res" class="remove-from-cart-item-action fa fa-remove fa-2x"></span>
+                                                        <label for="@(item.Id)-res"></label>
+                                                    </div>
                                                     }
                                                     <span>@T("ShoppingCart.Remove")</span>
                                                 </div>

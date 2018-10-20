@@ -4219,6 +4219,9 @@ a.eu-cookie-privacyinfo-tag {
     .order-summary-content .remove-from-cart > input[type='checkbox'] {
         display: none;
     }
+    .order-summary-content .remove-from-cart .custom-checkbox > input[type='checkbox'] {
+        display: none;
+    }
     .order-summary-content .remove-from-cart span.remove-from-cart-item-action:hover {
         color: #ea5648;
         cursor: pointer;
