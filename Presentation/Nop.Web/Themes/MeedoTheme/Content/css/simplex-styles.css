@@ -2922,8 +2922,8 @@ a.eu-cookie-privacyinfo-tag {
 
 
 
-/* PRODUCT DETAILS PAGE STYLE */
-.product-details-page .overview {
+    /* PRODUCT DETAILS PAGE STYLE */
+    .product-details-page .overview {
     float: left;
     width: 100%;
 }
@@ -5315,6 +5315,9 @@ a.eu-cookie-privacyinfo-tag {
 
 #toast-container .toast-info .sales-notification-product {
     margin: 0px 0px -20px 10px;
+}
+.toast-message .content {
+    text-align:center;
 }
 /* according menu */
 .new-checkout #accordion-container {

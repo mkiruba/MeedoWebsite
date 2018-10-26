@@ -112,7 +112,7 @@ function displayBarNotification(message, messagetype, timeout) {
         "debug": false,
         "newestOnTop": true,
         "progressBar": false,
-        "positionClass": "toast-top-center",
+        "positionClass": "toast-top-full-width",
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "500",
@@ -134,21 +134,22 @@ function displayBarNotification(message, messagetype, timeout) {
         }
     }
     if (messagetype == 'success') {       
-        toastr.options.positionClass = 'toast-top-center';
-        toastr.success(htmlcode);
+        toastr.options.positionClass = 'toast-top-full-width';
+        toastr.success(htmlcode);        
         $('#flyout-cart-wrapper').addClass('active');
         setInterval(function() {
             $('#flyout-cart-wrapper').removeClass('active');
         }, 5000);
     }
     else if (messagetype == 'error') {
-        toastr.options.positionClass = 'toast-top-center';
+        toastr.options.positionClass = 'toast-top-full-width';
         toastr.error(htmlcode);
     }
     else if (messagetype == 'warning') {
-        toastr.options.positionClass = 'toast-top-center';
+        toastr.options.positionClass = 'toast-top-full-width';
         toastr.warning(htmlcode);
     }
+    topFunction();
     startNotification();
     //$('#bar-notification').append(htmlcode)
     //    .addClass(cssclass)
@@ -168,6 +169,12 @@ function displayBarNotification(message, messagetype, timeout) {
     //    }, timeout);
     //}
 }
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 //function displayBarNotification(message, messagetype, timeout) {
 //    clearTimeout(barNotificationTimeout);
 
