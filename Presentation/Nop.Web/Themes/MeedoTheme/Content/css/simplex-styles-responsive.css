@@ -79,6 +79,11 @@
     .product-details-page .addtocart-quantity-box,.product-details-page .availability .stock strong,.product-details-page .stock .value{display:inline-block;float:none;}
     .product-details-page .add-to-cart .quantity-box label{float:none;vertical-align:text-bottom;display:inline-block;}
     .product-details-page .add-to-cart .product-add-button{float:none;margin-top:15px;display:inline-block;}
+    .product-details-page .add-to-cart .product-buy-button {
+        float: none;
+        margin-top: 15px;
+        display: inline-block;
+    }
     .product-details-page .attributes{clear:both;}
     .product-details-page .attributes .text-prompt{display:inline-block;margin-bottom:5px;}
     .giftcard textarea,.giftcard input,.product-details-page .attributes input,.product-details-page .attributes .btn-dropdown.form-control,.product-details-page .attributes select{width:auto !important;margin:0 auto;max-width:100%;display:inline-block;}

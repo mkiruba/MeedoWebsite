@@ -16341,6 +16341,9 @@
   <LocaleResource Name="ShoppingCart.AddToCart">
     <Value>Add to cart</Value>
   </LocaleResource>
+  <LocaleResource Name="ShoppingCart.BuyNow">
+    <Value>Buy Now</Value>
+  </LocaleResource>
   <LocaleResource Name="ShoppingCart.AddToCart.Update">
     <Value>Update</Value>
   </LocaleResource>

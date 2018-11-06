@@ -3353,8 +3353,20 @@ a.eu-cookie-privacyinfo-tag {
 
 .product-details-page .add-to-cart .product-add-button {
     float: left;
+    margin-right: 10px;
 }
+    .product-details-page .add-to-cart .product-buy-button .add-to-cart-button {
+        background: url(../images/product-cart-icon.png) no-repeat 12px -20px #ea5648;
+        text-transform: uppercase;
+        padding-left: 40px;
+    }
 
+        .product-details-page .add-to-cart .product-buy-button .add-to-cart-button:hover {
+            background: url(../images/product-cart-icon.png) no-repeat 12px -20px #333;
+        }
+.product-details-page .add-to-cart .product-buy-button {
+    margin-left: 10px;
+}
 .product-details-page .overview-buttons {
     clear: both;
     float: left;

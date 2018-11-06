@@ -131,7 +131,8 @@ namespace Nop.Web.Infrastructure
             //add product to cart (with attributes and options). used on the product details pages.
             routeBuilder.MapLocalizedRoute("AddProductToCart-Details", "addproducttocart/details/{productId:min(0)}/{shoppingCartTypeId:min(0)}",
 				new { controller = "ShoppingCart", action = "AddProductToCart_Details" });
-
+            routeBuilder.MapLocalizedRoute("BuyProductAndCheckout-Details", "buyproductandcheckout/details/{productId:min(0)}/{shoppingCartTypeId:min(0)}",
+                new { controller = "ShoppingCart", action = "BuyProductAndCheckout_Details" });
             //product tags
             routeBuilder.MapLocalizedRoute("ProductsByTag", "producttag/{productTagId:min(0)}/{SeName?}",
 				new { controller = "Catalog", action = "ProductsByTag" });

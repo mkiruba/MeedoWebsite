@@ -581,7 +581,7 @@ namespace Nop.Web.Controllers
                                 Url.RouteUrl("Wishlist")),
                             updatetopwishlistsectionhtml
                         });
-                    }
+                    }                
                 case ShoppingCartType.ShoppingCart:
                 default:
                     {
@@ -935,7 +935,113 @@ namespace Nop.Web.Controllers
             //return result
             return GetProductToCartDetails(addToCartWarnings, cartType, product);
         }
-        
+
+        [HttpPost]
+        public virtual IActionResult BuyProductAndCheckout_Details(int productId, int shoppingCartTypeId, IFormCollection form)
+        {
+            var product = _productService.GetProductById(productId);
+            if (product == null)
+            {
+                return Json(new
+                {
+                    redirect = Url.RouteUrl("HomePage")
+                });
+            }
+
+            //we can add only simple products
+            if (product.ProductType != ProductType.SimpleProduct)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Only simple products could be added to the cart"
+                });
+            }
+
+            //update existing shopping cart item
+            var updatecartitemid = 0;
+            foreach (var formKey in form.Keys)
+                if (formKey.Equals($"addtocart_{productId}.UpdatedShoppingCartItemId", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    int.TryParse(form[formKey], out updatecartitemid);
+                    break;
+                }
+            ShoppingCartItem updatecartitem = null;
+            if (_shoppingCartSettings.AllowCartItemEditing && updatecartitemid > 0)
+            {
+                //search with the same cart type as specified
+                var cart = _workContext.CurrentCustomer.ShoppingCartItems
+                    .Where(x => x.ShoppingCartTypeId == shoppingCartTypeId)
+                    .LimitPerStore(_storeContext.CurrentStore.Id)
+                    .ToList();
+                updatecartitem = cart.FirstOrDefault(x => x.Id == updatecartitemid);
+                //not found? let's ignore it. in this case we'll add a new item
+                //if (updatecartitem == null)
+                //{
+                //    return Json(new
+                //    {
+                //        success = false,
+                //        message = "No shopping cart item found to update"
+                //    });
+                //}
+                //is it this product?
+                if (updatecartitem != null && product.Id != updatecartitem.ProductId)
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "This product does not match a passed shopping cart item identifier"
+                    });
+                }
+            }
+
+            //customer entered price
+            var customerEnteredPriceConverted = decimal.Zero;
+            if (product.CustomerEntersPrice)
+            {
+                foreach (var formKey in form.Keys)
+                {
+                    if (formKey.Equals($"addtocart_{productId}.CustomerEnteredPrice", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (decimal.TryParse(form[formKey], out decimal customerEnteredPrice))
+                            customerEnteredPriceConverted = _currencyService.ConvertToPrimaryStoreCurrency(customerEnteredPrice, _workContext.WorkingCurrency);
+                        break;
+                    }
+                }
+            }
+
+            //quantity
+            var quantity = 1;
+            foreach (var formKey in form.Keys)
+                if (formKey.Equals($"addtocart_{productId}.EnteredQuantity", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    int.TryParse(form[formKey], out quantity);
+                    break;
+                }
+
+            var addToCartWarnings = new List<string>();
+
+            //product and gift card attributes
+            var attributes = ParseProductAttributes(product, form, addToCartWarnings);
+
+            //rental attributes
+            DateTime? rentalStartDate = null;
+            DateTime? rentalEndDate = null;
+            if (product.IsRental)
+            {
+                ParseRentalDates(product, form, out rentalStartDate, out rentalEndDate);
+            }
+
+            var cartType = updatecartitem == null ? (ShoppingCartType)shoppingCartTypeId :
+                //if the item to update is found, then we ignore the specified "shoppingCartTypeId" parameter
+                updatecartitem.ShoppingCartType;
+
+            SaveItem(updatecartitem, addToCartWarnings, product, cartType, attributes, customerEnteredPriceConverted, rentalStartDate, rentalEndDate, quantity);
+
+            //return result
+            return GetProductToCartDetails(addToCartWarnings, cartType, product);
+        }
+
         //handle product attribute selection event. this way we return new price, overridden gtin/sku/mpn
         //currently we use this method on the product details pages
         [HttpPost]

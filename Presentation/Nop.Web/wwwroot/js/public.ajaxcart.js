@@ -57,7 +57,25 @@ var AjaxCart = {
             error: this.ajaxFailure
         });
     },
+    buyproduct_details: function (urladd, formselector) {
+        if (this.loadWaiting != false) {
+            return;
+        }
+        this.setLoadWaiting(true);
 
+        $.ajax({
+            cache: false,
+            url: urladd,
+            data: $(formselector).serialize(),
+            type: 'post',
+            success: this.success_process,
+            complete: function (data) {
+                this.resetLoadWaiting;
+                location.href = "/onepagecheckout";                
+            },
+            error: this.ajaxFailure
+        });        
+    },
     //add a product to compare list
     addproducttocomparelist: function (urladd) {
         if (this.loadWaiting != false) {
@@ -108,7 +126,7 @@ var AjaxCart = {
                     //no timeout for errors
                     displayBarNotification(response.message, 'error', 0);
                 }
-            }
+            }            
             return false;
         }
         if (response.redirect) {
