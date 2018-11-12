@@ -68,11 +68,8 @@ var AjaxCart = {
             url: urladd,
             data: $(formselector).serialize(),
             type: 'post',
-            success: this.success_process,
-            complete: function (data) {
-                this.resetLoadWaiting;
-                location.href = "/onepagecheckout";                
-            },
+            success: this.success_process,            
+            complete: this.resetLoadWaiting,
             error: this.ajaxFailure
         });        
     },
