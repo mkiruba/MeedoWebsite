@@ -68,7 +68,7 @@ var AjaxCart = {
             url: urladd,
             data: $(formselector).serialize(),
             type: 'post',
-            success: this.success_process,            
+            success: this.buy_success_process,                    
             complete: this.resetLoadWaiting,
             error: this.ajaxFailure
         });        
@@ -89,7 +89,49 @@ var AjaxCart = {
             error: this.ajaxFailure
         });
     },
-
+    buy_success_process: function (response) {
+        fbq('track', 'AddToWishlist');
+        fbq('track', 'AddToCart');
+        if (response.updatetopcartsectionhtml) {
+            $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
+        }
+        if (response.updatetopwishlistsectionhtml) {
+            $(AjaxCart.topwishlistselector).html(response.updatetopwishlistsectionhtml);
+        }
+        if (response.updateflyoutcartsectionhtml) {
+            $(AjaxCart.flyoutcartselector).replaceWith(response.updateflyoutcartsectionhtml);
+        }
+        if (response.message) {
+            //display notification
+            if (response.success == true) {
+                //success
+                if (AjaxCart.usepopupnotifications == true) {
+                    displayPopupNotification(response.message, 'success', true);
+                }
+                else {
+                    //specify timeout for success messages
+                    displayBarNotification(response.message, 'success', 3500);
+                }
+                location.href = "/onepagecheckout"
+            }
+            else {
+                //error
+                if (AjaxCart.usepopupnotifications == true) {
+                    displayPopupNotification(response.message, 'error', true);
+                }
+                else {
+                    //no timeout for errors
+                    displayBarNotification(response.message, 'error', 0);
+                }
+            }
+            return false;
+        }
+        if (response.redirect) {
+            location.href = response.redirect;
+            return true;
+        }
+        return false;
+    },
     success_process: function (response) {
         fbq('track', 'AddToWishlist');
         fbq('track', 'AddToCart');
