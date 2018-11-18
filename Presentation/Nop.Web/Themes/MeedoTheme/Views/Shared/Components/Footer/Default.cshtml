@@ -11,12 +11,24 @@
 
     <script>
         $(document).ready(function () {
-            $('.fbreview-items').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 2000,
-            });
+            var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+
+            if (isMobile.matches) {
+                $('.fbreview-items').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                });
+            }
+            else {
+                $('.fbreview-items').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                });
+            }
         })
     </script>
     <div class="fbreview-items">
