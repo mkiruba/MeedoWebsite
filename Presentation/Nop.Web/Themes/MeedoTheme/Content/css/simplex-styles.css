@@ -4334,8 +4334,7 @@ a.eu-cookie-privacyinfo-tag {
         width: 100%;
         margin-bottom: 30px;
         border: none;
-        box-shadow: none;
-        margin-bottom: 0px;
+        box-shadow: none;        
     }
 
     .wishlist-page .totals .total-info .panel.panel-default, .order-summary-content .totals .total-info .panel.panel-default {

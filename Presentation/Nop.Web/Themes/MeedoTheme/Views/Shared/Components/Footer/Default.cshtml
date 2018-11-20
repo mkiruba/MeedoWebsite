@@ -11,27 +11,32 @@
 
     <script>
         $(document).ready(function () {
-            var isMobile = window.matchMedia("only screen and (max-width: 760px)");
-
-            if (isMobile.matches) {
-                $('.fbreview-items').slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                });
-            }
-            else {
-                $('.fbreview-items').slick({
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                });
-            }
+            console.log('pathname: ' + window.location.pathname);
+            console.log('href: ' + window.location.href);
+            console.log('origin: ' + window.location.origin);
+            if (window.location.pathname == '/') { 
+                var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+                $('.fbreview-items').show();
+                if (isMobile.matches) {
+                    $('.fbreview-items').slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 2000,
+                    });
+                }
+                else {
+                    $('.fbreview-items').slick({
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 2000,
+                    });
+                }
+            }            
         })
     </script>
-    <div class="fbreview-items">
+    <div class="fbreview-items" style="display:none;">
         <div>
             <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsowmya.srini92%2Fposts%2F1652257061509503%3A0&width=500" width="500" height="316" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         </div>
