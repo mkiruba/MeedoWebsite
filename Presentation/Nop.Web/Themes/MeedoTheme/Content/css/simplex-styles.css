@@ -3136,9 +3136,9 @@ a.eu-cookie-privacyinfo-tag {
     }
 
 .product-details-page .free-shipping {
-    color: #fff;
+    /*color: #fff;*/
     display: inline-block;
-    background: #333;
+    /*background: #333;*/
     padding: 10px 15px;
     margin-bottom: 20px;
 }
@@ -4290,7 +4290,7 @@ a.eu-cookie-privacyinfo-tag {
         }
 
         .order-summary-content .update-continue-button .continue-shopping-button {
-            background: url(../images/shopping-cart-icon.png) no-repeat 20px 10px #333;
+            background: url(../images/shopping-cart-icon.png) no-repeat 20px 10px #a5a5a5;
             padding-left: 50px;
             text-transform: uppercase;
         }

@@ -1497,8 +1497,9 @@ namespace Nop.Web.Controllers
                 if (!_orderSettings.AnonymousCheckoutAllowed 
                     || downloadableProductsRequireRegistration)
                     return Challenge();
-                
-                return RedirectToRoute("LoginCheckoutAsGuest", new {returnUrl = Url.RouteUrl("ShoppingCart")});
+
+                //return RedirectToRoute("LoginCheckoutAsGuest", new {returnUrl = Url.RouteUrl("ShoppingCart")});
+                return RedirectToRoute("Checkout");
             }
             
             return RedirectToRoute("Checkout");
