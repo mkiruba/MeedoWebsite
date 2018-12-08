@@ -4916,7 +4916,7 @@ a.eu-cookie-privacyinfo-tag {
     }
 
     .checkout-data .payment-method .method-name .payment-details {
-        float: left;
+        /*float: left;*/
         margin-top: 5px;
     }
 

@@ -1,4 +1,6 @@
-﻿@model CheckoutPaymentMethodModel
+﻿
+@model CheckoutPaymentMethodModel
+
 <div class="checkout-data">
     @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_payment_method_top" })
     <div class="section payment-method">
@@ -29,50 +31,137 @@
             <ul class="method-list" id="payment-method-block">
                 @for (var i = 0; i < Model.PaymentMethods.Count; i++)
                 {
-                    var paymentMethod = Model.PaymentMethods[i];
-                    var paymentMethodName = paymentMethod.Name;
-                    if (!string.IsNullOrEmpty(paymentMethod.Fee))
+                    if (Model.PaymentMethods[i].PaymentMethodSystemName == "Payments.CashOnDelivery")
                     {
-                        paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                        var paymentMethod = Model.PaymentMethods[i];
+                        var paymentMethodName = paymentMethod.Name;
+                        if (!string.IsNullOrEmpty(paymentMethod.Fee))
+                        {
+                            paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                        }
+                        <li>
+                            <div class="method-name">
+                                @*@if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
+                                {
+                                    <div class="payment-logo col-sm-12 col-md-4">
+                                        <label for="paymentmethod_@(i)">
+                                            <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
+                                        </label>
+                                    </div>
+                                }*@
+                                <div class="payment-details panel panel-default">
+                                    <div class="large radio">
+                                        <label class="panel-heading">
+                                            <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected">
+                                            <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                                            @if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
+                                            {
+                                                @*<div class="payment-logo col-sm-12 col-md-4">*@
+                                                <label for="paymentmethod_@(i)">
+                                                    <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
+                                                </label>
+                                                @*</div>*@
+                                            }
+                                            else
+                                            {
+                                                <label for="paymentmethod_@(i)">@paymentMethodName</label>
+                                                @if (!string.IsNullOrEmpty(paymentMethod.Description))
+                                                {
+                                                    <label style="display:block" class="payment-description">@paymentMethod.Description</label>
+                                                }
+                                            }
+                                        </label>
+                                        @*<div class="panel-body">
+                                            @if (!string.IsNullOrEmpty(paymentMethod.Description))
+                                            {
+                                                <label style="display:block" class="payment-description">@paymentMethod.Description</label>
+                                            }
+                                        </div>*@
+                                    </div>
+                                    @*<input id="paymentmethod_@(i)" type="radio" name="paymentmethod" class="custom-control-input" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected" />
+                                    <label for="paymentmethod_@(i)">@paymentMethodName</label>*@
+                                </div>
+                            </div>
+                        </li>
                     }
-                    <li>
-                        <div class="method-name">
-                            @if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
+
+                }
+            </ul>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title" style="color:#ea5648; font-weight:bold">Credit Card / Debit Card / Net Banking / UPI</h5>
+                </div>
+                <div class="card-body">                   
+                    <ul class="method-list" id="payment-method-block">
+                        @for (var i = 0; i < Model.PaymentMethods.Count; i++)
+                        {
+                            if (Model.PaymentMethods[i].PaymentMethodSystemName != "Payments.CashOnDelivery")
+                            {
+                                var paymentMethod = Model.PaymentMethods[i];
+                                var paymentMethodName = paymentMethod.Name;
+                                if (!string.IsNullOrEmpty(paymentMethod.Fee))
+                                {
+                                    paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                                }
+                                <li>
+                                    <div class="method-name">
+                                        @*@if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
                             {
                                 <div class="payment-logo col-sm-12 col-md-4">
                                     <label for="paymentmethod_@(i)">
                                         <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
                                     </label>
                                 </div>
+                            }*@
+                                        <div class="payment-details panel panel-default">
+                                            <div class="large radio">
+                                                <label class="panel-heading">
+                                                    <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected">
+                                                    <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                                                    @if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
+                                                    {
+                                                        @*<div class="payment-logo col-sm-12 col-md-4">*@
+                                                        <label for="paymentmethod_@(i)">
+                                                            <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
+                                                        </label>
+                                                        @*</div>*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <label for="paymentmethod_@(i)">@paymentMethodName</label>
+                                                        @if (!string.IsNullOrEmpty(paymentMethod.Description))
+                                                        {
+                                                            <label style="display:block" class="payment-description">@paymentMethod.Description</label>
+                                                        }
+                                                    }
+                                                </label>
+                                                <div class="panel-body">
+                                                    <img class="card-img-top" style="margin-left:55px;margin-top:10px" src="../../Themes/MeedoTheme/Content/images/payment-method1.png" alt="Card image">
+                                                    @*@if (!string.IsNullOrEmpty(paymentMethod.Description))
+                                                    {
+                                                        <label style="display:block" class="payment-description">@paymentMethod.Description</label>
+                                                    }*@
+                                                </div>
+                                            </div>
+                                            @*<input id="paymentmethod_@(i)" type="radio" name="paymentmethod" class="custom-control-input" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected" />
+                                <label for="paymentmethod_@(i)">@paymentMethodName</label>*@
+                                        </div>
+                                    </div>
+                                </li>
                             }
-                            <div class="payment-details">
-                                <div class="large radio">
-                                    <label>
-                                        <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected">
-                                        <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
-                                        <label for="paymentmethod_@(i)">@paymentMethodName</label>
-                                        @if (!string.IsNullOrEmpty(paymentMethod.Description))
-                                        {
-                                            <label style="display:block" class="payment-description">@paymentMethod.Description</label>
-                                        }
-                                    </label>
 
-                                </div>
-                                @*<input id="paymentmethod_@(i)" type="radio" name="paymentmethod" class="custom-control-input" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected" />
-                                    <label for="paymentmethod_@(i)">@paymentMethodName</label>*@
-
-                            </div>
-                        </div>
-                    </li>
+                        }
+                    </ul>
+                </div>
+                </div>
                 }
-            </ul>
-        }
-        else
-        {
-            <div class="message-error">
-                @T("Checkout.NoPaymentMethods")
+                else
+                {
+                <div class="message-error">
+                    @T("Checkout.NoPaymentMethods")
+                </div>
+                }
             </div>
-        }
-    </div>
-    @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_payment_method_bottom" })
-</div>
+            @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_payment_method_bottom" })
+        </div>      

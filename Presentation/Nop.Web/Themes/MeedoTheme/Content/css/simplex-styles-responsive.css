@@ -348,7 +348,7 @@
     .shopping-cart-page .common-buttons{float:none !important;}
     .remove-addtocart-checkbox .remove-from-cart{float: left;margin-right: 10px;}
     .remove-addtocart-checkbox .add-to-cart span{color:#666;}
-    .remove-addtocart-checkbox{float:left;width:100%;}
+    .remove-addtocart-checkbox{/*float:left;*/width:100%;}
     .wishlist-content .panel.panel-default table tbody tr:last-child td .product-wrapper, .order-summary-content .panel.panel-default.cart-item-table table tbody tr:last-child td .product-wrapper{border-bottom:none;}
     .wishlist-page .wishlist-add-to-cart,.wishlist-page .update-email-button{float:none;}
     .wishlist-page .wishlist-add-to-cart{clear:both;display:inline-block;}
