@@ -211,11 +211,11 @@
         // Set size class
         var setSizeClass = function() {
 
-            if (pgwSlider.plugin.width() <= 480) {
-                pgwSlider.plugin.addClass('narrow').removeClass('wide');
-            } else {
+            //if (pgwSlider.plugin.width() <= 480) {
+            //    pgwSlider.plugin.addClass('narrow').removeClass('wide');
+            //} else {
                 pgwSlider.plugin.addClass('wide').removeClass('narrow');
-            }
+            //}
 
             return true;
         };

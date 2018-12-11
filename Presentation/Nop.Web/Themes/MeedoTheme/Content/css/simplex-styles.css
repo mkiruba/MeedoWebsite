@@ -1871,7 +1871,7 @@ input[type="file"]:focus, input[type="checkbox"]:focus, input[type="radio"]:focu
     .item-box .product-box-add-to-cart-button {
         background: url('../images/product-cart-icon.png') no-repeat 12px 11px;
         border: 2px solid #ea5648;
-        color: #ea5648;
+        color: #fff;
         text-transform: uppercase;
         font-weight: 700;
         font-size: 14px;
@@ -3342,7 +3342,7 @@ a.eu-cookie-privacyinfo-tag {
 }
 
 .product-details-page .add-to-cart .product-add-button .add-to-cart-button {
-    background: url(../images/product-cart-icon.png) no-repeat 12px -20px #ea5648;
+    background: url(../images/product-cart-icon.png) no-repeat 12px -20px #333;
     text-transform: uppercase;
     padding-left: 40px;
 }

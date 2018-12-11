@@ -6,21 +6,28 @@
 //}
 
 //Local db connection
-{
-  "DataProvider": "sqlserver",
-  "DataConnectionString": "Data Source=windows8;Initial Catalog=meedodb;Integrated Security=True",
-  "RawDataSettings": {}
-} 
+//{
+//  "DataProvider": "sqlserver",
+//  "DataConnectionString": "Data Source=windows8;Initial Catalog=meedodb;Integrated Security=True",
+//  "RawDataSettings": {}
+//}
 
 //Live db connection
 //{
 //  "DataProvider": "sqlserver",
 //  "DataConnectionString": "Data Source=103.14.120.132;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
 //  "RawDataSettings": {}
-//} 
+//}
 ////Live deployment db connection
 //{
 //  "DataProvider": "sqlserver",
 //  "DataConnectionString": "Data Source=localhost;Initial Catalog=meedodb;Integrated Security=False;User ID=meedodb;Password=kFbx9%23;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
 //  "RawDataSettings": {}
-//} 
+//}
+
+////Live deployment db connection
+{
+  "DataProvider": "sqlserver",
+  "DataConnectionString": "Data Source=WINDOWS8\\SQLEXPRESS;Initial Catalog=meedodb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+  "RawDataSettings": {}
+} 

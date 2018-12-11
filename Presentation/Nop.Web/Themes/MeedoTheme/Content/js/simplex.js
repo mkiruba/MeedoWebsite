@@ -97,7 +97,8 @@ $(document).ready(function () {
         navigation: true,
         lazyLoad: true
     });
-    $("#crosssell-products-slider,#home-bestseller-slider,#home-features-slider,#related-products-slider,#also-purchased-products-slider").owlCarousel({
+    //$("#crosssell-products-slider,#home-bestseller-slider,#home-features-slider,#related-products-slider,#also-purchased-products-slider").owlCarousel({
+    $("#crosssell-products-slider,#home-bestseller-slider,#home-features-slider,#related-products-slider").owlCarousel({
         items: 4,
         itemsCustom: false,
         itemsDesktop: [1199, 4],
