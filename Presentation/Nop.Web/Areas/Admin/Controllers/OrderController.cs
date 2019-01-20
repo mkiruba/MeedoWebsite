@@ -500,7 +500,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             //products
             PrepareProducts(model, order, primaryStoreCurrency);
             //Dtg Order
-            PrepareDtgOrder(model, order);
+            //PrepareDtgOrder(model, order);
         }
 
         private void PrepareDtgOrder(OrderModel model, Order order)
