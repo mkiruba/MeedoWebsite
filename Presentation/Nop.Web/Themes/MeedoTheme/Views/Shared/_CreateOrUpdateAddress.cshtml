@@ -101,7 +101,7 @@
         <label class="control-label col-sm-3 col-md-3" asp-for="FirstName" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
-            <input class="form-control" asp-for="FirstName" />
+            <input class="form-control" asp-for="FirstName" placeholder="FirstName" />
         </div>
         <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -112,7 +112,7 @@
         <label class="control-label col-sm-3 col-md-3" asp-for="LastName" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
-            <input class="form-control" asp-for="LastName" />
+            <input class="form-control" asp-for="LastName" placeholder="LastName"/>
         </div>
         <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -125,7 +125,7 @@
             <label class="control-label col-sm-3 col-md-3" asp-for="PhoneNumber" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="PhoneNumber" />
+                <input class="form-control" asp-for="PhoneNumber" placeholder="Mobile Number"/>
             </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.PhoneRequired)
@@ -140,7 +140,7 @@
         <label class="control-label col-sm-3 col-md-3" asp-for="Email" asp-postfix=":"></label>
         <div class="visible-xs form-title-rquired"><nop-required /></div>
         <div class="col-sm-6 col-md-6">
-            <input class="form-control" asp-for="Email" />
+            <input class="form-control" asp-for="Email" placeholder="your@email.com"/>
         </div>
         <div class="col-sm-3 col-md-3">
             <div class="visible-lg visible-md visible-sm form-title-rquired"><nop-required /></div>
@@ -153,7 +153,7 @@
             <label class="control-label col-sm-3 col-md-3" asp-for="Address1" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="Address1" />
+                <input class="form-control" asp-for="Address1" placeholder="Flat No/Door No, Street"/>
             </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.StreetAddressRequired)
@@ -171,7 +171,7 @@
             <label class="control-label col-sm-3 col-md-3" asp-for="Address2" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="Address2" />
+                <input class="form-control" asp-for="Address2" placeholder="Area/Locality"/>
             </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.StreetAddress2Required)
@@ -205,7 +205,7 @@
             <label class="control-label col-sm-3 col-md-3" asp-for="City" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="City" />
+                <input class="form-control" asp-for="City" placeholder="City"/>
             </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.CityRequired)
@@ -247,7 +247,7 @@
             <label class="control-label col-sm-3 col-md-3" asp-for="ZipPostalCode" asp-postfix=":"></label>
             <div class="visible-xs form-title-rquired"><nop-required /></div>
             <div class="col-sm-6 col-md-6">
-                <input class="form-control" asp-for="ZipPostalCode" />
+                <input class="form-control" asp-for="ZipPostalCode" placeholder="Pincode" />
             </div>
             <div class="col-sm-3 col-md-3">
                 @if (Model.ZipPostalCodeRequired)
