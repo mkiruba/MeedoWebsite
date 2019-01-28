@@ -22,5 +22,6 @@
   "Widgets.Instagram",
   "Payments.CashOnDelivery",
   "Payments.Instamojo",
-  "Misc.MailChimp"
+  "Misc.MailChimp",
+  "Payments.PayPalExpressCheckout"
 ]
