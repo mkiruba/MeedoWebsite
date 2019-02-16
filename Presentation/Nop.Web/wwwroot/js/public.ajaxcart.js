@@ -90,8 +90,8 @@ var AjaxCart = {
         });
     },
     buy_success_process: function (response) {
-        fbq('track', 'AddToWishlist');
-        fbq('track', 'AddToCart');
+        //fbq('track', 'AddToWishlist');
+        //fbq('track', 'AddToCart');
         if (response.updatetopcartsectionhtml) {
             $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
         }
@@ -133,8 +133,8 @@ var AjaxCart = {
         return false;
     },
     success_process: function (response) {
-        fbq('track', 'AddToWishlist');
-        fbq('track', 'AddToCart');
+        //fbq('track', 'AddToWishlist');
+        //fbq('track', 'AddToCart');
         if (response.updatetopcartsectionhtml) {
             $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
         }

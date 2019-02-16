@@ -100,6 +100,7 @@ namespace Nop.Plugin.Widgets.FacebookPixel.Components
                     if (action.Equals("Category", StringComparison.InvariantCultureIgnoreCase))
                     {
                         globalScript = string.Concat(globalScript, this.GetFacebookPixelScriptFirstPart("Category", null, null, null));
+                        globalScript = string.Concat(globalScript, "fbq('track', 'ViewCategory');");
                         globalScript = string.Concat(globalScript, this.GetFacebookPixelScriptLastPart("Category", null, null, null));
                     }
                     else if (action.Equals("Manufacturer", StringComparison.InvariantCultureIgnoreCase))
@@ -177,7 +178,7 @@ namespace Nop.Plugin.Widgets.FacebookPixel.Components
                 else if (action.Equals("Completed", StringComparison.InvariantCultureIgnoreCase))
                 {
                     globalScript = string.Concat(globalScript, this.GetFacebookPixelScriptFirstPart("Completed", null, null, null));
-                    globalScript = string.Concat(globalScript, "fbq('track', 'Purchase', {value: '1.00', currency: 'USD'});");
+                    //globalScript = string.Concat(globalScript, "fbq('track', 'Purchase', {value: '1.00', currency: 'USD'});");
                     globalScript = string.Concat(globalScript, this.GetFacebookPixelScriptLastPart("Completed", null, null, null));
                 }                
             }

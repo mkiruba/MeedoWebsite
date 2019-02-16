@@ -536,7 +536,7 @@ var ConfirmOrder = {
     isSuccess: false,
 
     init: function (saveUrl, successUrl) { 
-        fbq('track', 'AddPaymentInfo');
+        //fbq('track', 'AddPaymentInfo');
         this.saveUrl = saveUrl;
         this.successUrl = successUrl;
     },
