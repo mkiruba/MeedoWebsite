@@ -28,6 +28,6 @@
 ////Live deployment db connection
 {
   "DataProvider": "sqlserver",
-  "DataConnectionString": "Data Source=WINDOWS8\\SQLEXPRESS;Initial Catalog=meedodb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+  "DataConnectionString": "Data Source=DESKTOP-6U3OSU9;Initial Catalog=meedodb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
   "RawDataSettings": {}
 } 

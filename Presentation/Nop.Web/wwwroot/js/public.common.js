@@ -242,7 +242,7 @@ function displayRecentSalesNotification(productUrl) {
         "positionClass": "toast-bottom-right",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": "1000",
+        "showDuration": "5000",
         "hideDuration": "1000",
         "timeOut": "3000",
         "extendedTimeOut": "500",

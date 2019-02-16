@@ -37,14 +37,14 @@
                     }
                     <li>
                         <div class="method-name">
-                            @if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
+                            @*@if (!string.IsNullOrEmpty(paymentMethod.LogoUrl))
                             {
                                 <div class="payment-logo">
                                     <label for="paymentmethod_@(i)">
                                         <img src="@paymentMethod.LogoUrl" alt="@paymentMethodName" />
                                     </label>
                                 </div>
-                            }
+                            }*@
                             <div class="payment-details">
                                 <input id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected" />
                                 <label for="paymentmethod_@(i)">@paymentMethodName</label>
